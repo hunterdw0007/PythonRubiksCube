@@ -21,7 +21,10 @@ def _validateCube(cube):
     validColors = 'wryobg'
     centerColors = ''
 
-    if len(cube) != 54 or cube == None:
+    if cube == None:
+        return False
+
+    if len(cube) != 54:
         return False
     
     for color in validColors:
