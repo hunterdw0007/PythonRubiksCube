@@ -215,6 +215,6 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = 'rgbowogro'
         
-        actualResult = rotate._faceCW(input)
+        actualResult = rotate._faceCCW(input)
         
         self.assertEqual(expectedResult, actualResult)
