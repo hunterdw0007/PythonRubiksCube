@@ -50,3 +50,7 @@ def _faceCW(face):
     newFace[6] = face[8]
     
     return ''.join(newFace);
+
+def _faceCCW(face):
+    
+    return 'wwwwwwwww'
