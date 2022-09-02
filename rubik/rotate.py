@@ -37,7 +37,7 @@ def _validate(cube):
     return True
 
 def _faceCW(face):
-    newFace = face
+    newFace = list(face)
     
     newFace[2] = face[0]
     newFace[5] = face[1]
@@ -49,4 +49,4 @@ def _faceCW(face):
     newFace[3] = face[7]
     newFace[6] = face[8]
     
-    return newFace;
+    return ''.join(newFace);
