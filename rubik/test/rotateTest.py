@@ -247,4 +247,12 @@ class RotateTest(unittest.TestCase):
         actualResult = rotate._validateDir(input)
         
         self.assertEqual(expectedResult, actualResult)
-
+        
+    def test_validateDir_020_ValidString(self):
+        input='FfRrLlUuDdBb'
+        
+        expectedResult = True
+        
+        actualResult = rotate._validateDir(input)
+        
+        self.assertEqual(expectedResult, actualResult)
