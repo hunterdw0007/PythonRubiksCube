@@ -52,5 +52,16 @@ def _faceCW(face):
     return ''.join(newFace);
 
 def _faceCCW(face):
+    newFace = list(face)
     
-    return 'wwwwwwwww'
+    newFace[6] = face[0]
+    newFace[3] = face[1]
+    newFace[0] = face[2]
+    newFace[7] = face[3]
+    # center stays at the same position
+    newFace[1] = face[5]
+    newFace[8] = face[6]
+    newFace[5] = face[7]
+    newFace[2] = face[8]
+    
+    return ''.join(newFace);
