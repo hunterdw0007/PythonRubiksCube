@@ -209,3 +209,12 @@ class RotateTest(unittest.TestCase):
         actualResult = rotate._faceCCW(input)
         
         self.assertEqual(expectedResult, actualResult)
+
+    def test_faceCCW_020_rotatedCounterclockwiseScrambled(self):
+        input = 'gorrwgoob'
+        
+        expectedResult = 'rgbowogro'
+        
+        actualResult = rotate._faceCW(input)
+        
+        self.assertEqual(expectedResult, actualResult)
