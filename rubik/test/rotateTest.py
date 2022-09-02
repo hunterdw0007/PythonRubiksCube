@@ -105,5 +105,11 @@ class RotateTest(unittest.TestCase):
         
         self.assertEqual(expectedResult, actualResult)
         
-         
-
+    def test_validateCube_920_stringLengthNot54(self):
+        input = 'wryobg'
+        
+        expectedResult = False
+        
+        actualResult = rotate._validate(input)
+        
+        self.assertEqual(expectedResult, actualResult)
