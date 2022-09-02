@@ -13,32 +13,8 @@ def _rotate(parms):
         result['status'] = 'error: invalid rotation'
     else:
         cubeRot = list(encodedCube)
-        
-        if encodedDir == 'F':
-            offset = 0
-            faceRot = _faceCW(''.join(cubeRot[0:9]))
             
-            for i, ch in enumerate(faceRot):
-                cubeRot[i + offset] = ch
-            
-            # Right Edges
-            cubeRot[47] = encodedCube[ 9]
-            cubeRot[46] = encodedCube[12]
-            cubeRot[45] = encodedCube[15]
-            # Left Edges
-            cubeRot[44] = encodedCube[29]
-            cubeRot[43] = encodedCube[32]
-            cubeRot[42] = encodedCube[35]
-            # Top Edges
-            cubeRot[ 9] = encodedCube[42]
-            cubeRot[12] = encodedCube[43]
-            cubeRot[15] = encodedCube[44]
-            # Bottom Edges
-            cubeRot[29] = encodedCube[45]
-            cubeRot[32] = encodedCube[46]
-            cubeRot[35] = encodedCube[47]
-            
-        elif encodedDir == 'f':
+        if encodedDir == 'f':
             offset = 0
             faceRot = _faceCCW(''.join(cubeRot[0:9]))
             
@@ -61,6 +37,31 @@ def _rotate(parms):
             cubeRot[15] = encodedCube[45]
             cubeRot[12] = encodedCube[46]
             cubeRot[ 9] = encodedCube[47]
+        
+        # Performs F since that is the default for no dir
+        else:
+            offset = 0
+            faceRot = _faceCW(''.join(cubeRot[0:9]))
+            
+            for i, ch in enumerate(faceRot):
+                cubeRot[i + offset] = ch
+            
+            # Right Edges
+            cubeRot[47] = encodedCube[ 9]
+            cubeRot[46] = encodedCube[12]
+            cubeRot[45] = encodedCube[15]
+            # Left Edges
+            cubeRot[44] = encodedCube[29]
+            cubeRot[43] = encodedCube[32]
+            cubeRot[42] = encodedCube[35]
+            # Top Edges
+            cubeRot[ 9] = encodedCube[42]
+            cubeRot[12] = encodedCube[43]
+            cubeRot[15] = encodedCube[44]
+            # Bottom Edges
+            cubeRot[29] = encodedCube[45]
+            cubeRot[32] = encodedCube[46]
+            cubeRot[35] = encodedCube[47]
             
         result['cube'] = ''.join(cubeRot)          
         result['status'] = 'ok'                     
