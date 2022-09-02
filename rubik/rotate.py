@@ -93,7 +93,7 @@ def _validateCube(cube):
     return True
 
 def _faceCW(face):
-    newFace = face
+    newFace = face[:]
     
     newFace[2] = face[0]
     newFace[5] = face[1]
@@ -108,7 +108,7 @@ def _faceCW(face):
     return newFace
 
 def _faceCCW(face):
-    newFace = face
+    newFace = face[:]
     
     newFace[6] = face[0]
     newFace[3] = face[1]
