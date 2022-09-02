@@ -12,23 +12,22 @@ def _rotate(parms):
 
 def _validate(cube):
     validColors = 'wryobg'
-    
+    centerColors = ''
+
     if len(cube) != 54:
-        return False
-    
-    if re.search(r'^[bgorwy]*$', cube) == None:
         return False
     
     for color in validColors:
         if cube.count(color) != 9:
             return False
     
-    centerIndex = 4
-    centerColors = ''
-    while centerIndex < 53:
-        if centerColors.count(cube[centerIndex]) != 0:
+    for i, color in enumerate(cube):
+        if validColors.count(color) != 1:
             return False
-        centerColors = centerColors + cube[centerIndex]
-        centerIndex += 9
+        if i % 9 == 4:
+            if centerColors.count(color) != 0:
+                return False
+            else:
+                centerColors += color
     
     return True
