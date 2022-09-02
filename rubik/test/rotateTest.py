@@ -69,7 +69,7 @@ class RotateTest(unittest.TestCase):
         inputDict = {}
         inputDict['op']   = 'rotate'
         inputDict['cube'] = 'gorrwgoobwwwrrwwgwrbgrybgorywyroybybrobbbgowgyyobgyygo'
-        inputDict['dir']  = 'R'
+        inputDict['dir']  = 'Q'
         
         expectResult = {}
         expectResult['status'] = 'error: invalid rotation'
