@@ -65,3 +65,6 @@ def _faceCCW(face):
     newFace[2] = face[8]
     
     return ''.join(newFace);
+
+def _validateDir(dir):
+    return True
