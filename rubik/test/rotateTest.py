@@ -65,6 +65,20 @@ class RotateTest(unittest.TestCase):
         self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
+    def test_rotate_920_validCubeInvalidRotation(self):
+        inputDict = {}
+        inputDict['op']   = 'rotate'
+        inputDict['cube'] = 'gorrwgoobwwwrrwwgwrbgrybgorywyroybybrobbbgowgyyobgyygo'
+        inputDict['dir']  = 'R'
+        
+        expectResult = {}
+        expectResult['status'] = 'error: invalid rotation'
+        
+        actualResult = rotate._rotate(inputDict)
+        
+        self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
 # Analysis: Validate Cube Function
 #
 #    inputs:
