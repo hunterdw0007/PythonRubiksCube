@@ -10,6 +10,6 @@ def _rotate(parms):
     return result
 
 def _validate(cube):
-    if cube.isEmpty():
+    if len(cube) == 0:
         return False
     return True
