@@ -14,7 +14,7 @@ def _rotate(parms):
     else:
         cubeRot = list(encodedCube)
         
-        if dir == 'F':
+        if encodedDir == 'F':
             offset = 0
             faceRot = _faceCW(''.join(cubeRot[0:9]))
             
@@ -38,7 +38,7 @@ def _rotate(parms):
             cubeRot[32] = encodedCube[46]
             cubeRot[35] = encodedCube[47]
             
-        elif dir == 'f':
+        elif encodedDir == 'f':
             offset = 0
             faceRot = _faceCCW(''.join(cubeRot[0:9]))
             
