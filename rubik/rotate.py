@@ -10,6 +10,6 @@ def _rotate(parms):
     return result
 
 def _validate(cube):
-    if len(cube) == 0:
+    if len(cube) != 54:
         return False
     return True
