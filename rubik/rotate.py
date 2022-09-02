@@ -67,4 +67,6 @@ def _faceCCW(face):
     return ''.join(newFace);
 
 def _validateDir(dir):
-    return True
+    if len(dir) == 0:
+        return True
+    return False
