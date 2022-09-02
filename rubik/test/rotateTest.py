@@ -131,3 +131,12 @@ class RotateTest(unittest.TestCase):
         actualResult = rotate._validate(input)
         
         self.assertEqual(expectedResult, actualResult)
+        
+    def test_validateCube_950_centersNotDifferent(self):
+        input = 'wwwwwwwwwrrrrrrrrryyyyyyyyyoooooooooggggbgggggbbbbbbbb'
+        
+        expectedResult = False
+        
+        actualResult = rotate._validate(input)
+        
+        self.assertEqual(expectedResult, actualResult)
