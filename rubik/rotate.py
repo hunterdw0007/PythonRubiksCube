@@ -16,7 +16,7 @@ def _rotate(parms):
             
         if encodedDir == 'f':
             offset = 0
-            faceRot = _faceCCW(''.join(cubeRot[0:9]))
+            faceRot = _faceCCW(cubeRot[0:9])
             
             for i, ch in enumerate(faceRot):
                 cubeRot[i + offset] = ch
@@ -41,7 +41,7 @@ def _rotate(parms):
         # Performs F since that is the default for no dir
         else:
             offset = 0
-            faceRot = _faceCW(''.join(cubeRot[0:9]))
+            faceRot = _faceCW(cubeRot[0:9])
             
             for i, ch in enumerate(faceRot):
                 cubeRot[i + offset] = ch
@@ -93,7 +93,7 @@ def _validateCube(cube):
     return True
 
 def _faceCW(face):
-    newFace = list(face)
+    newFace = face
     
     newFace[2] = face[0]
     newFace[5] = face[1]
@@ -105,10 +105,10 @@ def _faceCW(face):
     newFace[3] = face[7]
     newFace[6] = face[8]
     
-    return ''.join(newFace);
+    return newFace
 
 def _faceCCW(face):
-    newFace = list(face)
+    newFace = face
     
     newFace[6] = face[0]
     newFace[3] = face[1]
@@ -120,7 +120,7 @@ def _faceCCW(face):
     newFace[5] = face[7]
     newFace[2] = face[8]
     
-    return ''.join(newFace);
+    return newFace
 
 def _validateDir(dir):
     validDirs = 'FfRrLlUuDdBb'

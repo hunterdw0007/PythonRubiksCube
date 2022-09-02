@@ -225,12 +225,12 @@ class RotateTest(unittest.TestCase):
 # Analysis: Rotate Face CW Function
 #
 #    inputs:
-#        face: string; len=9, [browyg]; mandatory; arrives validated
+#        face: list[string]; len=9, [browyg]; mandatory; arrives validated
 #
 #    outputs:
 #        side-effects: no state changes; no external effects
 #        returns:
-#            nominal: string; len=9, [browyg]
+#            nominal: list[string]; len=9, [browyg]
 #        confidence level: BVA
 #
 #    happy path:
@@ -239,18 +239,18 @@ class RotateTest(unittest.TestCase):
 #
 
     def test_faceCW_010_rotatedClockwiseSolved(self):
-        input = 'wwwwwwwww'
+        input = list('wwwwwwwww')
         
-        expectedResult = 'wwwwwwwww'
+        expectedResult = list('wwwwwwwww')
         
         actualResult = rotate._faceCW(input)
         
         self.assertEqual(expectedResult, actualResult)
         
     def test_faceCW_020_rotatedClockwiseScrambled(self):
-        input = 'gorrwgoob'
+        input = list('gorrwgoob')
         
-        expectedResult = 'orgowobgr'
+        expectedResult = list('orgowobgr')
         
         actualResult = rotate._faceCW(input)
         
@@ -273,18 +273,18 @@ class RotateTest(unittest.TestCase):
 #
 
     def test_faceCCW_010_rotatedCounterclockwiseSolved(self):
-        input = 'wwwwwwwww'
+        input = list('wwwwwwwww')
         
-        expectedResult = 'wwwwwwwww'
+        expectedResult = list('wwwwwwwww')
         
         actualResult = rotate._faceCCW(input)
         
         self.assertEqual(expectedResult, actualResult)
 
     def test_faceCCW_020_rotatedCounterclockwiseScrambled(self):
-        input = 'gorrwgoob'
+        input = list('gorrwgoob')
         
-        expectedResult = 'rgbowogro'
+        expectedResult = list('rgbowogro')
         
         actualResult = rotate._faceCCW(input)
         
