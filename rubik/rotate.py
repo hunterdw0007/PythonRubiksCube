@@ -23,9 +23,9 @@ def _validate(cube):
         if cube.count(color) != 9:
             return False
     
-    centerIndex = 5
+    centerIndex = 4
     centerColors = ''
-    while centerIndex < 54:
+    while centerIndex < 53:
         if centerColors.count(cube[centerIndex]) != 0:
             return False
         centerColors = centerColors + cube[centerIndex]
