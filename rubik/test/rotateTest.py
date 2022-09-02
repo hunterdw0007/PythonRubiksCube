@@ -113,3 +113,12 @@ class RotateTest(unittest.TestCase):
         actualResult = rotate._validate(input)
         
         self.assertEqual(expectedResult, actualResult)
+        
+    def test_validateCube_930_invalidColor(self):
+        input = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbpppppppp'
+        
+        expectedResult = False
+        
+        actualResult = rotate._validate(input)
+        
+        self.assertEqual(expectedResult, actualResult)
