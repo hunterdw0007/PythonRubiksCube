@@ -122,3 +122,12 @@ class RotateTest(unittest.TestCase):
         actualResult = rotate._validate(input)
         
         self.assertEqual(expectedResult, actualResult)
+        
+    def test_validateCube_940_countNotNine(self):
+        input = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooogggggggggggggggggg'
+        
+        expectedResult = False
+        
+        actualResult = rotate._validate(input)
+        
+        self.assertEqual(expectedResult, actualResult)
