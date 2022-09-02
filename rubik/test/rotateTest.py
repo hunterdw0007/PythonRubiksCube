@@ -96,6 +96,15 @@ class RotateTest(unittest.TestCase):
         
         self.assertEqual(expectedResult, actualResult)
         
+    def test_validateCube_020_validCubeScrambled(self):
+        input = 'gorrwgoobwwwrrwwgwrbgrybgorywyroybybrobbbgowgyyobgyygo'
+        
+        expectedResult = True
+        
+        actualResult = rotate._validate(input)
+        
+        self.assertEqual(expectedResult, actualResult)
+        
     def test_validateCube_910_emptyCubeString(self):
         input = ''
         
