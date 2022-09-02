@@ -37,5 +37,16 @@ def _validate(cube):
     return True
 
 def _faceCW(face):
+    newFace = face
     
-    return 'wwwwwwwww'
+    newFace[2] = face[0]
+    newFace[5] = face[1]
+    newFace[8] = face[2]
+    newFace[1] = face[3]
+    # center stays at the same position
+    newFace[7] = face[5]
+    newFace[0] = face[6]
+    newFace[3] = face[7]
+    newFace[6] = face[8]
+    
+    return newFace;
