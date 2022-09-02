@@ -1,7 +1,7 @@
 '''
 Created on Sep 1, 2022
 
-@author: Hunter
+@author: Hunter Westerlund
 '''
 import unittest
 import rubik.rotate as rotate
@@ -48,8 +48,6 @@ class RotateTest(unittest.TestCase):
 # sad path:
 #    test 910: missing cube with valid rotation
 #    test 920: valid cube with invalid rotation
-#    test 930: 
-
 
     def test_rotate_010_shouldRotateValidCubeF(self):
         inputDict = {}
@@ -66,18 +64,36 @@ class RotateTest(unittest.TestCase):
         self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
-    def test_rotate_020_shouldRotateValidCubef(self):
-        inputDict = {}
-        inputDict['op']   = 'rotate'
-        inputDict['cube'] = 'gorrwgoobwwwrrwwgwrbgrybgorywyroybybrobbbgowgyyobgyygo'
-        inputDict['dir']  = 'F'
+# Analysis: Validate Cube Function
+#
+#    inputs:
+#        cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives unvalidated
+#
+#    outputs:
+#        side-effects: no state changes; no external effects
+#        returns:
+#            nominal: True
+#            abnormal: False
+#        confidence level: BVA
+#
+#    happy path:
+#        test 010: valid cube in solved state
+#        test 020: valid cube in scrambled state
+#    
+#    sad path:
+#        test 910: empty cube string
+#        test 920: string length not equal to 54
+#        test 930: invalid color in string
+#        test 940: count of any color not equal to nine
+#        test 950: centers are not all different
+#        
+    def test_validateCube_010_validCubeSolved(self):
+        input = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
         
-        expectResult = {}
-        expectResult['cube'] = '' #TODO: figure out rotation
-        expectResult['status'] = 'ok'
+        expectedResult = True
         
-        actualResult = rotate._rotate(inputDict)
+        actualResult = rotate._validate(input)
         
-        self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedResult, actualResult)
+         
 
