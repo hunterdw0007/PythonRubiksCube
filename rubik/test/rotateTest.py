@@ -93,7 +93,7 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = True
         
-        actualResult = rotate._validate(input)
+        actualResult = rotate._validateCube(input)
         
         self.assertEqual(expectedResult, actualResult)
         
@@ -102,7 +102,7 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = True
         
-        actualResult = rotate._validate(input)
+        actualResult = rotate._validateCube(input)
         
         self.assertEqual(expectedResult, actualResult)
         
@@ -111,7 +111,7 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = False
         
-        actualResult = rotate._validate(input)
+        actualResult = rotate._validateCube(input)
         
         self.assertEqual(expectedResult, actualResult)
         
@@ -120,7 +120,7 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = False
         
-        actualResult = rotate._validate(input)
+        actualResult = rotate._validateCube(input)
         
         self.assertEqual(expectedResult, actualResult)
         
@@ -129,7 +129,7 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = False
         
-        actualResult = rotate._validate(input)
+        actualResult = rotate._validateCube(input)
         
         self.assertEqual(expectedResult, actualResult)
         
@@ -138,7 +138,7 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = False
         
-        actualResult = rotate._validate(input)
+        actualResult = rotate._validateCube(input)
         
         self.assertEqual(expectedResult, actualResult)
         
@@ -147,7 +147,7 @@ class RotateTest(unittest.TestCase):
         
         expectedResult = False
         
-        actualResult = rotate._validate(input)
+        actualResult = rotate._validateCube(input)
         
         self.assertEqual(expectedResult, actualResult)
         

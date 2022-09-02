@@ -6,7 +6,7 @@ def _rotate(parms):
     result = {}
     encodedCube = parms.get('cube')
     
-    if not _validate(encodedCube):
+    if not _validateCube(encodedCube):
         result['status'] = 'error: invalid cube'
     else:
         rotatedCube = encodedCube                  #STUB:  rotate the cube
