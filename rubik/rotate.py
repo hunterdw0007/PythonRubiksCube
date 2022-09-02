@@ -14,7 +14,7 @@ def _rotate(parms):
         result['status'] = 'ok'                     
     return result
 
-def _validate(cube):
+def _validateCube(cube):
     validColors = 'wryobg'
     centerColors = ''
 
