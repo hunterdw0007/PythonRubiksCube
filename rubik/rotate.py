@@ -72,9 +72,6 @@ def _faceCCW(face):
 def _validateDir(dir):
     validDirs = 'FfRrLlUuDdBb'
     
-    if len(dir) == 0:
-        return True
-    
     for d in dir:
         if validDirs.count(d) == 0:
             return False
