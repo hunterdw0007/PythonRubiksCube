@@ -11,8 +11,16 @@ def _rotate(parms):
     return result
 
 def _validate(cube):
+    validColors = 'wryobg'
+    
     if len(cube) != 54:
         return False
+    
     if re.search(r'^[bgorwy]*$', cube) == None:
         return False
+    
+    for color in validColors:
+        if cube.count(color) != 9:
+            return False
+        
     return True
