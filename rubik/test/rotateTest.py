@@ -150,3 +150,28 @@ class RotateTest(unittest.TestCase):
         actualResult = rotate._validate(input)
         
         self.assertEqual(expectedResult, actualResult)
+        
+# Analysis: Rotate Face CW Function
+#
+#    inputs:
+#        face: string; len=9, [browyg]; mandatory; arrives validated
+#
+#    outputs:
+#        side-effects: no state changes; no external effects
+#        returns:
+#            nominal: string; len=9, [browyg]
+#        confidence level: BVA
+#
+#    happy path:
+#        test 010: solved face rotated CW
+#        test 020: scrambled face rotated CW
+#
+
+    def test_faceCW_010_rotatedClockwise(self):
+        input = 'wwwwwwwww'
+        
+        expectedResult = 'wwwwwwwww'
+        
+        actualResult = rotate._faceCW(input)
+        
+        self.assertEqual(expectedResult, actualResult)
