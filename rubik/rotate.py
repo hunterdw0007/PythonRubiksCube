@@ -8,3 +8,6 @@ def _rotate(parms):
     result['cube'] = 'orgowobgrowwwrwggwrbgrybgorywyroybyorobbbgbyywrwbgyygo'               
     result['status'] = 'ok'                     
     return result
+
+def _validate(cube):
+    return True
