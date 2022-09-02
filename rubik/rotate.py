@@ -5,9 +5,12 @@ def _rotate(parms):
     """Return rotated cube""" 
     result = {}
     encodedCube = parms.get('cube')
+    encodedDir = parms.get('dir')
     
     if not _validateCube(encodedCube):
         result['status'] = 'error: invalid cube'
+    elif not _validateDir(encodedDir):
+        result['status'] = 'error: invalid rotation'
     else:
         rotatedCube = encodedCube                  #STUB:  rotate the cube
         result['cube'] = 'orgowobgrowwwrwggwrbgrybgorywyroybyorobbbgbyywrwbgyygo'               
