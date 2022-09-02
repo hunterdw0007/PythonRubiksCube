@@ -35,3 +35,7 @@ def _validate(cube):
                 centerColors += color
     
     return True
+
+def _faceCW(face):
+    
+    return 'wwwwwwwww'
