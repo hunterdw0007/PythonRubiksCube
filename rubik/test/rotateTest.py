@@ -218,3 +218,33 @@ class RotateTest(unittest.TestCase):
         actualResult = rotate._faceCCW(input)
         
         self.assertEqual(expectedResult, actualResult)
+        
+    
+# Analysis: Validate Direction Function
+#
+#    inputs:
+#        dir: string; len .GE. 0, [FfRrLlUuDdBb]; mandatory; arrives unvalidated
+#
+#    outputs:
+#        side-effects: no state changes; no external effects
+#        returns:
+#            nominal: True
+#            abnormal: False
+#        confidence level: BVA
+#
+#    happy path:
+#        test 010: empty string
+#        test 020: string of valid rotations
+#
+#    sad path:
+#        test 910: invalid rotation char
+
+    def test_validateDir_010_EmptyString(self):
+        input = ''
+        
+        expectedResult = True
+        
+        actualResult = rotate._validateDir(input)
+        
+        self.assertEqual(expectedResult, actualResult)
+
