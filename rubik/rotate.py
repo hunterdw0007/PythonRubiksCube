@@ -62,6 +62,30 @@ def _rotate(parms):
             cubeRot[5] = encodedCube[50]
             cubeRot[2] = encodedCube[47]
             
+        elif encodedDir == 'r':
+            offset = 9
+            faceRot = _faceCCW(cubeRot[9:18])
+            
+            for i, ch in enumerate(faceRot):
+                cubeRot[i + offset] = ch
+                
+            # Front Edges
+            cubeRot[47] = encodedCube[2]
+            cubeRot[50] = encodedCube[5]
+            cubeRot[53] = encodedCube[8]
+            # Back Edges
+            cubeRot[38] = encodedCube[24]
+            cubeRot[41] = encodedCube[21]
+            cubeRot[44] = encodedCube[18]
+            # Up Edges
+            cubeRot[8] = encodedCube[44]
+            cubeRot[5] = encodedCube[41]
+            cubeRot[2] = encodedCube[38]
+            # Down Edges
+            cubeRot[18] = encodedCube[53]
+            cubeRot[21] = encodedCube[50]
+            cubeRot[24] = encodedCube[47]
+            
         # Performs F since that is the default for no dir
         else:
             offset = 0
