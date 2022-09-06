@@ -140,6 +140,21 @@ class RotateTest(unittest.TestCase):
         self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
+    def test_rotate_070_shouldRotateValidCuber(self):
+        inputDict = {}
+        inputDict['op']   = 'rotate'
+        inputDict['cube'] = 'gorrwgoobwwwrrwwgwrbgrybgorywyroybybrobbbgowgyyobgyygo'
+        inputDict['dir']  = 'r'
+        
+        expectResult = {}
+        expectResult['cube'] = 'gobrwgoogwwwwrgwrwobgyyboorywyroybybrogbbrowryyrbggygb'
+        expectResult['status'] = 'ok'
+        
+        actualResult = rotate._rotate(inputDict)
+        
+        self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
     def test_rotate_910_missingCube(self):
         inputDict = {}
         inputDict['op']   = 'rotate'
