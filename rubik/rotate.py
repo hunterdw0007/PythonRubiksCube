@@ -88,7 +88,7 @@ def _rotate(parms):
             
         elif encodedDir == 'B':
             offset = 18
-            faceRot = _faceCCW(cubeRot[18:27])
+            faceRot = _faceCW(cubeRot[18:27])
             
             for i, ch in enumerate(faceRot):
                 cubeRot[i + offset] = ch
