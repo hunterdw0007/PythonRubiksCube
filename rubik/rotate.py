@@ -14,7 +14,7 @@ def _rotate(parms):
     else:
         cubeRot = list(encodedCube)
         
-        if encodedDir == None:
+        if encodedDir == None or encodedDir == '':
             encodedDir = 'F'
         
         for rotation in encodedDir:
