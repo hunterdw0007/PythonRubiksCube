@@ -43,7 +43,8 @@ class RotateTest(unittest.TestCase):
 #    test 030: valid cube with missing rotation
 #    test 040: valid cube with '' rotation
 #    test 050: valid cube with no 'dir' key-value pair
-#    test 060 - 160: valid cube with R,r,L,l,U,u,D,d,B,b rotations
+#    test 060 - 160: valid cube with R,r,L,l,U,u,D,d,B,b rotations one each
+#    test 170: valid cube with multiple rotations
 #
 # sad path:
 #    test 910: missing cube with valid rotation
@@ -117,6 +118,21 @@ class RotateTest(unittest.TestCase):
         
         expectResult = {}
         expectResult['cube'] = 'orgowobgrowwwrwggwrbgrybgorywyroybyorobbbgbyywrwbgyygo'
+        expectResult['status'] = 'ok'
+        
+        actualResult = rotate._rotate(inputDict)
+        
+        self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_rotate_060_shouldRotateValidCubeR(self):
+        inputDict = {}
+        inputDict['op']   = 'rotate'
+        inputDict['cube'] = 'gorrwgoobwwwrrwwgwrbgrybgorywyroybybrobbbgowgyyobgyygo'
+        inputDict['dir']  = 'R'
+        
+        expectResult = {}
+        expectResult['cube'] = 'goorwyooowrwgrwwwwgbbbybborywyroybybrorbbgowbyygbgrygr'
         expectResult['status'] = 'ok'
         
         actualResult = rotate._rotate(inputDict)
