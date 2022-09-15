@@ -208,21 +208,21 @@ def _rotatef(cubeRot, cubeRotPrev):
         cubeRot[i + offset] = ch
         
     # Right Edges
-    cubeRot[42] = cubeRotPrev[ 9]
-    cubeRot[43] = cubeRotPrev[12]
-    cubeRot[44] = cubeRotPrev[15]
+    cubeRot[Cube.U20.value] = cubeRotPrev[Cube.R00.value]
+    cubeRot[Cube.U21.value] = cubeRotPrev[Cube.R10.value]
+    cubeRot[Cube.U22.value] = cubeRotPrev[Cube.R20.value]
     # Left Edges
-    cubeRot[45] = cubeRotPrev[29]
-    cubeRot[46] = cubeRotPrev[32]
-    cubeRot[47] = cubeRotPrev[35]
+    cubeRot[Cube.D00.value] = cubeRotPrev[Cube.L02.value]
+    cubeRot[Cube.D01.value] = cubeRotPrev[Cube.L12.value]
+    cubeRot[Cube.D02.value] = cubeRotPrev[Cube.L22.value]
     # Top Edges
-    cubeRot[35] = cubeRotPrev[42]
-    cubeRot[32] = cubeRotPrev[43]
-    cubeRot[29] = cubeRotPrev[44]
+    cubeRot[Cube.L22.value] = cubeRotPrev[Cube.U20.value]
+    cubeRot[Cube.L12.value] = cubeRotPrev[Cube.U21.value]
+    cubeRot[Cube.L02.value] = cubeRotPrev[Cube.U22.value]
     # Bottom Edges
-    cubeRot[15] = cubeRotPrev[45]
-    cubeRot[12] = cubeRotPrev[46]
-    cubeRot[ 9] = cubeRotPrev[47]
+    cubeRot[Cube.R20.value] = cubeRotPrev[Cube.D00.value]
+    cubeRot[Cube.R10.value] = cubeRotPrev[Cube.D01.value]
+    cubeRot[Cube.R00.value] = cubeRotPrev[Cube.D02.value]
     
     return cubeRot
 
