@@ -1,5 +1,62 @@
 import rubik.cube as rubik
 import re
+from enum import Enum
+
+class Cube(Enum):
+    F00 = 0
+    F01 = 1
+    F02 = 2
+    F10 = 3
+    F11 = 4
+    F12 = 5
+    F20 = 6
+    F21 = 7
+    F22 = 8
+    R00 = 9
+    R01 = 10
+    R02 = 11
+    R10 = 12
+    R11 = 13
+    R12 = 14
+    R20 = 15
+    R21 = 16
+    R22 = 17
+    B00 = 18
+    B01 = 19
+    B02 = 20
+    B10 = 21
+    B11 = 22
+    B12 = 23
+    B20 = 24
+    B21 = 25
+    B22 = 26
+    L00 = 27
+    L01 = 28
+    L02 = 29
+    L10 = 30
+    L11 = 31
+    L12 = 32
+    L20 = 33
+    L21 = 34
+    L22 = 35
+    U00 = 36
+    U01 = 37
+    U02 = 38
+    U10 = 39
+    U11 = 40
+    U12 = 41
+    U20 = 42
+    U21 = 43
+    U22 = 44
+    D00 = 45
+    D01 = 46
+    D02 = 47
+    D10 = 48
+    D11 = 49
+    D12 = 50
+    D20 = 51
+    D21 = 52
+    D22 = 53
 
 def _rotate(parms):
     """Return rotated cube""" 
@@ -287,28 +344,7 @@ def _rotate(parms):
                 
             # Performs F since that is the default for no dir
             else:
-                offset = 0
-                faceRot = _faceCW(cubeRot[0:9])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                
-                # Right Edges
-                cubeRot[47] = cubeRotPrev[ 9]
-                cubeRot[46] = cubeRotPrev[12]
-                cubeRot[45] = cubeRotPrev[15]
-                # Left Edges
-                cubeRot[44] = cubeRotPrev[29]
-                cubeRot[43] = cubeRotPrev[32]
-                cubeRot[42] = cubeRotPrev[35]
-                # Top Edges
-                cubeRot[ 9] = cubeRotPrev[42]
-                cubeRot[12] = cubeRotPrev[43]
-                cubeRot[15] = cubeRotPrev[44]
-                # Bottom Edges
-                cubeRot[29] = cubeRotPrev[45]
-                cubeRot[32] = cubeRotPrev[46]
-                cubeRot[35] = cubeRotPrev[47]
+                cubeRot = _rotateF(cubeRot, cubeRotPrev)
             
         result['cube'] = ''.join(cubeRot)          
         result['status'] = 'ok'                     
@@ -337,6 +373,17 @@ def _validateCube(cube):
             else:
                 centerColors += color
     
+    return True
+
+def _validateDir(dir):
+    validDirs = 'FfRrLlUuDdBb'
+    
+    if dir == None: 
+        return True
+    
+    for d in dir:
+        if validDirs.count(d) == 0:
+            return False
     return True
 
 def _faceCW(face):
@@ -369,13 +416,28 @@ def _faceCCW(face):
     
     return newFace
 
-def _validateDir(dir):
-    validDirs = 'FfRrLlUuDdBb'
+def _rotateF(cubeRot, cubeRotPrev):
+    offset = 0
+    faceRot = _faceCW(cubeRot[0:9])
     
-    if dir == None: 
-        return True
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
     
-    for d in dir:
-        if validDirs.count(d) == 0:
-            return False
-    return True
+    # Right Edges
+    cubeRot[Cube.D02] = cubeRotPrev[Cube.R00]
+    cubeRot[Cube.D01] = cubeRotPrev[Cube.R10]
+    cubeRot[Cube.D00] = cubeRotPrev[Cube.R20]
+    # Left Edges
+    cubeRot[Cube.U22] = cubeRotPrev[Cube.L02]
+    cubeRot[Cube.U21] = cubeRotPrev[Cube.L12]
+    cubeRot[Cube.U20] = cubeRotPrev[Cube.L22]
+    # Top Edges
+    cubeRot[ Cube.R00] = cubeRotPrev[Cube.U20]
+    cubeRot[Cube.R10] = cubeRotPrev[Cube.U21]
+    cubeRot[Cube.R20] = cubeRotPrev[Cube.U22]
+    # Bottom Edges
+    cubeRot[Cube.L02] = cubeRotPrev[Cube.D00]
+    cubeRot[Cube.L12] = cubeRotPrev[Cube.D01]
+    cubeRot[Cube.L22] = cubeRotPrev[Cube.D02]
+    
+    return cubeRot
