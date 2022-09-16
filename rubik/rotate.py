@@ -2,7 +2,7 @@ import rubik.cube as rubik
 import re
 from enum import Enum
 
-class Cube(Enum):
+class cubeEnum(Enum):
     F00 = 0
     F01 = 1
     F02 = 2
@@ -175,313 +175,313 @@ def _faceCCW(face):
     return newFace
 
 def _rotateF(cubeRot, cubeRotPrev):
-    offset = Cube.F00.value
+    offset = cubeEnum.F00.value
     faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
     
     # Right Edges
-    cubeRot[Cube.D02.value] = cubeRotPrev[Cube.R00.value]
-    cubeRot[Cube.D01.value] = cubeRotPrev[Cube.R10.value]
-    cubeRot[Cube.D00.value] = cubeRotPrev[Cube.R20.value]
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.D01.value] = cubeRotPrev[cubeEnum.R10.value]
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.R20.value]
     # Left Edges
-    cubeRot[Cube.U22.value] = cubeRotPrev[Cube.L02.value]
-    cubeRot[Cube.U21.value] = cubeRotPrev[Cube.L12.value]
-    cubeRot[Cube.U20.value] = cubeRotPrev[Cube.L22.value]
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.L02.value]
+    cubeRot[cubeEnum.U21.value] = cubeRotPrev[cubeEnum.L12.value]
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.L22.value]
     # Top Edges
-    cubeRot[Cube.R00.value] = cubeRotPrev[Cube.U20.value]
-    cubeRot[Cube.R10.value] = cubeRotPrev[Cube.U21.value]
-    cubeRot[Cube.R20.value] = cubeRotPrev[Cube.U22.value]
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.U20.value]
+    cubeRot[cubeEnum.R10.value] = cubeRotPrev[cubeEnum.U21.value]
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.U22.value]
     # Bottom Edges
-    cubeRot[Cube.L02.value] = cubeRotPrev[Cube.D00.value]
-    cubeRot[Cube.L12.value] = cubeRotPrev[Cube.D01.value]
-    cubeRot[Cube.L22.value] = cubeRotPrev[Cube.D02.value]
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.L12.value] = cubeRotPrev[cubeEnum.D01.value]
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.D02.value]
     
     return cubeRot
 
 def _rotatef(cubeRot, cubeRotPrev):
-    offset = Cube.F00.value
+    offset = cubeEnum.F00.value
     faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Right Edges
-    cubeRot[Cube.U20.value] = cubeRotPrev[Cube.R00.value]
-    cubeRot[Cube.U21.value] = cubeRotPrev[Cube.R10.value]
-    cubeRot[Cube.U22.value] = cubeRotPrev[Cube.R20.value]
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.U21.value] = cubeRotPrev[cubeEnum.R10.value]
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.R20.value]
     # Left Edges
-    cubeRot[Cube.D00.value] = cubeRotPrev[Cube.L02.value]
-    cubeRot[Cube.D01.value] = cubeRotPrev[Cube.L12.value]
-    cubeRot[Cube.D02.value] = cubeRotPrev[Cube.L22.value]
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.L02.value]
+    cubeRot[cubeEnum.D01.value] = cubeRotPrev[cubeEnum.L12.value]
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.L22.value]
     # Top Edges
-    cubeRot[Cube.L22.value] = cubeRotPrev[Cube.U20.value]
-    cubeRot[Cube.L12.value] = cubeRotPrev[Cube.U21.value]
-    cubeRot[Cube.L02.value] = cubeRotPrev[Cube.U22.value]
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.U20.value]
+    cubeRot[cubeEnum.L12.value] = cubeRotPrev[cubeEnum.U21.value]
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.U22.value]
     # Bottom Edges
-    cubeRot[Cube.R20.value] = cubeRotPrev[Cube.D00.value]
-    cubeRot[Cube.R10.value] = cubeRotPrev[Cube.D01.value]
-    cubeRot[Cube.R00.value] = cubeRotPrev[Cube.D02.value]
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.R10.value] = cubeRotPrev[cubeEnum.D01.value]
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.D02.value]
     
     return cubeRot
 
 def _rotateR(cubeRot, cubeRotPrev):
-    offset = Cube.R00.value
+    offset = cubeEnum.R00.value
     faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.U02.value] = cubeRotPrev[Cube.F02.value]
-    cubeRot[Cube.U12.value] = cubeRotPrev[Cube.F12.value]
-    cubeRot[Cube.U22.value] = cubeRotPrev[Cube.F22.value]
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.F02.value]
+    cubeRot[cubeEnum.U12.value] = cubeRotPrev[cubeEnum.F12.value]
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.F22.value]
     # Back Edges
-    cubeRot[Cube.D02.value] = cubeRotPrev[Cube.B20.value]
-    cubeRot[Cube.D12.value] = cubeRotPrev[Cube.B10.value]
-    cubeRot[Cube.D22.value] = cubeRotPrev[Cube.B00.value]
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.D12.value] = cubeRotPrev[cubeEnum.B10.value]
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.B00.value]
     # Up Edges
-    cubeRot[Cube.B00.value] = cubeRotPrev[Cube.U22.value]
-    cubeRot[Cube.B10.value] = cubeRotPrev[Cube.U12.value]
-    cubeRot[Cube.B20.value] = cubeRotPrev[Cube.U02.value]
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.U22.value]
+    cubeRot[cubeEnum.B10.value] = cubeRotPrev[cubeEnum.U12.value]
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.U02.value]
     # Down Edges
-    cubeRot[Cube.F22.value] = cubeRotPrev[Cube.D22.value]
-    cubeRot[Cube.F12.value] = cubeRotPrev[Cube.D12.value]
-    cubeRot[Cube.F02.value] = cubeRotPrev[Cube.D02.value]
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.D22.value]
+    cubeRot[cubeEnum.F12.value] = cubeRotPrev[cubeEnum.D12.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.D02.value]
     
     return cubeRot
 
 def _rotater(cubeRot, cubeRotPrev):
-    offset = Cube.R00.value
+    offset = cubeEnum.R00.value
     faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.D02.value] = cubeRotPrev[Cube.F02.value]
-    cubeRot[Cube.D12.value] = cubeRotPrev[Cube.F12.value]
-    cubeRot[Cube.D22.value] = cubeRotPrev[Cube.F22.value]
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.F02.value]
+    cubeRot[cubeEnum.D12.value] = cubeRotPrev[cubeEnum.F12.value]
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.F22.value]
     # Back Edges
-    cubeRot[Cube.U02.value] = cubeRotPrev[Cube.B20.value]
-    cubeRot[Cube.U12.value] = cubeRotPrev[Cube.B10.value]
-    cubeRot[Cube.U22.value] = cubeRotPrev[Cube.B00.value]
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.U12.value] = cubeRotPrev[cubeEnum.B10.value]
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.B00.value]
     # Up Edges
-    cubeRot[Cube.F22.value] = cubeRotPrev[Cube.U22.value]
-    cubeRot[Cube.F12.value] = cubeRotPrev[Cube.U12.value]
-    cubeRot[Cube.F02.value] = cubeRotPrev[Cube.U02.value]
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.U22.value]
+    cubeRot[cubeEnum.F12.value] = cubeRotPrev[cubeEnum.U12.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.U02.value]
     # Down Edges
-    cubeRot[Cube.B00.value] = cubeRotPrev[Cube.D22.value]
-    cubeRot[Cube.B10.value] = cubeRotPrev[Cube.D12.value]
-    cubeRot[Cube.B20.value] = cubeRotPrev[Cube.D02.value]
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.D22.value]
+    cubeRot[cubeEnum.B10.value] = cubeRotPrev[cubeEnum.D12.value]
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.D02.value]
     
     return cubeRot
 
 def _rotateB(cubeRot, cubeRotPrev):
-    offset = Cube.B00.value
+    offset = cubeEnum.B00.value
     faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Right Edges
-    cubeRot[Cube.U00.value] = cubeRotPrev[Cube.R02.value]
-    cubeRot[Cube.U01.value] = cubeRotPrev[Cube.R12.value]
-    cubeRot[Cube.U02.value] = cubeRotPrev[Cube.R22.value]
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.R02.value]
+    cubeRot[cubeEnum.U01.value] = cubeRotPrev[cubeEnum.R12.value]
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.R22.value]
     # Left Edges
-    cubeRot[Cube.D20.value] = cubeRotPrev[Cube.L00.value]
-    cubeRot[Cube.D21.value] = cubeRotPrev[Cube.L10.value]
-    cubeRot[Cube.D22.value] = cubeRotPrev[Cube.L20.value]
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.D21.value] = cubeRotPrev[cubeEnum.L10.value]
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.L20.value]
     # Up Edges
-    cubeRot[Cube.L20.value] = cubeRotPrev[Cube.U00.value]
-    cubeRot[Cube.L10.value] = cubeRotPrev[Cube.U01.value]
-    cubeRot[Cube.L00.value] = cubeRotPrev[Cube.U02.value]
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.L10.value] = cubeRotPrev[cubeEnum.U01.value]
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.U02.value]
     # Down Edges
-    cubeRot[Cube.R22.value] = cubeRotPrev[Cube.D20.value]
-    cubeRot[Cube.R12.value] = cubeRotPrev[Cube.D21.value]
-    cubeRot[Cube.R02.value] = cubeRotPrev[Cube.D22.value]
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.D20.value]
+    cubeRot[cubeEnum.R12.value] = cubeRotPrev[cubeEnum.D21.value]
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.D22.value]
     
     return cubeRot
 
 def _rotateb(cubeRot, cubeRotPrev):
-    offset = Cube.B00.value
+    offset = cubeEnum.B00.value
     faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Right Edges
-    cubeRot[Cube.D22.value] = cubeRotPrev[Cube.R02.value]
-    cubeRot[Cube.D21.value] = cubeRotPrev[Cube.R12.value]
-    cubeRot[Cube.D20.value] = cubeRotPrev[Cube.R22.value]
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.R02.value]
+    cubeRot[cubeEnum.D21.value] = cubeRotPrev[cubeEnum.R12.value]
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.R22.value]
     # Left Edges
-    cubeRot[Cube.U02.value] = cubeRotPrev[Cube.L00.value]
-    cubeRot[Cube.U01.value] = cubeRotPrev[Cube.L10.value]
-    cubeRot[Cube.U00.value] = cubeRotPrev[Cube.L20.value]
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.U01.value] = cubeRotPrev[cubeEnum.L10.value]
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.L20.value]
     # Up Edges
-    cubeRot[Cube.R02.value] = cubeRotPrev[Cube.U00.value]
-    cubeRot[Cube.R12.value] = cubeRotPrev[Cube.U01.value]
-    cubeRot[Cube.R22.value] = cubeRotPrev[Cube.U02.value]
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.R12.value] = cubeRotPrev[cubeEnum.U01.value]
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.U02.value]
     # Down Edges
-    cubeRot[Cube.L00.value] = cubeRotPrev[Cube.D20.value]
-    cubeRot[Cube.L10.value] = cubeRotPrev[Cube.D21.value]
-    cubeRot[Cube.L20.value] = cubeRotPrev[Cube.D22.value]
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.D20.value]
+    cubeRot[cubeEnum.L10.value] = cubeRotPrev[cubeEnum.D21.value]
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.D22.value]
     
     return cubeRot
 
 def _rotateL(cubeRot, cubeRotPrev):
-    offset = Cube.L00.value
+    offset = cubeEnum.L00.value
     faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.D00.value] = cubeRotPrev[Cube.F00.value]
-    cubeRot[Cube.D10.value] = cubeRotPrev[Cube.F10.value]
-    cubeRot[Cube.D20.value] = cubeRotPrev[Cube.F20.value]
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.D10.value] = cubeRotPrev[cubeEnum.F10.value]
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.F20.value]
     # Back Edges
-    cubeRot[Cube.U20.value] = cubeRotPrev[Cube.B02.value]
-    cubeRot[Cube.U10.value] = cubeRotPrev[Cube.B12.value]
-    cubeRot[Cube.U00.value] = cubeRotPrev[Cube.B22.value]
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.B02.value]
+    cubeRot[cubeEnum.U10.value] = cubeRotPrev[cubeEnum.B12.value]
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.B22.value]
     # Up Edges
-    cubeRot[Cube.F00.value] = cubeRotPrev[Cube.U00.value]
-    cubeRot[Cube.F10.value] = cubeRotPrev[Cube.U10.value]
-    cubeRot[Cube.F20.value] = cubeRotPrev[Cube.U20.value]
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.F10.value] = cubeRotPrev[cubeEnum.U10.value]
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.U20.value]
     # Down Edges
-    cubeRot[Cube.B22.value] = cubeRotPrev[Cube.D00.value]
-    cubeRot[Cube.B12.value] = cubeRotPrev[Cube.D10.value]
-    cubeRot[Cube.B02.value] = cubeRotPrev[Cube.D20.value]
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.B12.value] = cubeRotPrev[cubeEnum.D10.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.D20.value]
     
     return cubeRot
 
 def _rotatel(cubeRot, cubeRotPrev):
-    offset = Cube.L00.value
+    offset = cubeEnum.L00.value
     faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.U00.value] = cubeRotPrev[Cube.F00.value]
-    cubeRot[Cube.U10.value] = cubeRotPrev[Cube.F10.value]
-    cubeRot[Cube.U20.value] = cubeRotPrev[Cube.F20.value]
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.U10.value] = cubeRotPrev[cubeEnum.F10.value]
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.F20.value]
     # Back Edges
-    cubeRot[Cube.D20.value] = cubeRotPrev[Cube.B02.value]
-    cubeRot[Cube.D10.value] = cubeRotPrev[Cube.B12.value]
-    cubeRot[Cube.D00.value] = cubeRotPrev[Cube.B22.value]
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.B02.value]
+    cubeRot[cubeEnum.D10.value] = cubeRotPrev[cubeEnum.B12.value]
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.B22.value]
     # Up Edges
-    cubeRot[Cube.B22.value] = cubeRotPrev[Cube.U00.value]
-    cubeRot[Cube.B12.value] = cubeRotPrev[Cube.U10.value]
-    cubeRot[Cube.B02.value] = cubeRotPrev[Cube.U20.value]
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.B12.value] = cubeRotPrev[cubeEnum.U10.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.U20.value]
     # Down Edges
-    cubeRot[Cube.F00.value] = cubeRotPrev[Cube.D00.value]
-    cubeRot[Cube.F10.value] = cubeRotPrev[Cube.D10.value]
-    cubeRot[Cube.F20.value] = cubeRotPrev[Cube.D20.value]  
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.F10.value] = cubeRotPrev[cubeEnum.D10.value]
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.D20.value]  
       
     return cubeRot
 
 def _rotateU(cubeRot, cubeRotPrev):
-    offset = Cube.U00.value
+    offset = cubeEnum.U00.value
     faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.L00.value] = cubeRotPrev[Cube.F00.value]
-    cubeRot[Cube.L01.value] = cubeRotPrev[Cube.F01.value]
-    cubeRot[Cube.L02.value] = cubeRotPrev[Cube.F02.value]
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.L01.value] = cubeRotPrev[cubeEnum.F01.value]
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.F02.value]
     # Right Edges
-    cubeRot[Cube.F00.value] = cubeRotPrev[Cube.R00.value]
-    cubeRot[Cube.F01.value] = cubeRotPrev[Cube.R01.value]
-    cubeRot[Cube.F02.value] = cubeRotPrev[Cube.R02.value]
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.F01.value] = cubeRotPrev[cubeEnum.R01.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.R02.value]
     # Back Edges
-    cubeRot[Cube.R00.value] = cubeRotPrev[Cube.B00.value]
-    cubeRot[Cube.R01.value] = cubeRotPrev[Cube.B01.value]
-    cubeRot[Cube.R02.value] = cubeRotPrev[Cube.B02.value]
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.B00.value]
+    cubeRot[cubeEnum.R01.value] = cubeRotPrev[cubeEnum.B01.value]
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.B02.value]
     # Left Edges
-    cubeRot[Cube.B00.value] = cubeRotPrev[Cube.L00.value]
-    cubeRot[Cube.B01.value] = cubeRotPrev[Cube.L01.value]
-    cubeRot[Cube.B02.value] = cubeRotPrev[Cube.L02.value]
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.B01.value] = cubeRotPrev[cubeEnum.L01.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.L02.value]
     
     return cubeRot
 
 def _rotateu(cubeRot, cubeRotPrev):
-    offset = Cube.U00.value
+    offset = cubeEnum.U00.value
     faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.R00.value] = cubeRotPrev[Cube.F00.value]
-    cubeRot[Cube.R01.value] = cubeRotPrev[Cube.F01.value]
-    cubeRot[Cube.R02.value] = cubeRotPrev[Cube.F02.value]
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.R01.value] = cubeRotPrev[cubeEnum.F01.value]
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.F02.value]
     # Right Edges
-    cubeRot[Cube.B00.value] = cubeRotPrev[Cube.R00.value]
-    cubeRot[Cube.B01.value] = cubeRotPrev[Cube.R01.value]
-    cubeRot[Cube.B02.value] = cubeRotPrev[Cube.R02.value]
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.B01.value] = cubeRotPrev[cubeEnum.R01.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.R02.value]
     # Back Edges
-    cubeRot[Cube.L00.value] = cubeRotPrev[Cube.B00.value]
-    cubeRot[Cube.L01.value] = cubeRotPrev[Cube.B01.value]
-    cubeRot[Cube.L02.value] = cubeRotPrev[Cube.B02.value]
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.B00.value]
+    cubeRot[cubeEnum.L01.value] = cubeRotPrev[cubeEnum.B01.value]
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.B02.value]
     # Left Edges
-    cubeRot[Cube.F00.value] = cubeRotPrev[Cube.L00.value]
-    cubeRot[Cube.F01.value] = cubeRotPrev[Cube.L01.value]
-    cubeRot[Cube.F02.value] = cubeRotPrev[Cube.L02.value]    
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.F01.value] = cubeRotPrev[cubeEnum.L01.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.L02.value]    
     
     return cubeRot
 
 def _rotateD(cubeRot, cubeRotPrev):
-    offset = Cube.D00.value
+    offset = cubeEnum.D00.value
     faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.R20.value] = cubeRotPrev[Cube.F20.value]
-    cubeRot[Cube.R21.value] = cubeRotPrev[Cube.F21.value]
-    cubeRot[Cube.R22.value] = cubeRotPrev[Cube.F22.value]
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.F20.value]
+    cubeRot[cubeEnum.R21.value] = cubeRotPrev[cubeEnum.F21.value]
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.F22.value]
     # Right Edges
-    cubeRot[Cube.B20.value] = cubeRotPrev[Cube.R20.value]
-    cubeRot[Cube.B21.value] = cubeRotPrev[Cube.R21.value]
-    cubeRot[Cube.B22.value] = cubeRotPrev[Cube.R22.value]
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.R20.value]
+    cubeRot[cubeEnum.B21.value] = cubeRotPrev[cubeEnum.R21.value]
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.R22.value]
     # Back Edges
-    cubeRot[Cube.L20.value] = cubeRotPrev[Cube.B20.value]
-    cubeRot[Cube.L21.value] = cubeRotPrev[Cube.B21.value]
-    cubeRot[Cube.L22.value] = cubeRotPrev[Cube.B22.value]
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.L21.value] = cubeRotPrev[cubeEnum.B21.value]
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.B22.value]
     # Left Edges
-    cubeRot[Cube.F20.value] = cubeRotPrev[Cube.L20.value]
-    cubeRot[Cube.F21.value] = cubeRotPrev[Cube.L21.value]
-    cubeRot[Cube.F22.value] = cubeRotPrev[Cube.L22.value]
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.L20.value]
+    cubeRot[cubeEnum.F21.value] = cubeRotPrev[cubeEnum.L21.value]
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.L22.value]
     
     return cubeRot
 
 def _rotated(cubeRot, cubeRotPrev):
-    offset = Cube.D00.value
+    offset = cubeEnum.D00.value
     faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
     
     for i, ch in enumerate(faceRot):
         cubeRot[i + offset] = ch
         
     # Front Edges
-    cubeRot[Cube.L20.value] = cubeRotPrev[Cube.F20.value]
-    cubeRot[Cube.L21.value] = cubeRotPrev[Cube.F21.value]
-    cubeRot[Cube.L22.value] = cubeRotPrev[Cube.F22.value]
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.F20.value]
+    cubeRot[cubeEnum.L21.value] = cubeRotPrev[cubeEnum.F21.value]
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.F22.value]
     # Right Edges
-    cubeRot[Cube.F20.value] = cubeRotPrev[Cube.R20.value]
-    cubeRot[Cube.F21.value] = cubeRotPrev[Cube.R21.value]
-    cubeRot[Cube.F22.value] = cubeRotPrev[Cube.R22.value]
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.R20.value]
+    cubeRot[cubeEnum.F21.value] = cubeRotPrev[cubeEnum.R21.value]
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.R22.value]
     # Back Edges
-    cubeRot[Cube.R20.value] = cubeRotPrev[Cube.B20.value]
-    cubeRot[Cube.R21.value] = cubeRotPrev[Cube.B21.value]
-    cubeRot[Cube.R22.value] = cubeRotPrev[Cube.B22.value]
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.R21.value] = cubeRotPrev[cubeEnum.B21.value]
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.B22.value]
     # Left Edges
-    cubeRot[Cube.B20.value] = cubeRotPrev[Cube.L20.value]
-    cubeRot[Cube.B21.value] = cubeRotPrev[Cube.L21.value]
-    cubeRot[Cube.B22.value] = cubeRotPrev[Cube.L22.value]
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.L20.value]
+    cubeRot[cubeEnum.B21.value] = cubeRotPrev[cubeEnum.L21.value]
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.L22.value]
     
     return cubeRot
