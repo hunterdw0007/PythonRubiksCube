@@ -76,6 +76,8 @@ def _solveBottomCross(cube, solution):
                 rotations = rotations + 'LL'
                 cube = rotate._rotate({'cube':cube,'dir':'LL'})['cube']
                 
+            return _solveBottomCross(cube, rotations)
+                
                 
                 
                 
