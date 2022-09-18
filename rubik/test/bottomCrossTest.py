@@ -38,6 +38,9 @@ class BottomCrossTest(unittest.TestCase):
 #    test 010: solved cube
 #    test 020: solved bottom cross - unsolved cube
 #    test 030: edge in bottom flipped, others solved - assume side is front
+#
+# sad path:
+#    test 910: invalid cube - validateCube already tested with rotate in Iteration 1
 
     def test_bottomCross_010_solvedCube(self):
         inputDict = {}
@@ -81,4 +84,14 @@ class BottomCrossTest(unittest.TestCase):
         self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))'''
         
-    
+    def test_bottomCross_910_invalidCubeString(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = ''
+        
+        expectResult = {}
+        expectResult['status'] = 'error: invalid cube'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
