@@ -56,46 +56,72 @@ def _solveBottomCross(cube, solution):
                 
             cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
             
+            cube, location, upRotations = _positionEdgeInTop(cube, location)
+            
+            rotations = rotations + upRotations
+            
+            rotations = rotations + rotations[1].upper()
+            cube = rotate._rotate({'cube':cube,'dir':rotations[1].upper()})['cube']
+            
+            if math.floor(location/9) == 0:
+                rotations = rotations + 'FF'
+                cube = rotate._rotate({'cube':cube,'dir':'FF'})['cube']
+            elif math.floor(location / 9) == 1:
+                rotations = rotations + 'RR'
+                cube = rotate._rotate({'cube':cube,'dir':'RR'})['cube']
+            elif math.floor(location / 9) == 2:
+                rotations = rotations + 'BB'
+                cube = rotate._rotate({'cube':cube,'dir':'BB'})['cube']
+            else:
+                rotations = rotations + 'LL'
+                cube = rotate._rotate({'cube':cube,'dir':'LL'})['cube']
+                
+            return _solveBottomCross(cube, rotations)
+            
     # Case 3: edge in bottom, wrong spot
         elif cube[edge[0]] == cube[rotate.cubeEnum.D11.value] and cube[edge[1]] != sideColors[side]:
             if edge[2] == 'F':
                 rotations = 'FF'
-                location = rotate.cubeEnum.L01.value
+                location = rotate.cubeEnum.F01.value
             elif edge[2] == 'R':
                 rotations = 'RR'
-                location = rotate.cubeEnum.F01.value
+                location = rotate.cubeEnum.R01.value
             elif edge[2] == 'B':
                 rotations = 'BB'
-                location = rotate.cubeEnum.R01.value
+                location = rotate.cubeEnum.B01.value
             else:
                 rotations = 'LL'
-                location = rotate.cubeEnum.B01.value
+                location = rotate.cubeEnum.L01.value
                 
             cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
-                
-        while cube[location] != cube[location+3]:
-            rotations = rotations + 'U'
-            cube = rotate._rotate({'cube':cube,'dir':'U'})['cube']
-            location = location - 9 if location != rotate.cubeEnum.F01.value else rotate.cubeEnum.L01.value
-                
-        rotations = rotations + rotations[1].upper()
-        cube = rotate._rotate({'cube':cube,'dir':rotations[1].upper()})['cube']
-        
-        if math.floor(location/9) == 0:
-            rotations = rotations + 'FF'
-            cube = rotate._rotate({'cube':cube,'dir':'FF'})['cube']
-        elif math.floor(location / 9) == 1:
-            rotations = rotations + 'RR'
-            cube = rotate._rotate({'cube':cube,'dir':'RR'})['cube']
-        elif math.floor(location / 9) == 2:
-            rotations = rotations + 'BB'
-            cube = rotate._rotate({'cube':cube,'dir':'BB'})['cube']
-        else:
-            rotations = rotations + 'LL'
-            cube = rotate._rotate({'cube':cube,'dir':'LL'})['cube']
             
-        return _solveBottomCross(cube, rotations)
+            cube, location, upRotations = _positionEdgeInTop(cube, location)
+            
+            rotations = rotations + upRotations
+        
+            if math.floor(location/9) == 0:
+                rotations = rotations + 'FF'
+                cube = rotate._rotate({'cube':cube,'dir':'FF'})['cube']
+            elif math.floor(location / 9) == 1:
+                rotations = rotations + 'RR'
+                cube = rotate._rotate({'cube':cube,'dir':'RR'})['cube']
+            elif math.floor(location / 9) == 2:
+                rotations = rotations + 'BB'
+                cube = rotate._rotate({'cube':cube,'dir':'BB'})['cube']
+            else:
+                rotations = rotations + 'LL'
+                cube = rotate._rotate({'cube':cube,'dir':'LL'})['cube']
+                
+            return _solveBottomCross(cube, rotations)
                 
                 
+def _positionEdgeInTop(cube, location):
+    rotations = ''
+    while cube[location] != cube[location+3]:
+        rotations = rotations + 'U'
+        cube = rotate._rotate({'cube':cube,'dir':'U'})['cube']
+        location = location - 9 if location != rotate.cubeEnum.F01.value else rotate.cubeEnum.L01.value
+        
+    return cube, location, rotations
                 
                 
