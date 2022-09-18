@@ -15,15 +15,7 @@ def _solve(parms):
 
 def _solveBottomCross(cube, solution):
     # Base Case: check if bottom cross is solved
-    if (cube[rotate.cubeEnum.D11.value] == \
-    (   cube[rotate.cubeEnum.D01.value] 
-    and cube[rotate.cubeEnum.D10.value] 
-    and cube[rotate.cubeEnum.D12.value] 
-    and cube[rotate.cubeEnum.D21.value] ))\
-    and cube[rotate.cubeEnum.F11.value] == cube[rotate.cubeEnum.F21.value]\
-    and cube[rotate.cubeEnum.R11.value] == cube[rotate.cubeEnum.R21.value]\
-    and cube[rotate.cubeEnum.B11.value] == cube[rotate.cubeEnum.B21.value]\
-    and cube[rotate.cubeEnum.L11.value] == cube[rotate.cubeEnum.L21.value]:
+    if _checkBottomCross(cube):
         return solution
     
     # Used to check for correctness/incorrectness of edge pairs
@@ -97,7 +89,19 @@ def _solveBottomCross(cube, solution):
             rotations = rotations + downRotations
                 
             return _solveBottomCross(cube, rotations)
-                
+
+def _checkBottomCross(cube):
+    if (cube[rotate.cubeEnum.D11.value] == \
+    (   cube[rotate.cubeEnum.D01.value] 
+    and cube[rotate.cubeEnum.D10.value] 
+    and cube[rotate.cubeEnum.D12.value] 
+    and cube[rotate.cubeEnum.D21.value] ))\
+    and cube[rotate.cubeEnum.F11.value] == cube[rotate.cubeEnum.F21.value]\
+    and cube[rotate.cubeEnum.R11.value] == cube[rotate.cubeEnum.R21.value]\
+    and cube[rotate.cubeEnum.B11.value] == cube[rotate.cubeEnum.B21.value]\
+    and cube[rotate.cubeEnum.L11.value] == cube[rotate.cubeEnum.L21.value]:
+        return True
+    return False
                 
 def _positionEdgeInTop(cube, location):
     rotations = ''
