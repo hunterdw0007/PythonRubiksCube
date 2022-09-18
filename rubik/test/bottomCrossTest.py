@@ -38,6 +38,7 @@ class BottomCrossTest(unittest.TestCase):
 #    test 010: solved cube
 #    test 020: solved bottom cross - unsolved cube
 #    test 030: edge in bottom flipped, others solved - assume side is front
+#    test 040: edge in bottom flipped, others solved any side
 #
 # sad path:
 #    test 910: invalid cube - validateCube already tested with rotate in Iteration 1
@@ -70,13 +71,27 @@ class BottomCrossTest(unittest.TestCase):
         self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
-    def test_bottomCross_030_flippedEdgeOnBottom(self):
+    def test_bottomCross_030_flippedEdgeOnBottomF(self):
         inputDict = {}
         inputDict['op']   = 'solve'
         inputDict['cube'] = 'grwoboywbbboyrgrrwggbygyrgrybrbogbogorwryoyyoobwwwwywg'
         
         expectResult = {}
         expectResult['solution'] = 'FlUUULFF'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_bottomCross_030_flippedEdgeOnBottom(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'worrbgwbrgggorrgwowggbgyygroboboyboryrooyybyybwwwwrywb'
+        
+        expectResult = {}
+        expectResult['solution'] = 'RfUUUF'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
