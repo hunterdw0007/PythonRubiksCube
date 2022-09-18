@@ -13,8 +13,9 @@ def _solve(parms):
         result['status'] = 'ok'                   
     return result
 
-def _solveBottomCross(outputDict):
-    
+def _solveBottomCross(cubeDict):
+    outputDict = {}
+    outputDict = cubeDict
     if (outputDict.get('cube')[rotate.cubeEnum.B11.value] == \
     (   outputDict.get('cube')[rotate.cubeEnum.B01.value] 
     and outputDict.get('cube')[rotate.cubeEnum.B10.value] 
