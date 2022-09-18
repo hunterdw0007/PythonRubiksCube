@@ -48,5 +48,5 @@ class BottomCrossTest(unittest.TestCase):
         
         actualResult = solve._solve(inputDict)
         
-        self.assertEqual(expectResult.get('cube'), actualResult.get('cube'))
+        self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
