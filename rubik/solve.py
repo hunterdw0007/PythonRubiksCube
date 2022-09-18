@@ -78,6 +78,8 @@ def _solveBottomCross(cube, solution):
                 cube = rotate._rotate({'cube':cube,'dir':'LL'})['cube']
                 
             return _solveBottomCross(cube, rotations)
+        
+    # Case 3: edge in bottom, wrong spot
                 
                 
                 
