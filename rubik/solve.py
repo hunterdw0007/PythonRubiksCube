@@ -3,8 +3,9 @@ import rubik.rotate as rotate
 
 def _solve(parms):
     """Return rotates needed to solve input cube"""
-    encodedCube = parms.get('cube',None)
-    result = _solveBottomCross(encodedCube)
+    encodedCube = parms
+    encodedCube['solution'] = ''
+    result = _solveBottomCross(parms)
     result['status'] = 'ok'                   
     return result
 
