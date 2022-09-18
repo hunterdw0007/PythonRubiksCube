@@ -7,26 +7,23 @@ def _solve(parms):
     if not rotate._validateCube(parms.get('cube', None)):
         result['status'] = 'error: invalid cube'
     else:
-        encodedCube = parms
-        encodedCube['solution'] = ''
-        result = _solveBottomCross(encodedCube)
+        result['solution'] = _solveBottomCross(parms.get('cube'), '')
         result['status'] = 'ok'                   
     return result
 
-def _solveBottomCross(cubeDict):
-    outputDict = {}
-    outputDict = cubeDict
-    if (outputDict.get('cube')[rotate.cubeEnum.B11.value] == \
-    (   outputDict.get('cube')[rotate.cubeEnum.B01.value] 
-    and outputDict.get('cube')[rotate.cubeEnum.B10.value] 
-    and outputDict.get('cube')[rotate.cubeEnum.B12.value] 
-    and outputDict.get('cube')[rotate.cubeEnum.B21.value] ))\
-    and outputDict.get('cube')[rotate.cubeEnum.F11.value] == outputDict.get('cube')[rotate.cubeEnum.F21.value]\
-    and outputDict.get('cube')[rotate.cubeEnum.R11.value] == outputDict.get('cube')[rotate.cubeEnum.R21.value]\
-    and outputDict.get('cube')[rotate.cubeEnum.B11.value] == outputDict.get('cube')[rotate.cubeEnum.B21.value]\
-    and outputDict.get('cube')[rotate.cubeEnum.L11.value] == outputDict.get('cube')[rotate.cubeEnum.L21.value]:
-        return outputDict
+def _solveBottomCross(cube, solution):
+
+    if (cube[rotate.cubeEnum.B11.value] == \
+    (   cube[rotate.cubeEnum.B01.value] 
+    and cube[rotate.cubeEnum.B10.value] 
+    and cube[rotate.cubeEnum.B12.value] 
+    and cube[rotate.cubeEnum.B21.value] ))\
+    and cube[rotate.cubeEnum.F11.value] == cube[rotate.cubeEnum.F21.value]\
+    and cube[rotate.cubeEnum.R11.value] == cube[rotate.cubeEnum.R21.value]\
+    and cube[rotate.cubeEnum.B11.value] == cube[rotate.cubeEnum.B21.value]\
+    and cube[rotate.cubeEnum.L11.value] == cube[rotate.cubeEnum.L21.value]:
+        return solution
     
-    outputDict['solution'] = 'FlUUULFF'
-    outputDict['cube'] = rotate._rotate({'cube':outputDict.get('cube'),'dir':outputDict.get('solution')})['cube']
-    _solveBottomCross(outputDict)
+    solution = 'FlUUULFF'
+    cube = rotate._rotate({'cube':cube,'dir':solution})['cube']
+    _solveBottomCross(cube, solution)
