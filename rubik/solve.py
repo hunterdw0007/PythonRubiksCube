@@ -1,5 +1,6 @@
 import rubik.cube as rubik
 import rubik.rotate as rotate
+import math
 
 def _solve(parms):
     """Return rotates needed to solve input cube"""
@@ -63,13 +64,13 @@ def _solveBottomCross(cube, solution):
             rotations = rotations + rotations[1].upper()
             cube = rotate._rotate({'cube':cube,'dir':rotations[1].upper()})['cube']
             
-            if location / 9 == 0:
+            if math.floor(location/9) == 0:
                 rotations = rotations + 'FF'
                 cube = rotate._rotate({'cube':cube,'dir':'FF'})['cube']
-            elif location / 9 == 1:
+            elif math.floor(location / 9) == 1:
                 rotations = rotations + 'RR'
                 cube = rotate._rotate({'cube':cube,'dir':'RR'})['cube']
-            elif location / 9 == 2:
+            elif math.floor(location / 9) == 2:
                 rotations = rotations + 'BB'
                 cube = rotate._rotate({'cube':cube,'dir':'BB'})['cube']
             else:
