@@ -7,7 +7,8 @@ def _solve(parms):
     if not rotate._validateCube(parms.get('cube', None)):
         result['status'] = 'error: invalid cube'
     else:
-        result['solution'] = _solveBottomCross(parms.get('cube'), '')
+        solution = _solveBottomCross(parms.get('cube'), '')
+        result['solution'] = solution
         result['status'] = 'ok'                   
     return result
 
@@ -26,4 +27,4 @@ def _solveBottomCross(cube, solution):
     
     solution = 'FlUUULFF'
     cube = rotate._rotate({'cube':cube,'dir':solution})['cube']
-    _solveBottomCross(cube, solution)
+    return _solveBottomCross(cube, solution)
