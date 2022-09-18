@@ -14,16 +14,18 @@ def _solve(parms):
     return result
 
 def _solveBottomCross(outputDict):
-    cubeString = outputDict.get('cube')
-    rotString = outputDict.get('solution')
     
-    if (cubeString[rotate.cubeEnum.B11.value] == \
-    (   cubeString[rotate.cubeEnum.B01.value] 
-    and cubeString[rotate.cubeEnum.B10.value] 
-    and cubeString[rotate.cubeEnum.B12.value] 
-    and cubeString[rotate.cubeEnum.B21.value] ))\
-    and cubeString[rotate.cubeEnum.F11.value] == cubeString[rotate.cubeEnum.F21.value]\
-    and cubeString[rotate.cubeEnum.R11.value] == cubeString[rotate.cubeEnum.R21.value]\
-    and cubeString[rotate.cubeEnum.B11.value] == cubeString[rotate.cubeEnum.B21.value]\
-    and cubeString[rotate.cubeEnum.L11.value] == cubeString[rotate.cubeEnum.L21.value]:
+    if (outputDict.get('cube')[rotate.cubeEnum.B11.value] == \
+    (   outputDict.get('cube')[rotate.cubeEnum.B01.value] 
+    and outputDict.get('cube')[rotate.cubeEnum.B10.value] 
+    and outputDict.get('cube')[rotate.cubeEnum.B12.value] 
+    and outputDict.get('cube')[rotate.cubeEnum.B21.value] ))\
+    and outputDict.get('cube')[rotate.cubeEnum.F11.value] == outputDict.get('cube')[rotate.cubeEnum.F21.value]\
+    and outputDict.get('cube')[rotate.cubeEnum.R11.value] == outputDict.get('cube')[rotate.cubeEnum.R21.value]\
+    and outputDict.get('cube')[rotate.cubeEnum.B11.value] == outputDict.get('cube')[rotate.cubeEnum.B21.value]\
+    and outputDict.get('cube')[rotate.cubeEnum.L11.value] == outputDict.get('cube')[rotate.cubeEnum.L21.value]:
         return outputDict
+    
+    outputDict['solution'] = 'FlUUULFF'
+    outputDict['cube'] = rotate._rotate({'cube':outputDict.get('cube'),'dir':outputDict.get('solution')})['cube']
+    _solveBottomCross(outputDict)
