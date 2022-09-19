@@ -43,6 +43,7 @@ class BottomCrossTest(unittest.TestCase):
 #    test 060: edge in side
 #    test 070: edge in top, facing right way
 #    test 080: edge in top, facing sideways
+#    test 090: no edges placed initially - full solve
 #
 # sad path:
 #    test 910: invalid cube - validateCube already tested with rotate in Iteration 1
@@ -152,6 +153,20 @@ class BottomCrossTest(unittest.TestCase):
         
         expectResult = {}
         expectResult['solution'] = 'FRurfUUFF'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_bottomCross_090_fullBottomCrossSolve(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'ygwybrgbbooryrbrowwoywgworbrrbrogygogwgbybowgyywowyrgb'
+        
+        expectResult = {}
+        expectResult['solution'] = 'rURFFrUURLLrUUURBBlUULRR'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
