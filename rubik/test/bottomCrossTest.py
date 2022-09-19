@@ -114,6 +114,20 @@ class BottomCrossTest(unittest.TestCase):
         self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
+    def test_bottomCross_060_edgeInSide(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'gywyrwyrogbwrgrbgrrggyoryoywbybborboooboyyogrbgwwwwbwg'
+        
+        expectResult = {}
+        expectResult['solution'] = 'RUrFF'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
     def test_bottomCross_910_invalidCubeString(self):
         inputDict = {}
         inputDict['op']   = 'solve'
