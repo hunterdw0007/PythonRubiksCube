@@ -190,7 +190,7 @@ def _solveBottomCross(cube, solution):
             cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
             
             # Position the edge where it needs to be in the top
-            cube, location, upRotations = _positionEdgeInTop(cube, edge[0])
+            cube, location, upRotations = _positionEdgeInTop(cube, location)
             rotations += upRotations
             
             # Flip the edge from the top to the bottom
