@@ -24,6 +24,12 @@ def _solveBottomCross(cube, solution):
                       , (rotate.cubeEnum.D21.value, rotate.cubeEnum.B21.value, 'B')
                       , (rotate.cubeEnum.D10.value, rotate.cubeEnum.L21.value, 'L') ]
     
+    # Used to check for correctness/incorrectness of edge pairs
+    sideEdgePairs = [ (rotate.cubeEnum.F12.value, rotate.cubeEnum.R10.value, 'f', 'R')
+                    , (rotate.cubeEnum.R12.value, rotate.cubeEnum.B10.value, 'r', 'B')
+                    , (rotate.cubeEnum.B12.value, rotate.cubeEnum.L10.value, 'b', 'L')
+                    , (rotate.cubeEnum.L12.value, rotate.cubeEnum.F10.value, 'l', 'F') ]
+    
     # keeps track of the colors of each side
     sideColors = [cube[rotate.cubeEnum.F11.value],cube[rotate.cubeEnum.R11.value],cube[rotate.cubeEnum.B11.value],cube[rotate.cubeEnum.L11.value]]
     
@@ -88,13 +94,8 @@ def _solveBottomCross(cube, solution):
             cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
             rotations = rotations + downRotations
                 
+            # Recursive call to complete solution
             return _solveBottomCross(cube, solution + rotations)
-    
-    # Used to check for correctness/incorrectness of edge pairs
-    sideEdgePairs = [ (rotate.cubeEnum.F12.value, rotate.cubeEnum.R10.value, 'f', 'R')
-                    , (rotate.cubeEnum.R12.value, rotate.cubeEnum.B10.value, 'r', 'B')
-                    , (rotate.cubeEnum.B12.value, rotate.cubeEnum.L10.value, 'b', 'L')
-                    , (rotate.cubeEnum.L12.value, rotate.cubeEnum.F10.value, 'l', 'F') ]
     
     for side, edge in enumerate(sideEdgePairs):
     #Case 4: Edge in side - bottom color on left
@@ -122,6 +123,7 @@ def _solveBottomCross(cube, solution):
             cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
             rotations += downRotations
             
+            # Recursive call to complete solution
             return _solveBottomCross(cube, solution + rotations)
             
     #Case 5: Edge in side - bottom color on right
@@ -148,7 +150,8 @@ def _solveBottomCross(cube, solution):
             # Flip the edge from the top to the bottom
             cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
             rotations += downRotations
-            
+
+            # Recursive call to complete solution
             return _solveBottomCross(cube, solution + rotations)
 
 def _checkBottomCross(cube):
