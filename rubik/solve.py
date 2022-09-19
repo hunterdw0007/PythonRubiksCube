@@ -102,12 +102,21 @@ def _solveBottomCross(cube, solution):
             rotations += edge[3]
             cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
             
+            if edge[3] == 'F':
+                location = rotate.cubeEnum.F01.value
+            elif edge[3] == 'R':
+                location = rotate.cubeEnum.R01.value
+            elif edge[3] == 'B':
+                location = rotate.cubeEnum.B01.value
+            else:
+                location = rotate.cubeEnum.L01.value
+            
             # Position the edge where it needs to be in the top
             cube, location, upRotations = _positionEdgeInTop(cube, location)
             rotations += upRotations
             
             rotations += edge[3].lower()
-            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            cube = rotate._rotate({'cube':cube,'dir':edge[3].lower()})['cube']
             
             # Flip the edge from the top to the bottom
             cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
@@ -120,12 +129,21 @@ def _solveBottomCross(cube, solution):
             rotations += edge[2]
             cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
             
+            if edge[2] == 'f':
+                location = rotate.cubeEnum.F01.value
+            elif edge[2] == 'r':
+                location = rotate.cubeEnum.R01.value
+            elif edge[2] == 'b':
+                location = rotate.cubeEnum.B01.value
+            else:
+                location = rotate.cubeEnum.L01.value
+            
             # Position the edge where it needs to be in the top
             cube, location, upRotations = _positionEdgeInTop(cube, location)
             rotations += upRotations
             
             rotations += edge[2].upper()
-            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            cube = rotate._rotate({'cube':cube,'dir':edge[2].upper()})['cube']
             
             # Flip the edge from the top to the bottom
             cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
