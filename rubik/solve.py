@@ -34,16 +34,16 @@ def _solveBottomCross(cube, solution):
     # Case 2: Edge in bottom flipped
         if cube[edge[0]] == sideColors[side] and cube[edge[1]] == cube[rotate.cubeEnum.D11.value]:
             if edge[2] == 'F':
-                rotations = 'Fl'
+                rotations += 'Fl'
                 location = rotate.cubeEnum.L01.value
             elif edge[2] == 'R':
-                rotations = 'Rf'
+                rotations += 'Rf'
                 location = rotate.cubeEnum.F01.value
             elif edge[2] == 'B':
-                rotations = 'Br'
+                rotations += 'Br'
                 location = rotate.cubeEnum.R01.value
             else:
-                rotations = 'Lb'
+                rotations += 'Lb'
                 location = rotate.cubeEnum.B01.value
                 
             cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
@@ -61,21 +61,21 @@ def _solveBottomCross(cube, solution):
             rotations = rotations + downRotations
             
             # Recursive call to complete the cube solution
-            return _solveBottomCross(cube, rotations)
-            
+            return _solveBottomCross(cube, solution + rotations)
+          
     # Case 3: edge in bottom, wrong spot
         elif cube[edge[0]] == cube[rotate.cubeEnum.D11.value] and cube[edge[1]] != sideColors[side]:
             if edge[2] == 'F':
-                rotations = 'FF'
+                rotations += 'FF'
                 location = rotate.cubeEnum.F01.value
             elif edge[2] == 'R':
-                rotations = 'RR'
+                rotations += 'RR'
                 location = rotate.cubeEnum.R01.value
             elif edge[2] == 'B':
-                rotations = 'BB'
+                rotations += 'BB'
                 location = rotate.cubeEnum.B01.value
             else:
-                rotations = 'LL'
+                rotations += 'LL'
                 location = rotate.cubeEnum.L01.value
                 
             cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
@@ -88,7 +88,50 @@ def _solveBottomCross(cube, solution):
             cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
             rotations = rotations + downRotations
                 
-            return _solveBottomCross(cube, rotations)
+            return _solveBottomCross(cube, solution + rotations)
+    
+    # Used to check for correctness/incorrectness of edge pairs
+    sideEdgePairs = [ (rotate.cubeEnum.F12.value, rotate.cubeEnum.R10.value, 'f', 'R')
+                    , (rotate.cubeEnum.R12.value, rotate.cubeEnum.B10.value, 'r', 'B')
+                    , (rotate.cubeEnum.B12.value, rotate.cubeEnum.L10.value, 'b', 'L')
+                    , (rotate.cubeEnum.L12.value, rotate.cubeEnum.F10.value, 'l', 'F') ]
+    
+    for side, edge in enumerate(sideEdgePairs):
+    #Case 4: Edge in side - bottom color on left
+        if cube[edge[0]] == cube[rotate.cubeEnum.D11.value]:
+            rotations += edge[3]
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Position the edge where it needs to be in the top
+            cube, location, upRotations = _positionEdgeInTop(cube, location)
+            rotations += upRotations
+            
+            rotations += edge[3].lower()
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Flip the edge from the top to the bottom
+            cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
+            rotations += downRotations
+            
+            return _solveBottomCross(cube, solution + rotations)
+            
+    #Case 5: Edge in side - bottom color on right
+        elif cube[edge[1]] == cube[rotate.cubeEnum.D11.value]:
+            rotations += edge[2]
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Position the edge where it needs to be in the top
+            cube, location, upRotations = _positionEdgeInTop(cube, location)
+            rotations += upRotations
+            
+            rotations += edge[2].upper()
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Flip the edge from the top to the bottom
+            cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
+            rotations += downRotations
+            
+            return _solveBottomCross(cube, solution + rotations)
 
 def _checkBottomCross(cube):
     if (cube[rotate.cubeEnum.D11.value] == \
