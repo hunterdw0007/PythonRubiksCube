@@ -134,17 +134,24 @@ def _solveBottomCross(cube, solution):
             return _solveBottomCross(cube, solution + rotations)
 
 def _checkBottomCross(cube):
-    if (cube[rotate.cubeEnum.D11.value] == \
-    (   cube[rotate.cubeEnum.D01.value] 
-    and cube[rotate.cubeEnum.D10.value] 
-    and cube[rotate.cubeEnum.D12.value] 
-    and cube[rotate.cubeEnum.D21.value] ))\
-    and cube[rotate.cubeEnum.F11.value] == cube[rotate.cubeEnum.F21.value]\
-    and cube[rotate.cubeEnum.R11.value] == cube[rotate.cubeEnum.R21.value]\
-    and cube[rotate.cubeEnum.B11.value] == cube[rotate.cubeEnum.B21.value]\
-    and cube[rotate.cubeEnum.L11.value] == cube[rotate.cubeEnum.L21.value]:
-        return True
-    return False
+    if cube[rotate.cubeEnum.F11.value] != cube[rotate.cubeEnum.F21.value]:
+        return False
+    if cube[rotate.cubeEnum.R11.value] != cube[rotate.cubeEnum.R21.value]:
+        return False
+    if cube[rotate.cubeEnum.B11.value] != cube[rotate.cubeEnum.B21.value]:
+        return False
+    if cube[rotate.cubeEnum.L11.value] != cube[rotate.cubeEnum.L21.value]:
+        return False
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D01.value]:
+        return False
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D10.value]:
+        return False
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D12.value]:
+        return False
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D21.value]:
+        return False
+    # If it makes it here then it's all correct
+    return True
                 
 def _positionEdgeInTop(cube, location):
     rotations = ''
