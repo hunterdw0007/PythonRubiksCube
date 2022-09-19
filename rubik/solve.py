@@ -171,6 +171,49 @@ def _solveBottomCross(cube, solution):
             rotations += downRotations
             
             return _solveBottomCross(cube, solution + rotations)
+        
+        elif cube[edge[0]] == cube[rotate.cubeEnum.D11.value]:
+            # "Flip" edge to the right orientation
+            if edge[2] == 'F':
+                rotations += 'FR'
+                location = rotate.cubeEnum.R01.value
+            elif edge[2] == 'R':
+                rotations += 'RB'
+                location = rotate.cubeEnum.B01.value
+            elif edge[2] == 'B':
+                rotations += 'BL'
+                location = rotate.cubeEnum.L01.value
+            else:
+                rotations += 'LF'
+                location = rotate.cubeEnum.F01.value
+                
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Position the edge where it needs to be in the top
+            cube, location, upRotations = _positionEdgeInTop(cube, edge[0])
+            rotations += upRotations
+            
+            # Reset sides that were "messed up"
+            if edge[2] == 'F':
+                rotations += 'rf'
+                location = rotate.cubeEnum.R01.value
+            elif edge[2] == 'R':
+                rotations += 'br'
+                location = rotate.cubeEnum.B01.value
+            elif edge[2] == 'B':
+                rotations += 'lb'
+                location = rotate.cubeEnum.L01.value
+            else:
+                rotations += 'fl'
+                location = rotate.cubeEnum.F01.value
+                
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Flip the edge from the top to the bottom
+            cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
+            rotations += downRotations
+            
+            return _solveBottomCross(cube, solution + rotations)
 
 def _checkBottomCross(cube):
     if cube[rotate.cubeEnum.F11.value] != cube[rotate.cubeEnum.F21.value]:
