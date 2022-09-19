@@ -1,5 +1,62 @@
 import rubik.cube as rubik
 import re
+from enum import Enum
+
+class cubeEnum(Enum):
+    F00 = 0
+    F01 = 1
+    F02 = 2
+    F10 = 3
+    F11 = 4
+    F12 = 5
+    F20 = 6
+    F21 = 7
+    F22 = 8
+    R00 = 9
+    R01 = 10
+    R02 = 11
+    R10 = 12
+    R11 = 13
+    R12 = 14
+    R20 = 15
+    R21 = 16
+    R22 = 17
+    B00 = 18
+    B01 = 19
+    B02 = 20
+    B10 = 21
+    B11 = 22
+    B12 = 23
+    B20 = 24
+    B21 = 25
+    B22 = 26
+    L00 = 27
+    L01 = 28
+    L02 = 29
+    L10 = 30
+    L11 = 31
+    L12 = 32
+    L20 = 33
+    L21 = 34
+    L22 = 35
+    U00 = 36
+    U01 = 37
+    U02 = 38
+    U10 = 39
+    U11 = 40
+    U12 = 41
+    U20 = 42
+    U21 = 43
+    U22 = 44
+    D00 = 45
+    D01 = 46
+    D02 = 47
+    D10 = 48
+    D11 = 49
+    D12 = 50
+    D20 = 51
+    D21 = 52
+    D22 = 53
 
 def _rotate(parms):
     """Return rotated cube""" 
@@ -22,293 +79,30 @@ def _rotate(parms):
             cubeRotPrev = cubeRot[:]
             
             if rotation == 'f':
-                offset = 0
-                faceRot = _faceCCW(cubeRot[0:9])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Right Edges
-                cubeRot[42] = cubeRotPrev[ 9]
-                cubeRot[43] = cubeRotPrev[12]
-                cubeRot[44] = cubeRotPrev[15]
-                # Left Edges
-                cubeRot[45] = cubeRotPrev[29]
-                cubeRot[46] = cubeRotPrev[32]
-                cubeRot[47] = cubeRotPrev[35]
-                # Top Edges
-                cubeRot[35] = cubeRotPrev[42]
-                cubeRot[32] = cubeRotPrev[43]
-                cubeRot[29] = cubeRotPrev[44]
-                # Bottom Edges
-                cubeRot[15] = cubeRotPrev[45]
-                cubeRot[12] = cubeRotPrev[46]
-                cubeRot[ 9] = cubeRotPrev[47]
-            
+                cubeRot = _rotatef(cubeRot, cubeRotPrev)
             elif rotation == 'R':
-                offset = 9
-                faceRot = _faceCW(cubeRot[9:18])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[38] = cubeRotPrev[2]
-                cubeRot[41] = cubeRotPrev[5]
-                cubeRot[44] = cubeRotPrev[8]
-                # Back Edges
-                cubeRot[47] = cubeRotPrev[24]
-                cubeRot[50] = cubeRotPrev[21]
-                cubeRot[53] = cubeRotPrev[18]
-                # Up Edges
-                cubeRot[18] = cubeRotPrev[44]
-                cubeRot[21] = cubeRotPrev[41]
-                cubeRot[24] = cubeRotPrev[38]
-                # Down Edges
-                cubeRot[8] = cubeRotPrev[53]
-                cubeRot[5] = cubeRotPrev[50]
-                cubeRot[2] = cubeRotPrev[47]
-                
+                cubeRot = _rotateR(cubeRot, cubeRotPrev)               
             elif rotation == 'r':
-                offset = 9
-                faceRot = _faceCCW(cubeRot[9:18])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[47] = cubeRotPrev[2]
-                cubeRot[50] = cubeRotPrev[5]
-                cubeRot[53] = cubeRotPrev[8]
-                # Back Edges
-                cubeRot[38] = cubeRotPrev[24]
-                cubeRot[41] = cubeRotPrev[21]
-                cubeRot[44] = cubeRotPrev[18]
-                # Up Edges
-                cubeRot[8] = cubeRotPrev[44]
-                cubeRot[5] = cubeRotPrev[41]
-                cubeRot[2] = cubeRotPrev[38]
-                # Down Edges
-                cubeRot[18] = cubeRotPrev[53]
-                cubeRot[21] = cubeRotPrev[50]
-                cubeRot[24] = cubeRotPrev[47]
-                
+                cubeRot = _rotater(cubeRot, cubeRotPrev)               
             elif rotation == 'B':
-                offset = 18
-                faceRot = _faceCW(cubeRot[18:27])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Right Edges
-                cubeRot[36] = cubeRotPrev[11]
-                cubeRot[37] = cubeRotPrev[14]
-                cubeRot[38] = cubeRotPrev[17]
-                # Left Edges
-                cubeRot[51] = cubeRotPrev[27]
-                cubeRot[52] = cubeRotPrev[30]
-                cubeRot[53] = cubeRotPrev[33]
-                # Up Edges
-                cubeRot[33] = cubeRotPrev[36]
-                cubeRot[30] = cubeRotPrev[37]
-                cubeRot[27] = cubeRotPrev[38]
-                # Down Edges
-                cubeRot[17] = cubeRotPrev[51]
-                cubeRot[14] = cubeRotPrev[52]
-                cubeRot[11] = cubeRotPrev[53]
-                
+                cubeRot = _rotateB(cubeRot, cubeRotPrev)    
             elif rotation == 'b':
-                offset = 18
-                faceRot = _faceCCW(cubeRot[18:27])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Right Edges
-                cubeRot[53] = cubeRotPrev[11]
-                cubeRot[52] = cubeRotPrev[14]
-                cubeRot[51] = cubeRotPrev[17]
-                # Left Edges
-                cubeRot[38] = cubeRotPrev[27]
-                cubeRot[37] = cubeRotPrev[30]
-                cubeRot[36] = cubeRotPrev[33]
-                # Up Edges
-                cubeRot[11] = cubeRotPrev[36]
-                cubeRot[14] = cubeRotPrev[37]
-                cubeRot[17] = cubeRotPrev[38]
-                # Down Edges
-                cubeRot[27] = cubeRotPrev[51]
-                cubeRot[30] = cubeRotPrev[52]
-                cubeRot[33] = cubeRotPrev[53]
-                
+                cubeRot = _rotateb(cubeRot, cubeRotPrev)
             elif rotation == 'L':
-                offset = 27
-                faceRot = _faceCW(cubeRot[27:36])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[45] = cubeRotPrev[0]
-                cubeRot[48] = cubeRotPrev[3]
-                cubeRot[51] = cubeRotPrev[6]
-                # Back Edges
-                cubeRot[42] = cubeRotPrev[20]
-                cubeRot[39] = cubeRotPrev[23]
-                cubeRot[36] = cubeRotPrev[26]
-                # Up Edges
-                cubeRot[0] = cubeRotPrev[36]
-                cubeRot[3] = cubeRotPrev[39]
-                cubeRot[6] = cubeRotPrev[42]
-                # Down Edges
-                cubeRot[26] = cubeRotPrev[45]
-                cubeRot[23] = cubeRotPrev[48]
-                cubeRot[20] = cubeRotPrev[51]
-                
+                cubeRot = _rotateL(cubeRot, cubeRotPrev)
             elif rotation == 'l':
-                offset = 27
-                faceRot = _faceCCW(cubeRot[27:36])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[36] = cubeRotPrev[0]
-                cubeRot[39] = cubeRotPrev[3]
-                cubeRot[42] = cubeRotPrev[6]
-                # Back Edges
-                cubeRot[51] = cubeRotPrev[20]
-                cubeRot[48] = cubeRotPrev[23]
-                cubeRot[45] = cubeRotPrev[26]
-                # Up Edges
-                cubeRot[26] = cubeRotPrev[36]
-                cubeRot[23] = cubeRotPrev[39]
-                cubeRot[20] = cubeRotPrev[42]
-                # Down Edges
-                cubeRot[0] = cubeRotPrev[45]
-                cubeRot[3] = cubeRotPrev[48]
-                cubeRot[6] = cubeRotPrev[51]
-            
+                cubeRot = _rotatel(cubeRot, cubeRotPrev)
             elif rotation == 'U':
-                offset = 36
-                faceRot = _faceCW(cubeRot[36:45])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[27] = cubeRotPrev[0]
-                cubeRot[28] = cubeRotPrev[1]
-                cubeRot[29] = cubeRotPrev[2]
-                # Right Edges
-                cubeRot[0] = cubeRotPrev[9]
-                cubeRot[1] = cubeRotPrev[10]
-                cubeRot[2] = cubeRotPrev[11]
-                # Back Edges
-                cubeRot[9] = cubeRotPrev[18]
-                cubeRot[10] = cubeRotPrev[19]
-                cubeRot[11] = cubeRotPrev[20]
-                # Left Edges
-                cubeRot[18] = cubeRotPrev[27]
-                cubeRot[19] = cubeRotPrev[28]
-                cubeRot[20] = cubeRotPrev[29]
-                
+                cubeRot = _rotateU(cubeRot, cubeRotPrev)
             elif rotation == 'u':
-                offset = 36
-                faceRot = _faceCCW(cubeRot[36:45])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[9] = cubeRotPrev[0]
-                cubeRot[10] = cubeRotPrev[1]
-                cubeRot[11] = cubeRotPrev[2]
-                # Right Edges
-                cubeRot[18] = cubeRotPrev[9]
-                cubeRot[19] = cubeRotPrev[10]
-                cubeRot[20] = cubeRotPrev[11]
-                # Back Edges
-                cubeRot[27] = cubeRotPrev[18]
-                cubeRot[28] = cubeRotPrev[19]
-                cubeRot[29] = cubeRotPrev[20]
-                # Left Edges
-                cubeRot[0] = cubeRotPrev[27]
-                cubeRot[1] = cubeRotPrev[28]
-                cubeRot[2] = cubeRotPrev[29]
-                
+                cubeRot = _rotateu(cubeRot, cubeRotPrev)
             elif rotation == 'D':
-                offset = 45
-                faceRot = _faceCW(cubeRot[45:54])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[15] = cubeRotPrev[6]
-                cubeRot[16] = cubeRotPrev[7]
-                cubeRot[17] = cubeRotPrev[8]
-                # Right Edges
-                cubeRot[24] = cubeRotPrev[15]
-                cubeRot[25] = cubeRotPrev[16]
-                cubeRot[26] = cubeRotPrev[17]
-                # Back Edges
-                cubeRot[33] = cubeRotPrev[24]
-                cubeRot[34] = cubeRotPrev[25]
-                cubeRot[35] = cubeRotPrev[26]
-                # Left Edges
-                cubeRot[6] = cubeRotPrev[33]
-                cubeRot[7] = cubeRotPrev[34]
-                cubeRot[8] = cubeRotPrev[35]
-                
+                cubeRot = _rotateD(cubeRot, cubeRotPrev)
             elif rotation == 'd':
-                offset = 45
-                faceRot = _faceCCW(cubeRot[45:54])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                    
-                # Front Edges
-                cubeRot[33] = cubeRotPrev[6]
-                cubeRot[34] = cubeRotPrev[7]
-                cubeRot[35] = cubeRotPrev[8]
-                # Right Edges
-                cubeRot[6] = cubeRotPrev[15]
-                cubeRot[7] = cubeRotPrev[16]
-                cubeRot[8] = cubeRotPrev[17]
-                # Back Edges
-                cubeRot[15] = cubeRotPrev[24]
-                cubeRot[16] = cubeRotPrev[25]
-                cubeRot[17] = cubeRotPrev[26]
-                # Left Edges
-                cubeRot[24] = cubeRotPrev[33]
-                cubeRot[25] = cubeRotPrev[34]
-                cubeRot[26] = cubeRotPrev[35]
-                
+                cubeRot = _rotated(cubeRot, cubeRotPrev)
             # Performs F since that is the default for no dir
             else:
-                offset = 0
-                faceRot = _faceCW(cubeRot[0:9])
-                
-                for i, ch in enumerate(faceRot):
-                    cubeRot[i + offset] = ch
-                
-                # Right Edges
-                cubeRot[47] = cubeRotPrev[ 9]
-                cubeRot[46] = cubeRotPrev[12]
-                cubeRot[45] = cubeRotPrev[15]
-                # Left Edges
-                cubeRot[44] = cubeRotPrev[29]
-                cubeRot[43] = cubeRotPrev[32]
-                cubeRot[42] = cubeRotPrev[35]
-                # Top Edges
-                cubeRot[ 9] = cubeRotPrev[42]
-                cubeRot[12] = cubeRotPrev[43]
-                cubeRot[15] = cubeRotPrev[44]
-                # Bottom Edges
-                cubeRot[29] = cubeRotPrev[45]
-                cubeRot[32] = cubeRotPrev[46]
-                cubeRot[35] = cubeRotPrev[47]
+                cubeRot = _rotateF(cubeRot, cubeRotPrev)
             
         result['cube'] = ''.join(cubeRot)          
         result['status'] = 'ok'                     
@@ -337,6 +131,17 @@ def _validateCube(cube):
             else:
                 centerColors += color
     
+    return True
+
+def _validateDir(direction):
+    validDirs = 'FfRrLlUuDdBb'
+    
+    if direction == None: 
+        return True
+    
+    for d in direction:
+        if validDirs.count(d) == 0:
+            return False
     return True
 
 def _faceCW(face):
@@ -369,13 +174,314 @@ def _faceCCW(face):
     
     return newFace
 
-def _validateDir(dir):
-    validDirs = 'FfRrLlUuDdBb'
+def _rotateF(cubeRot, cubeRotPrev):
+    offset = cubeEnum.F00.value
+    faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
     
-    if dir == None: 
-        return True
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
     
-    for d in dir:
-        if validDirs.count(d) == 0:
-            return False
-    return True
+    # Right Edges
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.D01.value] = cubeRotPrev[cubeEnum.R10.value]
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.R20.value]
+    # Left Edges
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.L02.value]
+    cubeRot[cubeEnum.U21.value] = cubeRotPrev[cubeEnum.L12.value]
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.L22.value]
+    # Top Edges
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.U20.value]
+    cubeRot[cubeEnum.R10.value] = cubeRotPrev[cubeEnum.U21.value]
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.U22.value]
+    # Bottom Edges
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.L12.value] = cubeRotPrev[cubeEnum.D01.value]
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.D02.value]
+    
+    return cubeRot
+
+def _rotatef(cubeRot, cubeRotPrev):
+    offset = cubeEnum.F00.value
+    faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Right Edges
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.U21.value] = cubeRotPrev[cubeEnum.R10.value]
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.R20.value]
+    # Left Edges
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.L02.value]
+    cubeRot[cubeEnum.D01.value] = cubeRotPrev[cubeEnum.L12.value]
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.L22.value]
+    # Top Edges
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.U20.value]
+    cubeRot[cubeEnum.L12.value] = cubeRotPrev[cubeEnum.U21.value]
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.U22.value]
+    # Bottom Edges
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.R10.value] = cubeRotPrev[cubeEnum.D01.value]
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.D02.value]
+    
+    return cubeRot
+
+def _rotateR(cubeRot, cubeRotPrev):
+    offset = cubeEnum.R00.value
+    faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.F02.value]
+    cubeRot[cubeEnum.U12.value] = cubeRotPrev[cubeEnum.F12.value]
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.F22.value]
+    # Back Edges
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.D12.value] = cubeRotPrev[cubeEnum.B10.value]
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.B00.value]
+    # Up Edges
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.U22.value]
+    cubeRot[cubeEnum.B10.value] = cubeRotPrev[cubeEnum.U12.value]
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.U02.value]
+    # Down Edges
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.D22.value]
+    cubeRot[cubeEnum.F12.value] = cubeRotPrev[cubeEnum.D12.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.D02.value]
+    
+    return cubeRot
+
+def _rotater(cubeRot, cubeRotPrev):
+    offset = cubeEnum.R00.value
+    faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.D02.value] = cubeRotPrev[cubeEnum.F02.value]
+    cubeRot[cubeEnum.D12.value] = cubeRotPrev[cubeEnum.F12.value]
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.F22.value]
+    # Back Edges
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.U12.value] = cubeRotPrev[cubeEnum.B10.value]
+    cubeRot[cubeEnum.U22.value] = cubeRotPrev[cubeEnum.B00.value]
+    # Up Edges
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.U22.value]
+    cubeRot[cubeEnum.F12.value] = cubeRotPrev[cubeEnum.U12.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.U02.value]
+    # Down Edges
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.D22.value]
+    cubeRot[cubeEnum.B10.value] = cubeRotPrev[cubeEnum.D12.value]
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.D02.value]
+    
+    return cubeRot
+
+def _rotateB(cubeRot, cubeRotPrev):
+    offset = cubeEnum.B00.value
+    faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Right Edges
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.R02.value]
+    cubeRot[cubeEnum.U01.value] = cubeRotPrev[cubeEnum.R12.value]
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.R22.value]
+    # Left Edges
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.D21.value] = cubeRotPrev[cubeEnum.L10.value]
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.L20.value]
+    # Up Edges
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.L10.value] = cubeRotPrev[cubeEnum.U01.value]
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.U02.value]
+    # Down Edges
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.D20.value]
+    cubeRot[cubeEnum.R12.value] = cubeRotPrev[cubeEnum.D21.value]
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.D22.value]
+    
+    return cubeRot
+
+def _rotateb(cubeRot, cubeRotPrev):
+    offset = cubeEnum.B00.value
+    faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Right Edges
+    cubeRot[cubeEnum.D22.value] = cubeRotPrev[cubeEnum.R02.value]
+    cubeRot[cubeEnum.D21.value] = cubeRotPrev[cubeEnum.R12.value]
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.R22.value]
+    # Left Edges
+    cubeRot[cubeEnum.U02.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.U01.value] = cubeRotPrev[cubeEnum.L10.value]
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.L20.value]
+    # Up Edges
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.R12.value] = cubeRotPrev[cubeEnum.U01.value]
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.U02.value]
+    # Down Edges
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.D20.value]
+    cubeRot[cubeEnum.L10.value] = cubeRotPrev[cubeEnum.D21.value]
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.D22.value]
+    
+    return cubeRot
+
+def _rotateL(cubeRot, cubeRotPrev):
+    offset = cubeEnum.L00.value
+    faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.D10.value] = cubeRotPrev[cubeEnum.F10.value]
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.F20.value]
+    # Back Edges
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.B02.value]
+    cubeRot[cubeEnum.U10.value] = cubeRotPrev[cubeEnum.B12.value]
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.B22.value]
+    # Up Edges
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.F10.value] = cubeRotPrev[cubeEnum.U10.value]
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.U20.value]
+    # Down Edges
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.B12.value] = cubeRotPrev[cubeEnum.D10.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.D20.value]
+    
+    return cubeRot
+
+def _rotatel(cubeRot, cubeRotPrev):
+    offset = cubeEnum.L00.value
+    faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.U00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.U10.value] = cubeRotPrev[cubeEnum.F10.value]
+    cubeRot[cubeEnum.U20.value] = cubeRotPrev[cubeEnum.F20.value]
+    # Back Edges
+    cubeRot[cubeEnum.D20.value] = cubeRotPrev[cubeEnum.B02.value]
+    cubeRot[cubeEnum.D10.value] = cubeRotPrev[cubeEnum.B12.value]
+    cubeRot[cubeEnum.D00.value] = cubeRotPrev[cubeEnum.B22.value]
+    # Up Edges
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.U00.value]
+    cubeRot[cubeEnum.B12.value] = cubeRotPrev[cubeEnum.U10.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.U20.value]
+    # Down Edges
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.D00.value]
+    cubeRot[cubeEnum.F10.value] = cubeRotPrev[cubeEnum.D10.value]
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.D20.value]  
+      
+    return cubeRot
+
+def _rotateU(cubeRot, cubeRotPrev):
+    offset = cubeEnum.U00.value
+    faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.L01.value] = cubeRotPrev[cubeEnum.F01.value]
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.F02.value]
+    # Right Edges
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.F01.value] = cubeRotPrev[cubeEnum.R01.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.R02.value]
+    # Back Edges
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.B00.value]
+    cubeRot[cubeEnum.R01.value] = cubeRotPrev[cubeEnum.B01.value]
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.B02.value]
+    # Left Edges
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.B01.value] = cubeRotPrev[cubeEnum.L01.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.L02.value]
+    
+    return cubeRot
+
+def _rotateu(cubeRot, cubeRotPrev):
+    offset = cubeEnum.U00.value
+    faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.R00.value] = cubeRotPrev[cubeEnum.F00.value]
+    cubeRot[cubeEnum.R01.value] = cubeRotPrev[cubeEnum.F01.value]
+    cubeRot[cubeEnum.R02.value] = cubeRotPrev[cubeEnum.F02.value]
+    # Right Edges
+    cubeRot[cubeEnum.B00.value] = cubeRotPrev[cubeEnum.R00.value]
+    cubeRot[cubeEnum.B01.value] = cubeRotPrev[cubeEnum.R01.value]
+    cubeRot[cubeEnum.B02.value] = cubeRotPrev[cubeEnum.R02.value]
+    # Back Edges
+    cubeRot[cubeEnum.L00.value] = cubeRotPrev[cubeEnum.B00.value]
+    cubeRot[cubeEnum.L01.value] = cubeRotPrev[cubeEnum.B01.value]
+    cubeRot[cubeEnum.L02.value] = cubeRotPrev[cubeEnum.B02.value]
+    # Left Edges
+    cubeRot[cubeEnum.F00.value] = cubeRotPrev[cubeEnum.L00.value]
+    cubeRot[cubeEnum.F01.value] = cubeRotPrev[cubeEnum.L01.value]
+    cubeRot[cubeEnum.F02.value] = cubeRotPrev[cubeEnum.L02.value]    
+    
+    return cubeRot
+
+def _rotateD(cubeRot, cubeRotPrev):
+    offset = cubeEnum.D00.value
+    faceRot = _faceCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.F20.value]
+    cubeRot[cubeEnum.R21.value] = cubeRotPrev[cubeEnum.F21.value]
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.F22.value]
+    # Right Edges
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.R20.value]
+    cubeRot[cubeEnum.B21.value] = cubeRotPrev[cubeEnum.R21.value]
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.R22.value]
+    # Back Edges
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.L21.value] = cubeRotPrev[cubeEnum.B21.value]
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.B22.value]
+    # Left Edges
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.L20.value]
+    cubeRot[cubeEnum.F21.value] = cubeRotPrev[cubeEnum.L21.value]
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.L22.value]
+    
+    return cubeRot
+
+def _rotated(cubeRot, cubeRotPrev):
+    offset = cubeEnum.D00.value
+    faceRot = _faceCCW(cubeRot[offset + 0:offset + 9])
+    
+    for i, ch in enumerate(faceRot):
+        cubeRot[i + offset] = ch
+        
+    # Front Edges
+    cubeRot[cubeEnum.L20.value] = cubeRotPrev[cubeEnum.F20.value]
+    cubeRot[cubeEnum.L21.value] = cubeRotPrev[cubeEnum.F21.value]
+    cubeRot[cubeEnum.L22.value] = cubeRotPrev[cubeEnum.F22.value]
+    # Right Edges
+    cubeRot[cubeEnum.F20.value] = cubeRotPrev[cubeEnum.R20.value]
+    cubeRot[cubeEnum.F21.value] = cubeRotPrev[cubeEnum.R21.value]
+    cubeRot[cubeEnum.F22.value] = cubeRotPrev[cubeEnum.R22.value]
+    # Back Edges
+    cubeRot[cubeEnum.R20.value] = cubeRotPrev[cubeEnum.B20.value]
+    cubeRot[cubeEnum.R21.value] = cubeRotPrev[cubeEnum.B21.value]
+    cubeRot[cubeEnum.R22.value] = cubeRotPrev[cubeEnum.B22.value]
+    # Left Edges
+    cubeRot[cubeEnum.B20.value] = cubeRotPrev[cubeEnum.L20.value]
+    cubeRot[cubeEnum.B21.value] = cubeRotPrev[cubeEnum.L21.value]
+    cubeRot[cubeEnum.B22.value] = cubeRotPrev[cubeEnum.L22.value]
+    
+    return cubeRot
