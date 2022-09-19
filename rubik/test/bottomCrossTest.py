@@ -82,7 +82,7 @@ class BottomCrossTest(unittest.TestCase):
         inputDict['cube'] = 'grwoboywbbboyrgrrwggbygyrgrybrbogbogorwryoyyoobwwwwywg'
         
         expectResult = {}
-        expectResult['solution'] = 'FlUUULFF'
+        expectResult['solution'] = 'FlULUUFF'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
@@ -96,7 +96,7 @@ class BottomCrossTest(unittest.TestCase):
         inputDict['cube'] = 'worrbgwbrgggorrgwowggbgyygroboboyboryrooyybyybwwwwrywb'
         
         expectResult = {}
-        expectResult['solution'] = 'RfUUUFRR'
+        expectResult['solution'] = 'RfUFUURR'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
@@ -104,7 +104,7 @@ class BottomCrossTest(unittest.TestCase):
         self.assertEqual(expectResult.get('solution'), actualResult.get('solution'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
-    def test_bottomCross_050_edgeInWrongPosition(self):
+    def test_bottomCross_050_edgeInWrongPositionBottom(self):
         inputDict = {}
         inputDict['op']   = 'solve'
         inputDict['cube'] = 'yoyroyorbrbwrbowborbyyroyrwgyrggbrggoobgyybwgwwowwwggb'
@@ -166,7 +166,7 @@ class BottomCrossTest(unittest.TestCase):
         inputDict['cube'] = 'ygwybrgbbooryrbrowwoywgworbrrbrogygogwgbybowgyywowyrgb'
         
         expectResult = {}
-        expectResult['solution'] = 'rURFFrUURLLrUUURBBlUULRR'
+        expectResult['solution'] = 'ruRUUFFruRBBruRURRULL'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
