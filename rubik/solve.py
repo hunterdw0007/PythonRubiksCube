@@ -18,10 +18,77 @@ def _solveBottomCross(cube, solution):
     if _checkBottomCross(cube):
         return solution
     
+    # Used to check for correctness/incorrectness of edge pairs
+    bottomEdgePairs = [ (rotate.cubeEnum.D01.value, rotate.cubeEnum.F21.value, 'F')
+                      , (rotate.cubeEnum.D12.value, rotate.cubeEnum.R21.value, 'R')
+                      , (rotate.cubeEnum.D21.value, rotate.cubeEnum.B21.value, 'B')
+                      , (rotate.cubeEnum.D10.value, rotate.cubeEnum.L21.value, 'L') ]
+    
+    # keeps track of the colors of each side
+    sideColors = [cube[rotate.cubeEnum.F11.value],cube[rotate.cubeEnum.R11.value],cube[rotate.cubeEnum.B11.value],cube[rotate.cubeEnum.L11.value]]
+    
     rotations = ''
     location = 0
     
-    _solveEdgeInBottom(cube, location, rotations, solution)
+    for side, edge in enumerate(bottomEdgePairs):
+    # Case 2: Edge in bottom flipped
+        if cube[edge[0]] == sideColors[side] and cube[edge[1]] == cube[rotate.cubeEnum.D11.value]:
+            if edge[2] == 'F':
+                rotations += 'Fl'
+                location = rotate.cubeEnum.L01.value
+            elif edge[2] == 'R':
+                rotations += 'Rf'
+                location = rotate.cubeEnum.F01.value
+            elif edge[2] == 'B':
+                rotations += 'Br'
+                location = rotate.cubeEnum.R01.value
+            else:
+                rotations += 'Lb'
+                location = rotate.cubeEnum.B01.value
+                
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Position the edge where it needs to be in the top
+            cube, location, upRotations = _positionEdgeInTop(cube, location)
+            rotations = rotations + upRotations
+            
+            # Reset the side that was rotated so that nothing is messed up
+            rotations = rotations + rotations[1].upper()
+            cube = rotate._rotate({'cube':cube,'dir':rotations[1].upper()})['cube']
+            
+            # Flip the edge from the top to the bottom
+            cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
+            rotations = rotations + downRotations
+            
+            # Recursive call to complete the cube solution
+            return _solveBottomCross(cube, solution + rotations)
+          
+    # Case 3: edge in bottom, wrong spot
+        elif cube[edge[0]] == cube[rotate.cubeEnum.D11.value] and cube[edge[1]] != sideColors[side]:
+            if edge[2] == 'F':
+                rotations += 'FF'
+                location = rotate.cubeEnum.F01.value
+            elif edge[2] == 'R':
+                rotations += 'RR'
+                location = rotate.cubeEnum.R01.value
+            elif edge[2] == 'B':
+                rotations += 'BB'
+                location = rotate.cubeEnum.B01.value
+            else:
+                rotations += 'LL'
+                location = rotate.cubeEnum.L01.value
+                
+            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+            
+            # Position the edge where it needs to be in the top
+            cube, location, upRotations = _positionEdgeInTop(cube, location)
+            rotations = rotations + upRotations
+
+            # Flip the edge from the top to the bottom
+            cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
+            rotations = rotations + downRotations
+                
+            return _solveBottomCross(cube, solution + rotations)
     
     # Used to check for correctness/incorrectness of edge pairs
     sideEdgePairs = [ (rotate.cubeEnum.F12.value, rotate.cubeEnum.R10.value, 'f', 'R')
@@ -129,74 +196,5 @@ def _flipEdgeToBottomFromTop(cube, location):
         cube = rotate._rotate({'cube':cube,'dir':'LL'})['cube']
         
     return cube, location, rotations
-
-def _solveEdgeInBottom(cube, location, rotations, solution):
-    # Used to check for correctness/incorrectness of edge pairs
-    bottomEdgePairs = [ (rotate.cubeEnum.D01.value, rotate.cubeEnum.F21.value, 'F')
-                      , (rotate.cubeEnum.D12.value, rotate.cubeEnum.R21.value, 'R')
-                      , (rotate.cubeEnum.D21.value, rotate.cubeEnum.B21.value, 'B')
-                      , (rotate.cubeEnum.D10.value, rotate.cubeEnum.L21.value, 'L') ]
-    
-    # keeps track of the colors of each side
-    sideColors = [cube[rotate.cubeEnum.F11.value],cube[rotate.cubeEnum.R11.value],cube[rotate.cubeEnum.B11.value],cube[rotate.cubeEnum.L11.value]]
-    
-    for side, edge in enumerate(bottomEdgePairs):
-    # Case 2: Edge in bottom flipped
-        if cube[edge[0]] == sideColors[side] and cube[edge[1]] == cube[rotate.cubeEnum.D11.value]:
-            if edge[2] == 'F':
-                rotations += 'Fl'
-                location = rotate.cubeEnum.L01.value
-            elif edge[2] == 'R':
-                rotations += 'Rf'
-                location = rotate.cubeEnum.F01.value
-            elif edge[2] == 'B':
-                rotations += 'Br'
-                location = rotate.cubeEnum.R01.value
-            else:
-                rotations += 'Lb'
-                location = rotate.cubeEnum.B01.value
                 
-            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
-            
-            # Position the edge where it needs to be in the top
-            cube, location, upRotations = _positionEdgeInTop(cube, location)
-            rotations = rotations + upRotations
-            
-            # Reset the side that was rotated so that nothing is messed up
-            rotations = rotations + rotations[1].upper()
-            cube = rotate._rotate({'cube':cube,'dir':rotations[1].upper()})['cube']
-            
-            # Flip the edge from the top to the bottom
-            cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
-            rotations = rotations + downRotations
-            
-            # Recursive call to complete the cube solution
-            return _solveBottomCross(cube, solution + rotations)
-          
-    # Case 3: edge in bottom, wrong spot
-        elif cube[edge[0]] == cube[rotate.cubeEnum.D11.value] and cube[edge[1]] != sideColors[side]:
-            if edge[2] == 'F':
-                rotations += 'FF'
-                location = rotate.cubeEnum.F01.value
-            elif edge[2] == 'R':
-                rotations += 'RR'
-                location = rotate.cubeEnum.R01.value
-            elif edge[2] == 'B':
-                rotations += 'BB'
-                location = rotate.cubeEnum.B01.value
-            else:
-                rotations += 'LL'
-                location = rotate.cubeEnum.L01.value
-                
-            cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
-            
-            # Position the edge where it needs to be in the top
-            cube, location, upRotations = _positionEdgeInTop(cube, location)
-            rotations = rotations + upRotations
-
-            # Flip the edge from the top to the bottom
-            cube, location, downRotations = _flipEdgeToBottomFromTop(cube, location)
-            rotations = rotations + downRotations
-                
-            return _solveBottomCross(cube, solution + rotations)
                 
