@@ -8,7 +8,7 @@ def _solve(parms):
         result['status'] = 'error: invalid cube'
     else:
         solution = _solveBottomCross(parms.get('cube'), '')
-        result['rotation'] = solution
+        result['rotations'] = solution
         result['status'] = 'ok'                   
     return result
 
