@@ -1,10 +1,11 @@
 import rubik.rotate as rotate
+import rubik.verify as verify
 import math
 
 def _solve(parms):
     """Return rotates needed to solve input cube"""
     result = {}
-    if not rotate._validateCube(parms.get('cube', None)):
+    if not verify._validateCube(parms.get('cube', None)):
         result['status'] = 'error: invalid cube'
     else:
         solution = _solveBottomCross(parms.get('cube'), '')
