@@ -43,7 +43,7 @@ class Test(unittest.TestCase):
     def test_bottomCornersTest_010_solvedBottomCornersVerify(self):
         inputDict = {}
         inputDict['op']   = 'solve'
-        inputDict['cube'] = 'gbggbggbgorooroorobgbbgbbgbrorrorrorywywywywywywywywyw'
+        inputDict['cube'] = 'bgbgbgbgbrororororgbgbgbgbgororororoywywywywywywywywyw'
         
         expectResult = True
         
