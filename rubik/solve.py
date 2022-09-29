@@ -224,7 +224,6 @@ def _positionEdgeInTop(cube, location):
         
     return cube, location, rotations
 
-
 def _flipEdgeToBottomFromTop(cube, location):
     # Flips an edge from being in the top of the cube to being in the bottom of the cube
     rotations = ''
@@ -271,3 +270,31 @@ def _checkBottomCorners(cube):
         return False
     # If it makes it here then it's all correct
     return True
+
+def _positionCornerInTop(cube, location):
+    
+    rotations = ''
+    
+    # Used to check for correctness/incorrectness of edge pairs
+    topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
+                      , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
+                      , (cube[rotate.cubeEnum.B02.value], cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.U00.value])
+                      , (cube[rotate.cubeEnum.L02.value], cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.U20.value]) ]
+    
+    bottomCornerColors = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.D11.value])
+                         , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
+                         , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
+                         , (cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.D11.value]) ]
+    
+    while sorted(topCornerColors[int((location-2)/9)]) != sorted(bottomCornerColors[int((location-2)/9)]):
+        rotations = rotations + 'U'
+        cube = rotate._rotate({'cube':cube,'dir':'U'})['cube']
+        topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
+                          , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
+                          , (cube[rotate.cubeEnum.B02.value], cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.U00.value])
+                          , (cube[rotate.cubeEnum.L02.value], cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.U20.value]) ]
+        location = location - 9 if location != rotate.cubeEnum.F02.value else rotate.cubeEnum.L02.value
+        
+    return cube, location, rotations
+        
+        

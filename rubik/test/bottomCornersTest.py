@@ -5,6 +5,7 @@ Created on Sep 26, 2022
 '''
 import unittest
 import rubik.solve as solve
+import rubik.rotate as rotate
 
 class Test(unittest.TestCase):
 
@@ -49,12 +50,12 @@ class Test(unittest.TestCase):
         self.assertEqual(expectResult, actualResult)
     
     def test_bottomCross_015_positionCornerInTop(self):
-        cube = ''
-        location = 0
+        cube = 'gggbbbgggrororororbbbgggbbbororororowwwyyywwwyyywwwyyy'
+        location = rotate.cubeEnum.F02.value
         
-        expectedCube = ''
+        expectedCube = 'orobbbggggggorororrorgggbbbbbbrororowywwywwywyyywwwyyy'
         expectedRotations = 'UUU'
-        expectedLocation = 9
+        expectedLocation = rotate.cubeEnum.R02.value
         
         actualCube, actualLocation, actualRotations = solve._positionCornerInTop(cube, location)
         
