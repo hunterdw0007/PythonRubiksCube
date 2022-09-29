@@ -193,13 +193,13 @@ def _solveBottomCross(cube, solution):
             
             return _solveBottomCross(cube, solution + rotations)
 
-'''
+
 def _solveBottomCorners(cube, solution):
     # Returns the rotations needed to take a given cube and produce a cube with a solved bottom corners
     # Base Case: check if bottom corners are solved
     if _checkBottomCorners(cube):
         return cube, solution
-    '''
+    
     
 def _checkBottomCross(cube):
     # Checks whether or not the bottom cross is solved
