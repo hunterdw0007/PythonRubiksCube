@@ -8,14 +8,6 @@ import rubik.solve as solve
 
 class BottomCrossTest(unittest.TestCase):
 
-
-    def setUp(self):
-        pass
-
-
-    def tearDown(self):
-        pass
-
 # Analysis
 #
 # inputs:
