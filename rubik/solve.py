@@ -14,6 +14,8 @@ def _solve(parms):
         result['status'] = 'ok'                   
     return result
 
+# Main solver functions
+
 def _solveBottomCross(cube, solution):
     # Returns the rotations needed to take a given cube and produce a cube with a solved bottom cross
     # Base Case: check if bottom cross is solved
@@ -200,7 +202,25 @@ def _solveBottomCorners(cube, solution):
     if _checkBottomCorners(cube):
         return cube, solution
     
+    topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
+                      , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
+                      , (cube[rotate.cubeEnum.B02.value], cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.U00.value])
+                      , (cube[rotate.cubeEnum.L02.value], cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.U20.value]) ]
     
+    bottomCornerColors = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.D11.value])
+                         , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
+                         , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
+                         , (cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.D11.value]) ]
+                         
+    rotations = 'RUruRUruRUruRUruRUru'
+    location = 0
+    
+    cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+    
+    return _solveBottomCorners(cube, solution + rotations)
+    
+# Helpers for Bottom Cross    
+   
 def _checkBottomCross(cube):
     # Checks whether or not the bottom cross is solved
     if cube[rotate.cubeEnum.F11.value] != cube[rotate.cubeEnum.F21.value]:
@@ -249,8 +269,10 @@ def _flipEdgeToBottomFromTop(cube, location):
         rotations = rotations + 'LL'
         cube = rotate._rotate({'cube':cube,'dir':'LL'})['cube']
         
-    return cube, location, rotations
-                
+    return cube, location, rotations               
+
+# Helpers for Bottom Corners
+
 def _checkBottomCorners(cube):
     # Checks whether or not the bottom corners are solved - independent of the bottom cross being solved
     if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D00.value]:
