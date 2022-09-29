@@ -28,6 +28,7 @@ class Test(unittest.TestCase):
 #
 # happy path:
 #    test 010: solved corners - not bottom cross
+#    test 015: position corner in top check
 #    test 020: solved bottom - unsolved cube
 #    test 030: three corners solved, unsolved one above where it needs to go
 #    test 040: three corders solved, unsolved on in top not where it needs to go
@@ -37,19 +38,27 @@ class Test(unittest.TestCase):
 #    test 080: no corners solved, unsolved randomly distributed
 #    test 090: completely scrambled cube, solve bottom cross and corners
 #
-# sad path:
-#    test 910: invalid cube - validateCube already tested with rotate in Iteration 1
 
     def test_bottomCornersTest_010_solvedBottomCornersVerify(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'bgbgbgbgbrororororgbgbgbgbgororororoywywywywywywywywyw'
+        cube = 'bgbgbgbgbrororororgbgbgbgbgororororoywywywywywywywywyw'
         
         expectResult = True
         
-        actualResult = solve._checkBottomCorners(inputDict.get('cube'))
+        actualResult = solve._checkBottomCorners(cube)
         
         self.assertEqual(expectResult, actualResult)
     
-    
+    def test_bottomCross_015_positionCornerInTop(self):
+        cube = ''
+        location = 0
+        
+        expectedCube = ''
+        expectedRotations = 'UUU'
+        expectedLocation = 9
+        
+        actualCube, actualLocation, actualRotations = solve._positionCornerInTop(cube, location)
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedLocation, actualLocation)
+        self.assertEqual(expectedRotations, actualRotations)
     
