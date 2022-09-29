@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
 #    test 090: completely scrambled cube, solve bottom cross and corners
 #
 
-    def test_bottomCornersTest_010_solvedBottomCornersVerify(self):
+    def test_bottomCorners_010_solvedBottomCornersVerify(self):
         cube = 'bgbgbgbgbrororororgbgbgbgbgororororoywywywywywywywywyw'
         
         expectResult = True
@@ -49,7 +49,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
     
-    def test_bottomCross_015_positionCornerInTop(self):
+    def test_bottomCorners_015_positionCornerInTop(self):
         cube = 'gggbbbgggrororororbbbgggbbbororororowwwyyywwwyyywwwyyy'
         location = rotate.cubeEnum.F02.value
         
@@ -62,4 +62,18 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedLocation, actualLocation)
         self.assertEqual(expectedRotations, actualRotations)
+        
+    def test_bottomCorners_030_unsolvedAbovePosition(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'rgwyobooybobobrgbbygybrbrrrgrbygrgggooogyyyyowwrwwwwww'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'RurURurURurURurURurU'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
     
