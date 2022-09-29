@@ -8,8 +8,9 @@ def _solve(parms):
     if not verify._validateCube(parms.get('cube', None)):
         result['status'] = 'error: invalid cube'
     else:
-        solution = _solveBottomCross(parms.get('cube'), '')
-        result['rotations'] = solution
+        cube, bottomCrossRotations = _solveBottomCross(parms.get('cube'), '')
+        cube, bottomCornersRotations = _solveBottomCorners(cube, '')
+        result['rotations'] = bottomCrossRotations + bottomCornersRotations
         result['status'] = 'ok'                   
     return result
 
@@ -17,7 +18,7 @@ def _solveBottomCross(cube, solution):
     # Returns the rotations needed to take a given cube and produce a cube with a solved bottom cross
     # Base Case: check if bottom cross is solved
     if _checkBottomCross(cube):
-        return solution
+        return cube, solution
     
     # Used to check for correctness/incorrectness of edge pairs
     bottomEdgePairs = [ (rotate.cubeEnum.D01.value, rotate.cubeEnum.F21.value, 'F')
@@ -192,6 +193,14 @@ def _solveBottomCross(cube, solution):
             
             return _solveBottomCross(cube, solution + rotations)
 
+'''
+def _solveBottomCorners(cube, solution):
+    # Returns the rotations needed to take a given cube and produce a cube with a solved bottom corners
+    # Base Case: check if bottom corners are solved
+    if _checkBottomCorners(cube):
+        return cube, solution
+    '''
+    
 def _checkBottomCross(cube):
     # Checks whether or not the bottom cross is solved
     if cube[rotate.cubeEnum.F11.value] != cube[rotate.cubeEnum.F21.value]:
