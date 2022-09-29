@@ -14,6 +14,7 @@ def _solve(parms):
     return result
 
 def _solveBottomCross(cube, solution):
+    # Returns the rotations needed to take a given cube and produce a cube with a solved bottom cross
     # Base Case: check if bottom cross is solved
     if _checkBottomCross(cube):
         return solution
@@ -192,6 +193,7 @@ def _solveBottomCross(cube, solution):
             return _solveBottomCross(cube, solution + rotations)
 
 def _checkBottomCross(cube):
+    # Checks whether or not the bottom cross is solved
     if cube[rotate.cubeEnum.F11.value] != cube[rotate.cubeEnum.F21.value]:
         return False
     if cube[rotate.cubeEnum.R11.value] != cube[rotate.cubeEnum.R21.value]:
@@ -212,6 +214,8 @@ def _checkBottomCross(cube):
     return True
                 
 def _positionEdgeInTop(cube, location):
+    # Correctly positions an edge in the top row of the cube to be able to place it in the bottom cross
+
     rotations = ''
     while cube[location] != cube[location+3]:
         rotations = rotations + 'U'
@@ -220,7 +224,9 @@ def _positionEdgeInTop(cube, location):
         
     return cube, location, rotations
 
+
 def _flipEdgeToBottomFromTop(cube, location):
+    # Flips an edge from being in the top of the cube to being in the bottom of the cube
     rotations = ''
     if math.floor(location/9) == 0:
         rotations = rotations + 'FF'
@@ -237,4 +243,31 @@ def _flipEdgeToBottomFromTop(cube, location):
         
     return cube, location, rotations
                 
-                
+def _checkBottomCorners(cube):
+    # Checks whether or not the bottom corners are solved - independent of the bottom cross being solved
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D00.value]:
+        return False
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D02.value]:
+        return False
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D20.value]:
+        return False
+    if cube[rotate.cubeEnum.D11.value] != cube[rotate.cubeEnum.D22.value]:
+        return False
+    if cube[rotate.cubeEnum.F11.value] != cube[rotate.cubeEnum.F20.value]:
+        return False
+    if cube[rotate.cubeEnum.F11.value] != cube[rotate.cubeEnum.F22.value]:
+        return False
+    if cube[rotate.cubeEnum.R11.value] != cube[rotate.cubeEnum.R20.value]:
+        return False
+    if cube[rotate.cubeEnum.R11.value] != cube[rotate.cubeEnum.R22.value]:
+        return False
+    if cube[rotate.cubeEnum.B11.value] != cube[rotate.cubeEnum.B20.value]:
+        return False
+    if cube[rotate.cubeEnum.B11.value] != cube[rotate.cubeEnum.B22.value]:
+        return False
+    if cube[rotate.cubeEnum.L11.value] != cube[rotate.cubeEnum.L20.value]:
+        return False
+    if cube[rotate.cubeEnum.L11.value] != cube[rotate.cubeEnum.L22.value]:
+        return False
+    # If it makes it here then it's all correct
+    return True
