@@ -195,34 +195,27 @@ def _solveBottomCross(cube, solution):
             
             return _solveBottomCross(cube, solution + rotations)
 
-
 def _solveBottomCorners(cube, solution):
     # Returns the rotations needed to take a given cube and produce a cube with a solved bottom corners
     # Base Case: check if bottom corners are solved
     if _checkBottomCorners(cube):
         return cube, solution
     
-    topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
-                      , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
-                      , (cube[rotate.cubeEnum.B02.value], cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.U00.value])
-                      , (cube[rotate.cubeEnum.L02.value], cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.U20.value]) ]
+    location = _locateBottomCornerInTop(cube)
     
-    bottomCornerColors = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.D11.value])
-                         , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
-                         , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
-                         , (cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.D11.value]) ]
+    cube, location, posRots = _positionCornerInTop(cube, location)
     
-    location = 2
+    rotations = posRots
                
-    cube, location, move = _moveCornerToBottomFromTop(cube, location)
+    cube, location, moveRots = _moveCornerToBottomFromTop(cube, location)
     
-    rotations = move
+    rotations = rotations + moveRots
     
     count = 0
     
     while not _checkBottomCornerOrientation(cube, location) and count < 6:
-        cube, location, orient = _orientCornerInBottom(cube, location)
-        rotations += orient
+        cube, location, orientRots = _orientCornerInBottom(cube, location)
+        rotations = rotations + orientRots
         count += 1 # count prevents infinite loop
     
     return _solveBottomCorners(cube, solution + rotations)
@@ -360,4 +353,20 @@ def _checkBottomCornerOrientation(cube, location):
         if cube[rotate.cubeEnum.D02.value] == cube[rotate.cubeEnum.D11.value]:
             return True
     return False
+
+def _locateBottomCornerInTop(cube):
+    
+    topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
+                      , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
+                      , (cube[rotate.cubeEnum.B02.value], cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.U00.value])
+                      , (cube[rotate.cubeEnum.L02.value], cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.U20.value]) ]
+    
+    # Set to -1 in case none are found
+    location = -1
+    
+    for i, corner in enumerate(topCornerColors):
+        if corner.count(cube[rotate.cubeEnum.D11.value]) > 0:
+            location = i * 9 + 2
+            
+    return location
         
