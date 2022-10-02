@@ -29,9 +29,11 @@ class Test(unittest.TestCase):
 #
 # happy path:
 #    test 010: solved corners - not bottom cross
-#    test 015: position corner in top check
+#    test 011: position corner in top function
+#    test 012: check bottom corner orientation function
 #    test 020: solved bottom - unsolved cube
 #    test 030: three corners solved, unsolved one above where it needs to go
+#    test 031: three corners solved, unsolved one above where it needs to go, not F02 corner
 #    test 040: three corders solved, unsolved on in top not where it needs to go
 #    test 050: three corners solved, unsolved in its spot but rotated incorrectly
 #    test 060: no corners solved, unsolved all in top
@@ -49,7 +51,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
     
-    def test_bottomCorners_015_positionCornerInTop(self):
+    def test_bottomCorners_011_positionCornerInTop(self):
         cube = 'gggbbbgggrororororbbbgggbbbororororowwwyyywwwyyywwwyyy'
         location = rotate.cubeEnum.F02.value
         
@@ -63,7 +65,7 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedLocation, actualLocation)
         self.assertEqual(expectedRotations, actualRotations)
         
-    def test_bottomCorners_016_checkBottomCornerOrientation(self):
+    def test_bottomCorners_012_checkBottomCornerOrientation(self):
         cube = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
         
         locations = [rotate.cubeEnum.F22.value, rotate.cubeEnum.R22.value, rotate.cubeEnum.B22.value, rotate.cubeEnum.L22.value]
@@ -93,6 +95,20 @@ class Test(unittest.TestCase):
         
         expectResult = {}
         expectResult['rotations'] = 'RUruRUruRUruRUruRUru'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_bottomCorners_031_unsolvedAbovePositionNotF(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'ggbrbybbbryworbrrygggrgbbggybyoogoooryryyrooywwwwwwwwo'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'BUbuBUbuBUbuBUbuBUbu'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
