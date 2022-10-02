@@ -201,15 +201,19 @@ def _solveBottomCorners(cube, solution):
     if _checkBottomCorners(cube):
         return cube, solution
     
+    rotations = solution
     location = _locateBottomCornerInTop(cube)
     
-    cube, location, posRots = _positionCornerInTop(cube, location)
+    if location == -1:
+        location = _locateRotatedBottomCorner(cube)
+    else:
+        cube, location, posRots = _positionCornerInTop(cube, location)
     
-    rotations = posRots
-               
-    cube, location, moveRots = _moveCornerToBottomFromTop(cube, location)
-    
-    rotations = rotations + moveRots
+        rotations = rotations + posRots
+                   
+        cube, location, moveRots = _moveCornerToBottomFromTop(cube, location)
+        
+        rotations = rotations + moveRots
     
     count = 0
     
@@ -375,8 +379,8 @@ def _checkBottomCornerOrientation(cube, location):
     return False
 
 def _locateBottomCornerInTop(cube):
-    # Checks each of the four top corners to see if they contain a face with the same color as the Down side of the cube
-    # Returns the first one found or -1 if none are found
+# Checks each of the four top corners to see if they contain a face with the same color as the Down side of the cube
+# Returns the first one found or -1 if none are found
     
     topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
                       , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
@@ -391,4 +395,36 @@ def _locateBottomCornerInTop(cube):
             location = i * 9 + 2
             
     return location
+
+def _locateRotatedBottomCorner(cube):
+    expectedBottomCorners = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.D11.value])
+                            , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
+                            , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
+                            , (cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.D11.value]) ]
+
+    actualBottomCorners = [ (cube[rotate.cubeEnum.F22.value], cube[rotate.cubeEnum.R20.value], cube[rotate.cubeEnum.D02.value])
+                          , (cube[rotate.cubeEnum.R22.value], cube[rotate.cubeEnum.B20.value], cube[rotate.cubeEnum.D22.value])
+                          , (cube[rotate.cubeEnum.B22.value], cube[rotate.cubeEnum.L20.value], cube[rotate.cubeEnum.D20.value])
+                          , (cube[rotate.cubeEnum.L22.value], cube[rotate.cubeEnum.F20.value], cube[rotate.cubeEnum.D00.value]) ]
+    
+    location = -1
+    rotations = ''
+    
+    for i, corner in enumerate(actualBottomCorners):
+        # We only care if the corner contains the right colors and is rotated incorrectly
+        if sorted(corner) == sorted(expectedBottomCorners[i]) and corner[2] != expectedBottomCorners[i][2]:
+            location = i * 9 + 8
+            break
+                
+    return location
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         

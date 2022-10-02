@@ -37,6 +37,7 @@ class Test(unittest.TestCase):
 #    test 040: three corders solved, unsolved on in top not where it needs to go
 #    test 041: three corders solved, unsolved on in top not where it needs to go, not F02 corner
 #    test 050: three corners solved, unsolved in its spot but rotated incorrectly
+#    test 051: two corners solved, others swapped in bottom
 #    test 060: no corners solved, unsolved all in top
 #    test 070: no corners solved, unsolved all in bottom
 #    test 080: no corners solved, unsolved randomly distributed
@@ -148,10 +149,24 @@ class Test(unittest.TestCase):
     def test_bottomCorners_050_unsolvedInPositionRotated(self):
         inputDict = {}
         inputDict['op']   = 'solve'
-        inputDict['cube'] = 'ryooryrrwbrorgrrggyggoogoooygbrbybbbrygoybyrywwgwwwwww'
+        inputDict['cube'] = 'ryborbrrgyggrgbwggobroogoooggbrbybbbyyyoyyyrowwrwwwwww'
         
         expectResult = {}
-        expectResult['rotations'] = 'RUruRUruRUruRUru'
+        expectResult['rotations'] = 'RUruRUru'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_bottomCorners_051_cornersInBottomSwapped(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'bryrbobbrrbygrygrwgorggbbggyyooogooobyoryyybgwwwwwwwwr'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'RUruRUru'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
