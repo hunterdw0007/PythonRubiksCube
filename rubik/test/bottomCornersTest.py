@@ -35,6 +35,7 @@ class Test(unittest.TestCase):
 #    test 030: three corners solved, unsolved one above where it needs to go
 #    test 031: three corners solved, unsolved one above where it needs to go, not F02 corner
 #    test 040: three corders solved, unsolved on in top not where it needs to go
+#    test 041: three corders solved, unsolved on in top not where it needs to go, not F02 corner
 #    test 050: three corners solved, unsolved in its spot but rotated incorrectly
 #    test 060: no corners solved, unsolved all in top
 #    test 070: no corners solved, unsolved all in bottom
@@ -144,4 +145,16 @@ class Test(unittest.TestCase):
         self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
-    
+    def test_bottomCorners_050_unsolvedInPositionRotated(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'ryooryrrwbrorgrrggyggoogoooygbrbybbbrygoybyrywwgwwwwww'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'RUruRUruRUruRUru'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
