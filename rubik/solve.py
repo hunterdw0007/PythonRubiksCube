@@ -211,11 +211,16 @@ def _solveBottomCorners(cube, solution):
                          , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
                          , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
                          , (cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.D11.value]) ]
-                         
-    rotations = 'RUruRUruRUruRUruRUru'
-    location = 0
     
-    cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+    location = 2
+               
+    cube, location, move = _moveCornerToBottomFromTop(cube, location)
+    
+    rotations = move
+    
+    while not _checkBottomCornerOrientation(cube, location):
+        cube, location, orient = _orientCornerInBottom(cube, location)
+        rotations += orient
     
     return _solveBottomCorners(cube, solution + rotations)
     
@@ -327,5 +332,29 @@ def _positionCornerInTop(cube, location):
         location = location - 9 if location != rotate.cubeEnum.F02.value else rotate.cubeEnum.L02.value
         
     return cube, location, rotations
+
+def _moveCornerToBottomFromTop(cube, location):
+    
+    if location == rotate.cubeEnum.F02.value:
+        rotations = 'RUru'
+        cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
         
+    location += 6
+    
+    return cube, location, rotations
+        
+def _orientCornerInBottom(cube, location):
+
+    if location == rotate.cubeEnum.F22.value:
+        rotations = 'RUru'
+        cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+        
+    return cube, location, rotations
+
+def _checkBottomCornerOrientation(cube, location):
+    
+    if location == rotate.cubeEnum.F22.value:
+        if cube[rotate.cubeEnum.D02.value] == cube[rotate.cubeEnum.D11.value]:
+            return True
+    return False
         
