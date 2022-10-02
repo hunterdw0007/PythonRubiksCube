@@ -218,9 +218,12 @@ def _solveBottomCorners(cube, solution):
     
     rotations = move
     
-    while not _checkBottomCornerOrientation(cube, location):
+    count = 0
+    
+    while not _checkBottomCornerOrientation(cube, location) and count < 6:
         cube, location, orient = _orientCornerInBottom(cube, location)
         rotations += orient
+        count += 1 # count prevents infinite loop
     
     return _solveBottomCorners(cube, solution + rotations)
     
