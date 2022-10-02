@@ -91,4 +91,18 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_bottomCorners_040_unsolvedNotAbovePosition(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'bygrbybbrobborybrryryggbgggrgroogooogbooyywrywwywwwwww'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'UUURUruRUruRUru'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
     
