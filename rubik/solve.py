@@ -360,7 +360,7 @@ def _orientCornerInBottom(cube, location):
     if location == rotate.cubeEnum.L22.value:
         rotations = 'FUfuFUfu'
     
-    cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+    cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
         
     return cube, location, rotations
 
