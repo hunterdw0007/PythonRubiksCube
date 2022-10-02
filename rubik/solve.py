@@ -348,13 +348,16 @@ def _orientCornerInBottom(cube, location):
     return cube, location, rotations
 
 def _checkBottomCornerOrientation(cube, location):
-    
-    if location == rotate.cubeEnum.F22.value:
-        if cube[rotate.cubeEnum.D02.value] == cube[rotate.cubeEnum.D11.value]:
+# Checks a given bottom corner location to see if it is oriented such that the face pointing down is the same color as the
+# Down side of the cube
+# Returns True if it is facing down, and False otherwise
+    if location == rotate.cubeEnum.F22.value and cube[rotate.cubeEnum.D02.value] == cube[rotate.cubeEnum.D11.value]:
             return True
     return False
 
 def _locateBottomCornerInTop(cube):
+    # Checks each of the four top corners to see if they contain a face with the same color as the Down side of the cube
+    # Returns the first one found or -1 if none are found
     
     topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
                       , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
