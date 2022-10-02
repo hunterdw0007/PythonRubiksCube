@@ -166,7 +166,7 @@ class Test(unittest.TestCase):
         inputDict['cube'] = 'bryrbobbrrbygrygrwgorggbbggyyooogooobyoryyybgwwwwwwwwr'
         
         expectResult = {}
-        expectResult['rotations'] = 'RUruRUru'
+        expectResult['rotations'] = 'RUruUUUBUbuBUbuBUbuBUbuBUbuURUruRUruRUruRUruRUru'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)

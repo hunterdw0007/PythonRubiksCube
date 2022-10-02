@@ -205,6 +205,9 @@ def _solveBottomCorners(cube, solution):
     location = _locateBottomCornerInTop(cube)
     
     if location == -1:
+        cube, location, rotations = _moveWrongBottomCornerToTop(cube)
+    
+    if location == -1:
         location = _locateRotatedBottomCorner(cube)
     else:
         cube, location, posRots = _positionCornerInTop(cube, location)
@@ -222,7 +225,7 @@ def _solveBottomCorners(cube, solution):
         rotations = rotations + orientRots
         count += 1 # count prevents infinite loop
     
-    return _solveBottomCorners(cube, solution + rotations)
+    return _solveBottomCorners(cube, rotations)
     
 # Helpers for Bottom Cross    
    
@@ -350,7 +353,7 @@ def _moveCornerToBottomFromTop(cube, location):
     return cube, location, rotations
         
 def _orientCornerInBottom(cube, location):
-
+    
     if location == rotate.cubeEnum.F22.value:
         rotations = 'RUruRUru'
     if location == rotate.cubeEnum.R22.value:
@@ -408,7 +411,6 @@ def _locateRotatedBottomCorner(cube):
                           , (cube[rotate.cubeEnum.L22.value], cube[rotate.cubeEnum.F20.value], cube[rotate.cubeEnum.D00.value]) ]
     
     location = -1
-    rotations = ''
     
     for i, corner in enumerate(actualBottomCorners):
         # We only care if the corner contains the right colors and is rotated incorrectly
@@ -418,8 +420,28 @@ def _locateRotatedBottomCorner(cube):
                 
     return location
         
-        
-        
+def _moveWrongBottomCornerToTop(cube):
+    
+    expectedBottomCorners = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.D11.value])
+                            , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
+                            , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
+                            , (cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.D11.value]) ]
+
+    actualBottomCorners = [ (cube[rotate.cubeEnum.F22.value], cube[rotate.cubeEnum.R20.value], cube[rotate.cubeEnum.D02.value])
+                          , (cube[rotate.cubeEnum.R22.value], cube[rotate.cubeEnum.B20.value], cube[rotate.cubeEnum.D22.value])
+                          , (cube[rotate.cubeEnum.B22.value], cube[rotate.cubeEnum.L20.value], cube[rotate.cubeEnum.D20.value])
+                          , (cube[rotate.cubeEnum.L22.value], cube[rotate.cubeEnum.F20.value], cube[rotate.cubeEnum.D00.value]) ]
+    
+    location = -1
+    rotations = ''
+    
+    for i, corner in enumerate(actualBottomCorners):
+        if sorted(corner) != sorted(expectedBottomCorners[i]) and corner.count(cube[rotate.cubeEnum.D11.value]):
+            cube, _, rotations = _moveCornerToBottomFromTop(cube, i * 9 + 2)
+            location = i * 9 + 2
+            break
+    
+    return cube, location, rotations
         
         
         
