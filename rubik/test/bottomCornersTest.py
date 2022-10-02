@@ -40,9 +40,7 @@ class Test(unittest.TestCase):
 #    test 051: two corners solved, others swapped in bottom
 #    test 060: no corners solved, unsolved all in top
 #    test 070: no corners solved, unsolved all in bottom
-#    test 080: no corners solved, unsolved randomly distributed
-#    test 090: completely scrambled cube, solve bottom cross and corners
-#
+#    test 080: completely scrambled cube, solve bottom cross and corners
 
     def test_bottomCorners_010_solvedBottomCornersVerify(self):
         cube = 'bgbgbgbgbrororororgbgbgbgbgororororoywywywywywywywywyw'
@@ -192,6 +190,20 @@ class Test(unittest.TestCase):
         inputDict = {}
         inputDict['op']   = 'solve'
         inputDict['cube'] = 'gorobgobwyyyrryrrwrgobgyogrbrygobwogyogbyroybwwgwwwbwb'
+        
+        expectResult = {}
+        #expectResult['rotations'] = ''
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        #self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_bottomCorners_080_cubeCompletelyScrambled(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'gwogwbbyrbyowroyyowwwgyogoorrwyowwrrbrbbbgroyybgggrgby'
         
         expectResult = {}
         #expectResult['rotations'] = ''
