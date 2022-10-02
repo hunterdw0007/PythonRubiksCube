@@ -63,6 +63,14 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedLocation, actualLocation)
         self.assertEqual(expectedRotations, actualRotations)
         
+    def test_bottomCorners_016_checkBottomCornerOrientation(self):
+        cube = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
+        
+        locations = [rotate.cubeEnum.F22.value, rotate.cubeEnum.R22.value, rotate.cubeEnum.B22.value, rotate.cubeEnum.L22.value]
+        
+        for location in locations:
+            self.assertTrue(solve._checkBottomCornerOrientation(cube, location))
+        
     def test_bottomCorners_020_solvedBottomBaseCase(self):
         inputDict = {}
         inputDict['op']   = 'solve'
@@ -105,4 +113,5 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
     

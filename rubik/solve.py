@@ -353,6 +353,12 @@ def _checkBottomCornerOrientation(cube, location):
 # Returns True if it is facing down, and False otherwise
     if location == rotate.cubeEnum.F22.value and cube[rotate.cubeEnum.D02.value] == cube[rotate.cubeEnum.D11.value]:
             return True
+    if location == rotate.cubeEnum.R22.value and cube[rotate.cubeEnum.D22.value] == cube[rotate.cubeEnum.D11.value]:
+            return True
+    if location == rotate.cubeEnum.B22.value and cube[rotate.cubeEnum.D20.value] == cube[rotate.cubeEnum.D11.value]:
+            return True
+    if location == rotate.cubeEnum.L22.value and cube[rotate.cubeEnum.D00.value] == cube[rotate.cubeEnum.D11.value]:
+            return True
     return False
 
 def _locateBottomCornerInTop(cube):
