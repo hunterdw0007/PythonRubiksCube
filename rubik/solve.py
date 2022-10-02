@@ -333,8 +333,14 @@ def _moveCornerToBottomFromTop(cube, location):
     
     if location == rotate.cubeEnum.F02.value:
         rotations = 'RUru'
-        cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+    if location == rotate.cubeEnum.R02.value:
+        rotations = 'BUbu'
+    if location == rotate.cubeEnum.B02.value:
+        rotations = 'LUlu'
+    if location == rotate.cubeEnum.L02.value:
+        rotations = 'FUfu'
         
+    cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube'] 
     location += 6
     
     return cube, location, rotations
@@ -343,7 +349,14 @@ def _orientCornerInBottom(cube, location):
 
     if location == rotate.cubeEnum.F22.value:
         rotations = 'RUru'
-        cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
+    if location == rotate.cubeEnum.R22.value:
+        rotations = 'BUbu'
+    if location == rotate.cubeEnum.B22.value:
+        rotations = 'LUlu'
+    if location == rotate.cubeEnum.L22.value:
+        rotations = 'FUfu'
+    
+    cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
         
     return cube, location, rotations
 
