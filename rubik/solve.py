@@ -396,6 +396,7 @@ def _locateBottomCornerInTop(cube):
     for i, corner in enumerate(topCornerColors):
         if corner.count(cube[rotate.cubeEnum.D11.value]) > 0:
             location = i * 9 + 2
+            break
             
     return location
 
