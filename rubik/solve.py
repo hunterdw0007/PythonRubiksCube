@@ -348,13 +348,13 @@ def _moveCornerToBottomFromTop(cube, location):
 def _orientCornerInBottom(cube, location):
 
     if location == rotate.cubeEnum.F22.value:
-        rotations = 'RUru'
+        rotations = 'RUruRUru'
     if location == rotate.cubeEnum.R22.value:
-        rotations = 'BUbu'
+        rotations = 'BUbuBUbu'
     if location == rotate.cubeEnum.B22.value:
-        rotations = 'LUlu'
+        rotations = 'LUluLUlu'
     if location == rotate.cubeEnum.L22.value:
-        rotations = 'FUfu'
+        rotations = 'FUfuFUfu'
     
     cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
         
