@@ -228,9 +228,7 @@ def _solveBottomCorners(cube, solution):
         rotations = rotations + orientRots
         count += 1
     
-    return _solveBottomCorners(cube, rotations)
-    
-# Helpers for Bottom Cross    
+    return _solveBottomCorners(cube, rotations)  
    
 def _checkBottomCross(cube):
     # Checks whether or not the bottom cross is solved
