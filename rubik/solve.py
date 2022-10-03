@@ -14,8 +14,6 @@ def _solve(parms):
         result['status'] = 'ok'                   
     return result
 
-# Main solver functions
-
 def _solveBottomCross(cube, solution):
     # Returns the rotations needed to take a given cube and produce a cube with a solved bottom cross
     # Base Case: check if bottom cross is solved
