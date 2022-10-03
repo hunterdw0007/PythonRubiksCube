@@ -202,13 +202,17 @@ def _solveBottomCorners(cube, solution):
         return cube, solution
     
     rotations = solution
+    # Case 1: piece is located in top, set the location
     location = _locateBottomCornerInTop(cube)
     
+    # Case 2: piece is located in bottom, move to top
     if location == -1:
         cube, location, rotations = _moveWrongBottomCornerToTop(cube)
     
+    # Case 3: piece is already in the right spot
     if location == -1:
         location = _locateRotatedBottomCorner(cube)
+    # Condition for Case 1 & 2 to move the piece to the right spot
     else:
         cube, location, posRots = _positionCornerInTop(cube, location)
     
@@ -218,12 +222,13 @@ def _solveBottomCorners(cube, solution):
         
         rotations = rotations + moveRots
     
+    # Count is a failsafe for an infinite loop
+    # and performing this algorithm more than 3 times would just loop back to the previous state again
     count = 0
-    
-    while not _checkBottomCornerOrientation(cube, location) and count < 6:
+    while not _checkBottomCornerOrientation(cube, location) and count < 3:
         cube, location, orientRots = _orientCornerInBottom(cube, location)
         rotations = rotations + orientRots
-        count += 1 # count prevents infinite loop
+        count += 1
     
     return _solveBottomCorners(cube, rotations)
     
@@ -328,6 +333,7 @@ def _positionCornerInTop(cube, location):
     while sorted(topCornerColors[int((location-2)/9)]) != sorted(bottomCornerColors[int((location-2)/9)]):
         rotations = rotations + 'U'
         cube = rotate._rotate({'cube':cube,'dir':'U'})['cube']
+        # Reassign after each U rotation
         topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
                           , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
                           , (cube[rotate.cubeEnum.B02.value], cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.U00.value])
@@ -337,7 +343,8 @@ def _positionCornerInTop(cube, location):
     return cube, location, rotations
 
 def _moveCornerToBottomFromTop(cube, location):
-    
+# Moves a corner from the position above its correct position to its correct position
+# Also does the reverse but the location value will be incorrect
     if location == rotate.cubeEnum.F02.value:
         rotations = 'RUru'
     if location == rotate.cubeEnum.R02.value:
@@ -353,7 +360,7 @@ def _moveCornerToBottomFromTop(cube, location):
     return cube, location, rotations
         
 def _orientCornerInBottom(cube, location):
-    
+# Rotates a bottom corner once "clockwise" thus three applications of this algorithm will loop back to itself
     if location == rotate.cubeEnum.F22.value:
         rotations = 'RUruRUru'
     if location == rotate.cubeEnum.R22.value:
@@ -384,7 +391,6 @@ def _checkBottomCornerOrientation(cube, location):
 def _locateBottomCornerInTop(cube):
 # Checks each of the four top corners to see if they contain a face with the same color as the Down side of the cube
 # Returns the first one found or -1 if none are found
-    
     topCornerColors = [ (cube[rotate.cubeEnum.F02.value], cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.U22.value])
                       , (cube[rotate.cubeEnum.R02.value], cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.U02.value])
                       , (cube[rotate.cubeEnum.B02.value], cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.U00.value])
@@ -401,6 +407,8 @@ def _locateBottomCornerInTop(cube):
     return location
 
 def _locateRotatedBottomCorner(cube):
+# Checks each of the four bottom corners to see if they are in the right spot but rotated the wrong way
+# Returns the location of a corner if found or -1 if none are found
     expectedBottomCorners = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.D11.value])
                             , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
                             , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
@@ -422,7 +430,7 @@ def _locateRotatedBottomCorner(cube):
     return location
         
 def _moveWrongBottomCornerToTop(cube):
-    
+# Finds the first corner that is located in the bottom which is in the wrong spot and moves it to the top to be operated on later
     expectedBottomCorners = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.D11.value])
                             , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.D11.value])
                             , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.D11.value])
