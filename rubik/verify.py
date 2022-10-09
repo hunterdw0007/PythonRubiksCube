@@ -1,5 +1,9 @@
 import rubik.cube as rubik
 
+def _verify(parms):
+    return parms
+
+
 def _validateCube(cube):
     validColors = 'wryobg'
     centerColors = ''
