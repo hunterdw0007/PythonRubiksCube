@@ -6,6 +6,7 @@ Created on Oct 13, 2022
 import unittest
 import rubik.solve as solve
 import rubik.rotate as rotate
+import rubik.solveMiddleLayer as solveMiddleLayer
 
 class Test(unittest.TestCase):
 
@@ -30,6 +31,6 @@ class Test(unittest.TestCase):
         
         expectResult = True
         
-        actualResult = solve._checkMiddleLayer(cube)
+        actualResult = solveMiddleLayer._checkMiddleLayer(cube)
         
         self.assertEqual(expectResult, actualResult)
