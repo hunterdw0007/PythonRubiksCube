@@ -54,7 +54,7 @@ class Test(unittest.TestCase):
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
-        expectResult = False
+        expectResult = True
         
         actualResult = solveMiddleLayer._checkMiddleLayer(cube)
         
