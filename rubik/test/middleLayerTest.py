@@ -102,6 +102,18 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
+    def test_locateMiddlePieceInTop_910_edgeNotFoundInTop(self):
+        # Solved cube has no middle edges in top
+        cube = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = -1
+        
+        actualResult = solveMiddleLayer._locateMiddlePieceInTop(cube)
+        
+        self.assertEqual(expectResult, actualResult)
         
         
             
