@@ -47,3 +47,15 @@ class Test(unittest.TestCase):
         actualResult = solveMiddleLayer._checkMiddleLayer(cube)
         
         self.assertEqual(expectResult, actualResult)
+
+    def test_middleLayer_030_solvedMiddleEdgesOnly(self):
+        cube = 'rgbbbbyybyborrrywrwgogggwrgywgoooowrgwbbyywyogorowrwyb'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = False
+        
+        actualResult = solveMiddleLayer._checkMiddleLayer(cube)
+        
+        self.assertEqual(expectResult, actualResult)
