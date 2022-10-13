@@ -22,3 +22,7 @@ def _checkMiddleLayer(cube):
     if cube[rotate.cubeEnum.L12.value] != cube[rotate.cubeEnum.L11.value]:
         return False
     return True
+
+def _locateMiddlePieceInTop(cube):
+    
+    return rotate.cubeEnum.F01.value
