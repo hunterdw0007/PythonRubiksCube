@@ -6,6 +6,7 @@ Created on Oct 13, 2022
 import unittest
 import rubik.solve as solve
 import rubik.rotate as rotate
+import rubik.verify as verify
 import rubik.solveMiddleLayer as solveMiddleLayer
 
 class Test(unittest.TestCase):
@@ -30,6 +31,18 @@ class Test(unittest.TestCase):
         cube = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
         
         expectResult = True
+        
+        actualResult = solveMiddleLayer._checkMiddleLayer(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+    
+    def test_middleLayer_020_solvedMiddleEdgesOfSolvedBottomCheck(self):
+        cube = 'byybwbwwwbyrrrorrrboobyryyywoowowooobwwybrybrggggggggg'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = False
         
         actualResult = solveMiddleLayer._checkMiddleLayer(cube)
         
