@@ -115,5 +115,34 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
+# Analysis - solve._positionMiddlePieceInTop
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#    location: integer, 0-53, arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns:
+#        cube: string; len=54, [browyg], 9 occurences of each character, unique middle color
+#        location: integer, 0-53 corresponding to location
+#        rotations: string, len=0-3, [U]
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: edge located in front
+#    test 020: edge not located in front
         
-            
+    def test_positionMiddlePieceInTop_010_edgeLocatedInFront(self):
+        cube = 'gogobbbbbogyyrrrrrbybygbgggyrrooyoooogrbyrygywwwwwwwww'
+        location = 1
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = rotate.cubeEnum.F01.value
+        
+        actualResult = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
+        
+        self.assertEqual(expectResult, actualResult)
