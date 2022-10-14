@@ -133,6 +133,7 @@ class Test(unittest.TestCase):
 # happy path:
 #    test 010: edge located in front
 #    test 020: edge not located in front
+#    test 030: all edges solved except one, needs 3 rotations to place
         
     def test_positionMiddlePieceInTop_010_edgeLocatedInFront(self):
         cube = 'gogobbbbbogyyrrrrrbybygbgggyrrooyoooogrbyrygywwwwwwwww'
@@ -161,6 +162,23 @@ class Test(unittest.TestCase):
         expectedCube = cube
         expectedLocation = rotate.cubeEnum.R01.value
         expectedRotations = ''
+        
+        actualCube, actualLocation, actualRotations = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedLocation, actualLocation)
+        self.assertEqual(expectedRotations, actualRotations)
+        
+    def test_positionMiddlePieceInTop_030_edgeNeedsThreeRotations(self):
+        cube = 'yogggggggygbooyooorbbobbbbbyyorrrrrroyyryygbrwwwwwwwww'
+        location = rotate.cubeEnum.F01.value
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'yyoggggggyogooyoooygbobbbbbrbbrrrrrryyryyborgwwwwwwwww'
+        expectedLocation = rotate.cubeEnum.R01.value
+        expectedRotations = 'UUU'
         
         actualCube, actualLocation, actualRotations = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
         
