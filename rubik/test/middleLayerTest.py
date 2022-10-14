@@ -141,8 +141,12 @@ class Test(unittest.TestCase):
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
-        expectResult = rotate.cubeEnum.F01.value
+        expectedCube = cube
+        expectedLocation = rotate.cubeEnum.F01.value
+        expectedRotations = ''
         
-        actualResult = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
+        actualCube, actualLocation, actualRotations = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
         
-        self.assertEqual(expectResult, actualResult)
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedLocation, actualLocation)
+        self.assertEqual(expectedRotations, actualRotations)
