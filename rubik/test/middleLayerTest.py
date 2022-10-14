@@ -136,13 +136,30 @@ class Test(unittest.TestCase):
         
     def test_positionMiddlePieceInTop_010_edgeLocatedInFront(self):
         cube = 'gogobbbbbogyyrrrrrbybygbgggyrrooyoooogrbyrygywwwwwwwww'
-        location = 1
+        location = rotate.cubeEnum.F01.value
     
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
         expectedCube = cube
-        expectedLocation = rotate.cubeEnum.F01.value
+        expectedLocation = rotate.cubeEnum.L01.value
+        expectedRotations = 'U'
+        
+        actualCube, actualLocation, actualRotations = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedLocation, actualLocation)
+        self.assertEqual(expectedRotations, actualRotations)
+
+    def test_positionMiddlePieceInTop_020_edgeNotLocatedInFront(self):
+        cube = 'bybobbbbbyrryrrrrrgogygbgggogyooyoooygyrybrgowwwwwwwww'
+        location = rotate.cubeEnum.R01.value
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = cube
+        expectedLocation = rotate.cubeEnum.R01.value
         expectedRotations = ''
         
         actualCube, actualLocation, actualRotations = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
