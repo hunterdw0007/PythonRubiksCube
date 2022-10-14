@@ -67,7 +67,7 @@ class Test(unittest.TestCase):
 #
 # outputs:
 #    side-effects: no state changes; no external effects
-#    returns: integer, 0-54 corresponding to location
+#    returns: integer, [0-53] corresponding to location
 #
 #    confidence level: boundary value analysis
 #
@@ -119,7 +119,7 @@ class Test(unittest.TestCase):
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
-#    location: integer, 0-53, arrives validated
+#    location: integer, [0-53], arrives validated
 #
 # outputs:
 #    side-effects: no state changes; no external effects
@@ -185,3 +185,31 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedLocation, actualLocation)
         self.assertEqual(expectedRotations, actualRotations)
+
+# Analysis - solve._locateMiddlePieceInMiddle
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: integer, 0-53 corresponding to location
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: edge found in Front
+#    test 020: edge found elsewhere
+#    test 030: edge found "flipped" but in right spot
+
+def test_locateMiddlePieceInTop_010_edgeFoundInFront(self):
+        cube = 'rgbggbgggrboooyoooygoobbbbbbryrrrrrryygyyygoywwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = rotate.cubeEnum.F12.value
+        
+        actualResult = solveMiddleLayer._locateMiddlePieceInMiddle(cube)
+        
+        self.assertEqual(expectResult, actualResult)
