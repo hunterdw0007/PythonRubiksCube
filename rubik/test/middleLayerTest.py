@@ -213,3 +213,15 @@ class Test(unittest.TestCase):
         actualResult = solveMiddleLayer._locateMiddlePieceInMiddle(cube)
         
         self.assertEqual(expectResult, actualResult)
+
+    def test_locateMiddlePieceInMiddle_020_edgeNotFoundInFront(self):
+        cube = 'gygggggggooooobooobbbobbbbbrrrrrrrrryyyyyyygywwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = rotate.cubeEnum.R12.value
+        
+        actualResult = solveMiddleLayer._locateMiddlePieceInMiddle(cube)
+        
+        self.assertEqual(expectResult, actualResult)
