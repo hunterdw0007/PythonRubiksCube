@@ -57,7 +57,22 @@ def _positionMiddlePieceInTop(cube, location):
     return cube, location, rotations
 
 def _locateMiddlePieceInMiddle(cube):
-    # Finds the first piece in the middle which is either in the wrong position or oriented incorrectly
-    # Returns the location of the piece
-    return rotate.cubeEnum.F12.value
-
+    
+    expectedMiddles = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value])
+                      , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value])
+                      , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value])
+                      , (cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.F11.value]) ]
+    
+    actualMiddles = [ (cube[rotate.cubeEnum.F12.value], cube[rotate.cubeEnum.R10.value])
+                    , (cube[rotate.cubeEnum.R12.value], cube[rotate.cubeEnum.B10.value])
+                    , (cube[rotate.cubeEnum.B12.value], cube[rotate.cubeEnum.L10.value])
+                    , (cube[rotate.cubeEnum.L12.value], cube[rotate.cubeEnum.F10.value]) ]
+    
+    location = -1
+    
+    for i, middle in enumerate(actualMiddles):
+        if middle != expectedMiddles[i] and middle.count(cube[rotate.cubeEnum.U11.value]) < 1:
+            location = i * 9 + 5
+            break
+    
+    return location

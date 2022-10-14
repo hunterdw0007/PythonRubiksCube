@@ -200,7 +200,6 @@ class Test(unittest.TestCase):
 # happy path:
 #    test 010: edge found in Front
 #    test 020: edge found elsewhere
-#    test 030: edge found "flipped" but in right spot
 
     def test_locateMiddlePieceInMiddle_010_edgeFoundInFront(self):
         cube = 'rgbggbgggrboooyoooygoobbbbbbryrrrrrryygyyygoywwwwwwwww'
