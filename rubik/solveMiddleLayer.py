@@ -43,3 +43,7 @@ def _locateMiddlePieceInTop(cube):
             break
         
     return location
+
+def _positionMiddlePieceInTop(cube, location):
+    rotations = ''
+    return cube, location, rotations
