@@ -56,3 +56,8 @@ def _positionMiddlePieceInTop(cube, location):
         
     return cube, location, rotations
 
+def _locateMiddlePieceInMiddle(cube):
+    # Finds the first piece in the middle which is either in the wrong position or oriented incorrectly
+    # Returns the location of the piece
+    return rotate.cubeEnum.F12.value
+
