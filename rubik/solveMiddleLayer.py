@@ -24,7 +24,7 @@ def _checkMiddleLayer(cube):
     return True
 
 def _locateMiddlePieceInTop(cube):
-    
+    # Finds the first piece in the top row that contains colors corresponding to two adjacent sides and returns its location
     sortedEdgeColors = [ sorted((cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value]))
                        , sorted((cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value]))
                        , sorted((cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value]))
@@ -45,5 +45,14 @@ def _locateMiddlePieceInTop(cube):
     return location
 
 def _positionMiddlePieceInTop(cube, location):
+    # Moves an edge piece in the top until it lines up with its matching side
+    # Returns the cube state, the new location, and the rotations to get that state
     rotations = ''
+    
+    while cube[location] != cube[location + 3]:
+        rotations = rotations + 'U'
+        cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
+        location = location - 9 if location != rotate.cubeEnum.F01.value else rotate.cubeEnum.L01.value
+        
     return cube, location, rotations
+

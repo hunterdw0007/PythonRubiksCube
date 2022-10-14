@@ -141,7 +141,7 @@ class Test(unittest.TestCase):
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
-        expectedCube = cube
+        expectedCube = 'ogyobbbbbbybyrrrrryrrygbggggogooyoooybogygyrrwwwwwwwww'
         expectedLocation = rotate.cubeEnum.L01.value
         expectedRotations = 'U'
         
