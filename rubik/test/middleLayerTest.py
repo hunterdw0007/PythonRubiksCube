@@ -202,7 +202,7 @@ class Test(unittest.TestCase):
 #    test 020: edge found elsewhere
 #    test 030: edge found "flipped" but in right spot
 
-def test_locateMiddlePieceInTop_010_edgeFoundInFront(self):
+    def test_locateMiddlePieceInMiddle_010_edgeFoundInFront(self):
         cube = 'rgbggbgggrboooyoooygoobbbbbbryrrrrrryygyyygoywwwwwwwww'
         
         #checking that cube is valid
