@@ -111,7 +111,16 @@ def _middleAlgorithmRight(cube, location):
     return cube, rotations
 
 def _middleAlgorithmLeft(cube, location):
-    rotations = 'ulULUFuf'
+    rotations = ''
+    
+    if location == rotate.cubeEnum.F01.value:
+        rotations = 'ulULUFuf'
+    elif location == rotate.cubeEnum.R01.value:
+        rotations = 'ufUFURur'
+    elif location == rotate.cubeEnum.B01.value:
+        rotations = 'urURUBub'
+    else:
+        rotations = 'ubUBULul'
     
     cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
     
