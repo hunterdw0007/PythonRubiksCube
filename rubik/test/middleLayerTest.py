@@ -277,3 +277,36 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedLocation, actualLocation)
         self.assertEqual(expectedRotations, actualRotations)
+        
+# Analysis - solve._middleAlgorithmRight
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#    location: integer, [0-53], arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns:
+#        cube: string; len=54, [browyg], 9 occurences of each character, unique middle color
+#        rotations: string, len=0-3, [U]
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: edge located in front
+#    test 020: edge not located in front
+
+def test_middleAlgorithmRight_010_edgeLocatedInFront(self):
+        cube = 'bbbbbbbbbrrrrrrrrrgggggggggoooooooooyyyyyyyyywwwwwwwww'
+        location = rotate.cubeEnum.F01.value
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'yobbbbbbbrggyrrrrroryggggggoygoooooobbyryyryywwwwwwwww'
+        expectedRotations = 'URurufUF'
+        
+        actualCube, actualRotations = solveMiddleLayer._middleAlgorithmRight(cube, location)
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
