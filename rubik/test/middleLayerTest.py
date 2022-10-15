@@ -236,7 +236,7 @@ class Test(unittest.TestCase):
 #    returns:
 #        cube: string; len=54, [browyg], 9 occurences of each character, unique middle color
 #        location: integer, 0-53 corresponding to location
-#        rotations: string, len=0-3, [U]
+#        rotations: string, len=8
 #
 #    confidence level: boundary value analysis
 #
@@ -288,7 +288,7 @@ class Test(unittest.TestCase):
 #    side-effects: no state changes; no external effects
 #    returns:
 #        cube: string; len=54, [browyg], 9 occurences of each character, unique middle color
-#        rotations: string, len=0-3, [U]
+#        rotations: string, len=8
 #
 #    confidence level: boundary value analysis
 #
@@ -322,6 +322,39 @@ class Test(unittest.TestCase):
         expectedRotations = 'UBuburUR'
         
         actualCube, actualRotations = solveMiddleLayer._middleAlgorithmRight(cube, location)
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
+        
+# Analysis - solve._middleAlgorithmLeft
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#    location: integer, [0-53], arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns:
+#        cube: string; len=54, [browyg], 9 occurences of each character, unique middle color
+#        rotations: string, len=8
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: edge located in front
+#    test 020: edge not located in front
+
+    def test_middleAlgorithmLeft_010_edgeLocatedInFront(self):
+        cube = 'bbbbbbbbbrrrrrrrrrgggggggggoooooooooyyyyyyyyywwwwwwwww'
+        location = rotate.cubeEnum.F01.value
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'brybbbbbbgyrrrrrrryorggggggggoooyoooybbyyoyyowwwwwwwww'
+        expectedRotations = 'ulULUFuf'
+        
+        actualCube, actualRotations = solveMiddleLayer._middleAlgorithmLeft(cube, location)
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
