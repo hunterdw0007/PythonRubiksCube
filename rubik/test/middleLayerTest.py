@@ -11,7 +11,7 @@ import rubik.solveMiddleLayer as solveMiddleLayer
 
 class Test(unittest.TestCase):
 
-# Analysis - solve._checkMiddleLayer
+# Analysis - solveMiddleLayer._checkMiddleLayer
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
@@ -60,7 +60,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
 
-# Analysis - solve._locateMiddlePieceInTop
+# Analysis - solveMiddleLayer._locateMiddlePieceInTop
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
@@ -115,7 +115,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
-# Analysis - solve._positionMiddlePieceInTop
+# Analysis - solveMiddleLayer._positionMiddlePieceInTop
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
@@ -186,7 +186,7 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedLocation, actualLocation)
         self.assertEqual(expectedRotations, actualRotations)
 
-# Analysis - solve._locateMiddlePieceInMiddle
+# Analysis - solveMiddleLayer._locateMiddlePieceInMiddle
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
@@ -225,7 +225,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
-# Analysis - solve._moveMiddlePieceToTop
+# Analysis - solveMiddleLayer._moveMiddlePieceToTop
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
@@ -278,7 +278,7 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedLocation, actualLocation)
         self.assertEqual(expectedRotations, actualRotations)
         
-# Analysis - solve._middleAlgorithmRight
+# Analysis - solveMiddleLayer._middleAlgorithmRight
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
@@ -326,7 +326,7 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
         
-# Analysis - solve._middleAlgorithmLeft
+# Analysis - solveMiddleLayer._middleAlgorithmLeft
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
