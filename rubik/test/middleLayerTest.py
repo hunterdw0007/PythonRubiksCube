@@ -262,13 +262,13 @@ class Test(unittest.TestCase):
         self.assertEqual(expectedRotations, actualRotations)
         
     def test_moveMiddlePieceToTop_020_edgeNotLocatedInFront(self):
-        cube = 'gybrrrrrrybgggrgggogyyoooooborbbbbbbryygyyyoowwwwwwwww'
-        location = rotate.cubeEnum.F12.value
+        cube = 'bybrrrrrrrygggbgggooryooooogyobbbbbbygyryoygywwwwwwwww'
+        location = rotate.cubeEnum.R12.value
     
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
-        expectedCube = 'bybrrrrrrrygggbgggooryooooogyobbbbbbygyryoygywwwwwwwww'
+        expectedCube = 'bggrrrrrryygggygggoyooooooobyybbbbbbyrybygrorwwwwwwwww'
         expectedLocation = rotate.cubeEnum.L01.value
         expectedRotations = 'UBuburUR'
         

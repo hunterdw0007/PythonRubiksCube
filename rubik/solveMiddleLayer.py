@@ -77,5 +77,22 @@ def _locateMiddlePieceInMiddle(cube):
     
     return location
 
-def _moveMiddlePieceToTop(cube,location):
-    return 'yrgrryrrrobbogggggyrgooooooyyrbbbbbbrgogyybyywwwwwwwww', rotate.cubeEnum.B01.value, 'URurufUF'
+def _moveMiddlePieceToTop(cube, location):
+    rotations = ''
+    
+    if location == rotate.cubeEnum.F12.value:
+        rotations = 'URurufUF'
+        location = rotate.cubeEnum.B01.value
+    elif location == rotate.cubeEnum.R12.value:
+        rotations = 'UBuburUR'
+        location = rotate.cubeEnum.L01.value
+    elif location == rotate.cubeEnum.B12.value:
+        rotations = 'ULulubUB'
+        location = rotate.cubeEnum.L01.value
+    else:
+        rotations = 'UFufulUL'
+        location = rotate.cubeEnum.R01.value
+        
+    cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
+    
+    return cube, location, rotations
