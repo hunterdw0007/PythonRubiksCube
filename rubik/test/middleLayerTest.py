@@ -310,3 +310,18 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+        
+    def test_middleAlgorithmRight_020_edgeNotLocatedInFront(self):
+        cube = 'bbbbbbbbbrrrrrrrrrgggggggggoooooooooyyyyyyyyywwwwwwwww'
+        location = rotate.cubeEnum.R01.value
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'byobbbbbbybrrrrrrrgooygggggbgyooooooyyyryyrggwwwwwwwww'
+        expectedRotations = 'UBuburUR'
+        
+        actualCube, actualRotations = solveMiddleLayer._middleAlgorithmRight(cube, location)
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
