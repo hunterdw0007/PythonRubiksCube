@@ -98,7 +98,16 @@ def _moveMiddlePieceToTop(cube, location):
     return cube, location, rotations
 
 def _middleAlgorithmRight(cube, location):
-    rotations = 'URurufUF'
+    rotations = ''
+    
+    if location == rotate.cubeEnum.F01.value:
+        rotations = 'URurufUF'
+    elif location == rotate.cubeEnum.R01.value:
+        rotations = 'UBuburUR'
+    elif location == rotate.cubeEnum.B01.value:
+        rotations = 'ULulubUB'
+    else:
+        rotations = 'UFufulUL'
     
     cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
     
