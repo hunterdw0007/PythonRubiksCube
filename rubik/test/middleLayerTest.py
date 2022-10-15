@@ -296,7 +296,7 @@ class Test(unittest.TestCase):
 #    test 010: edge located in front
 #    test 020: edge not located in front
 
-def test_middleAlgorithmRight_010_edgeLocatedInFront(self):
+    def test_middleAlgorithmRight_010_edgeLocatedInFront(self):
         cube = 'bbbbbbbbbrrrrrrrrrgggggggggoooooooooyyyyyyyyywwwwwwwww'
         location = rotate.cubeEnum.F01.value
     
