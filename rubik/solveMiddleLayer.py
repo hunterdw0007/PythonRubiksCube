@@ -109,3 +109,10 @@ def _middleAlgorithmRight(cube, location):
     cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
     
     return cube, rotations
+
+def _middleAlgorithmLeft(cube, location):
+    rotations = 'ulULUFuf'
+    
+    cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
+    
+    return cube, rotations
