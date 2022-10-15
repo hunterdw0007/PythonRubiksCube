@@ -57,7 +57,8 @@ def _positionMiddlePieceInTop(cube, location):
     return cube, location, rotations
 
 def _locateMiddlePieceInMiddle(cube):
-    
+    # Finds the first piece in the middle layer which is either in the wrong position, or "flipped" but otherwise in the right position
+    # Returns the location of that piece
     expectedMiddles = [ (cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.R11.value])
                       , (cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.B11.value])
                       , (cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.L11.value])
@@ -78,23 +79,19 @@ def _locateMiddlePieceInMiddle(cube):
     return location
 
 def _moveMiddlePieceToTop(cube, location):
-    rotations = ''
+    # Given the location of a piece in the middle layer which is misplaced, it moves it to the top layer
+    # Returns the new cube state, location of the piece moved, and the rotations it took
+    cube, rotations = _middleAlgorithmRight(cube, location - 4)
     
     if location == rotate.cubeEnum.F12.value:
-        rotations = 'URurufUF'
         location = rotate.cubeEnum.B01.value
     elif location == rotate.cubeEnum.R12.value:
-        rotations = 'UBuburUR'
         location = rotate.cubeEnum.L01.value
     elif location == rotate.cubeEnum.B12.value:
-        rotations = 'ULulubUB'
         location = rotate.cubeEnum.L01.value
     else:
-        rotations = 'UFufulUL'
         location = rotate.cubeEnum.R01.value
         
-    cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
-    
     return cube, location, rotations
 
 def _middleAlgorithmRight(cube, location):
