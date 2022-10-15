@@ -245,17 +245,17 @@ class Test(unittest.TestCase):
 #    test 020: edge not located in front
 
     def test_moveMiddlePieceToTop_010_edgeLocatedInFront(self):
-        cube = 'ygorrrrrbbgrgggggoyyoooooororbbbbbbgryyyybyywwwwwwwwww'
+        cube = 'rygrrgrrrogbrgggggrbbooooooyrybbbbbboyyyyygoywwwwwwwww'
         location = rotate.cubeEnum.F12.value
     
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
-        expectedCube = 'yoorrgrrrbyyygggggrrbooooooryobbbbbbyggbyrgyywwwwwwwww'
+        expectedCube = 'yrgrryrrrobbogggggyrgooooooyyrbbbbbbrgogyybyywwwwwwwww'
         expectedLocation = rotate.cubeEnum.B01.value
         expectedRotations = 'URurufUF'
         
-        actualCube, actualLocation, actualRotations = solveMiddleLayer._positionMiddlePieceInTop(cube, location)
+        actualCube, actualLocation, actualRotations = solveMiddleLayer._moveMiddlePieceToTop(cube, location)
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedLocation, actualLocation)

@@ -78,4 +78,4 @@ def _locateMiddlePieceInMiddle(cube):
     return location
 
 def _moveMiddlePieceToTop(cube,location):
-    return 'yoorrgrrrbyyygggggrrbooooooryobbbbbbyggbyrgyywwwwwwwww', rotate.cubeEnum.B01.value, 'URurufUF'
+    return 'yrgrryrrrobbogggggyrgooooooyyrbbbbbbrgogyybyywwwwwwwww', rotate.cubeEnum.B01.value, 'URurufUF'
