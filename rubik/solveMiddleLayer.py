@@ -96,3 +96,10 @@ def _moveMiddlePieceToTop(cube, location):
     cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
     
     return cube, location, rotations
+
+def _middleAlgorithmRight(cube, location):
+    rotations = 'URurufUF'
+    
+    cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
+    
+    return cube, rotations
