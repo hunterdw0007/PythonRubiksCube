@@ -373,3 +373,39 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+        
+# Analysis - solve._solve
+#
+# inputs:
+#    parms: dict: mandatory: arrives validated
+#    parms['op']: string; 'solve', mandatory, arrives validated
+#    parms['cube']: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives unvalidated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: dict
+#    nominal:
+#        dict['rotations']: string, rotations to solve cube bottom
+#        dict['status']: string, 'ok'
+#    abnormal:
+#        dict['status']: string, 'error: xxx', xxx is message
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: edge located in front
+#    test 020: edge not located in front
+
+    def test_solveMiddleLayer_010_solvedCubeInput(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
+        
+        expectResult = {}
+        expectResult['rotations'] = ''
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
