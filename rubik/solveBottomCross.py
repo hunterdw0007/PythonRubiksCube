@@ -215,13 +215,13 @@ def _positionEdgeInTop(cube, location):
 def _flipEdgeToBottomFromTop(cube, location):
     # Flips an edge from being in the top of the cube to being in the bottom of the cube
     rotations = ''
-    if math.floor(location/9) == 0:
+    if location == rotate.cubeEnum.F01.value:
         rotations = rotations + 'FF'
         cube = rotate._rotate({'cube':cube,'dir':'FF'})['cube']
-    elif math.floor(location / 9) == 1:
+    elif location == rotate.cubeEnum.R01.value:
         rotations = rotations + 'RR'
         cube = rotate._rotate({'cube':cube,'dir':'RR'})['cube']
-    elif math.floor(location / 9) == 2:
+    elif location == rotate.cubeEnum.B01.value:
         rotations = rotations + 'BB'
         cube = rotate._rotate({'cube':cube,'dir':'BB'})['cube']
     else:
