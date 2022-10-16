@@ -6,6 +6,7 @@ Created on Sep 26, 2022
 import unittest
 import rubik.solve as solve
 import rubik.rotate as rotate
+import rubik.solveBottomCorners as solveBottomCorners
 
 class Test(unittest.TestCase):
 
@@ -47,7 +48,7 @@ class Test(unittest.TestCase):
         
         expectResult = True
         
-        actualResult = solve._checkBottomCorners(cube)
+        actualResult = solveBottomCorners._checkBottomCorners(cube)
         
         self.assertEqual(expectResult, actualResult)
     
@@ -59,7 +60,7 @@ class Test(unittest.TestCase):
         expectedRotations = 'UUU'
         expectedLocation = rotate.cubeEnum.R02.value
         
-        actualCube, actualLocation, actualRotations = solve._positionCornerInTop(cube, location)
+        actualCube, actualLocation, actualRotations = solveBottomCorners._positionCornerInTop(cube, location)
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedLocation, actualLocation)
@@ -71,7 +72,7 @@ class Test(unittest.TestCase):
         locations = [rotate.cubeEnum.F22.value, rotate.cubeEnum.R22.value, rotate.cubeEnum.B22.value, rotate.cubeEnum.L22.value]
         
         for location in locations:
-            self.assertTrue(solve._checkBottomCornerOrientation(cube, location))
+            self.assertTrue(solveBottomCorners._checkBottomCornerOrientation(cube, location))
         
     def test_bottomCorners_020_solvedBottomBaseCase(self):
         inputDict = {}
