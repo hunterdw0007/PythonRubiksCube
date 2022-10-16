@@ -439,3 +439,17 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_solveMiddleLayer_040_solvedBottomMiddleNoneSolved(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'gbyyrrrrrrrobgrgggbyygoyooobgygbobbbrbyoyyoogwwwwwwwww'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'UubUBULulUUurURUBubURurufUFUUUUFufulUL'
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
