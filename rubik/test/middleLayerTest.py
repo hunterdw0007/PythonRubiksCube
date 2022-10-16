@@ -395,6 +395,8 @@ class Test(unittest.TestCase):
 # happy path:
 #    test 010: solved cube input
 #    test 020: solved bottom layer and middle layer input
+#    test 030: solved bottom layer, not middle layer
+#    test 040: solved bottom layer, no middle pieces solved
 
     def test_solveMiddleLayer_010_solvedCubeInput(self):
         inputDict = {}
@@ -417,6 +419,20 @@ class Test(unittest.TestCase):
         
         expectResult = {}
         expectResult['rotations'] = ''
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_solveMiddleLayer_030_solvedBottomNotMiddle(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'orbyrrrrrrgoggggggyrroooooogyybbobbbyygbyybbywwwwwwwww'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'ulULUFuf'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
