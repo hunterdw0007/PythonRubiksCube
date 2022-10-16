@@ -17,23 +17,8 @@ def _solveMiddleLayer(cube, rotations):
         
     cube, location, posRots = _positionMiddlePieceInTop(cube, location)
     rotations += posRots
-    
-    moveRight = True
-    
-    if location == rotate.cubeEnum.F01.value:
-        if cube[rotate.cubeEnum.U21.value] == cube[rotate.cubeEnum.L11.value]:
-            moveRight = False
-    elif location == rotate.cubeEnum.R01.value:
-        if cube[rotate.cubeEnum.U12.value] == cube[rotate.cubeEnum.F11.value]:
-            moveRight = False
-    elif location == rotate.cubeEnum.B01.value:
-        if cube[rotate.cubeEnum.U01.value] == cube[rotate.cubeEnum.R11.value]:
-            moveRight = False
-    else:
-        if cube[rotate.cubeEnum.U10.value] == cube[rotate.cubeEnum.B11.value]:
-            moveRight = False
             
-    if moveRight == True:
+    if _chooseAlgorithmDirection(cube, location):
         cube, algRots = _middleAlgorithmRight(cube, location)
         rotations += algRots
     else:
@@ -134,6 +119,8 @@ def _moveMiddlePieceToTop(cube, location):
     return cube, location, rotations
 
 def _middleAlgorithmRight(cube, location):
+    # Performs the algorithm to move a middle edge from the top to the middle, moving the piece right
+    # Returns the new cube state, and the rotations of the algorithm
     rotations = ''
     
     if location == rotate.cubeEnum.F01.value:
@@ -150,6 +137,8 @@ def _middleAlgorithmRight(cube, location):
     return cube, rotations
 
 def _middleAlgorithmLeft(cube, location):
+    # Performs the algorithm to move a middle edge from the top to the middle, moving the piece left
+    # Returns the new cube state, and the rotations of the algorithm
     rotations = ''
     
     if location == rotate.cubeEnum.F01.value:
@@ -164,3 +153,21 @@ def _middleAlgorithmLeft(cube, location):
     cube = rotate._rotate({'cube':cube,'dir':rotations}).get('cube')
     
     return cube, rotations
+
+def _chooseAlgorithmDirection(cube, location):
+    # Given the location of a piece needing to be moved from the top to the middle
+    # Returns the direction of the algorithm needed to move it correctly
+    if location == rotate.cubeEnum.F01.value:
+        if cube[rotate.cubeEnum.U21.value] == cube[rotate.cubeEnum.L11.value]:
+            return False
+    elif location == rotate.cubeEnum.R01.value:
+        if cube[rotate.cubeEnum.U12.value] == cube[rotate.cubeEnum.F11.value]:
+            return False
+    elif location == rotate.cubeEnum.B01.value:
+        if cube[rotate.cubeEnum.U01.value] == cube[rotate.cubeEnum.R11.value]:
+            return False
+    else:
+        if cube[rotate.cubeEnum.U10.value] == cube[rotate.cubeEnum.B11.value]:
+            return False
+    
+    return True
