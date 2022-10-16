@@ -1,7 +1,7 @@
-import rubik.rotate as rotate
 import rubik.verify as verify
 import rubik.solveBottomCross as solveBottomCross
 import rubik.solveBottomCorners as solveBottomCorners
+import rubik.solveMiddleLayer as solveMiddleLayer
 
 def _solve(parms):
     """Return rotates needed to solve input cube"""
@@ -11,7 +11,8 @@ def _solve(parms):
     else:
         cube, bottomCrossRotations = solveBottomCross._solveBottomCross(parms.get('cube'), '')
         cube, bottomCornersRotations = solveBottomCorners._solveBottomCorners(cube, '')
-        result['rotations'] = bottomCrossRotations + bottomCornersRotations
+        cube, middleLayerRotations = solveMiddleLayer._solveMiddleLayer(cube, '')
+        result['rotations'] = bottomCrossRotations + bottomCornersRotations + middleLayerRotations
         result['status'] = 'ok'                   
     return result
         

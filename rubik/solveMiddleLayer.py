@@ -1,7 +1,46 @@
 import rubik.rotate as rotate
 
-def _solveMiddleLayer():
-    return True
+def _solveMiddleLayer(cube, rotations):
+    # Takes in a cube with solved bottom layer and solves the middle layer
+    # Returns the cube state and the string of rotations to produce it
+    if _checkMiddleLayer(cube):
+        return cube, rotations
+    
+    # Case 1: Piece is located in the top
+    location = _locateMiddlePieceInTop(cube)
+    
+    # Case 2: Piece is located in the middle
+    if location == -1:
+        location = _locateMiddlePieceInMiddle(cube)
+        cube, location, mvRots = _moveMiddlePieceToTop(cube, location)
+        rotations += mvRots
+        
+    cube, location, posRots = _positionMiddlePieceInTop(cube, location)
+    rotations += posRots
+    
+    moveRight = True
+    
+    if location == rotate.cubeEnum.F01.value:
+        if cube[rotate.cubeEnum.U21.value] == cube[rotate.cubeEnum.L11.value]:
+            moveRight = False
+    elif location == rotate.cubeEnum.R01.value:
+        if cube[rotate.cubeEnum.U12.value] == cube[rotate.cubeEnum.F11.value]:
+            moveRight = False
+    elif location == rotate.cubeEnum.B01.value:
+        if cube[rotate.cubeEnum.U01.value] == cube[rotate.cubeEnum.R11.value]:
+            moveRight = False
+    else:
+        if cube[rotate.cubeEnum.U10.value] == cube[rotate.cubeEnum.B11.value]:
+            moveRight = False
+            
+    if moveRight == True:
+        cube, algRots = _middleAlgorithmRight(cube, location)
+        rotations += algRots
+    else:
+        cube, algRots = _middleAlgorithmLeft(cube, location)
+        rotations += algRots
+        
+    return _solveMiddleLayer(cube, rotations)
 
 def _checkMiddleLayer(cube):
     # Checks whether or not the middle edges are solved independent of any other part of the cube being solved
