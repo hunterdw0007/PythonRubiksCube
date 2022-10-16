@@ -5,6 +5,7 @@ Created on Sep 18, 2022
 '''
 import unittest
 import rubik.solve as solve
+import rubik.solveBottomCross as solveBottomCross
 
 class BottomCrossTest(unittest.TestCase):
 
@@ -41,116 +42,80 @@ class BottomCrossTest(unittest.TestCase):
 #    test 910: invalid cube - validateCube already tested with rotate in Iteration 1
 
     def test_bottomCross_010_solvedCube(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
+        cube = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
         
-        expectResult = {}
-        expectResult['rotations'] = ''
-        expectResult['status'] = 'ok'
+        expectedRotations= ''
+        expectedCube = cube
         
-        actualResult = solve._solve(inputDict)
+        actualCube, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
+        self.assertEqual(expectedCube, actualCube)
         
     def test_bottomCross_020_solvedCrossUnsolvedCube(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'ygwybbobrryworgyrwbgbygyrgryboboobogoooryrgrbwwgwwwywg'
+        cube = 'ygwybbobrryworgyrwbgbygyrgryboboobogoooryrgrbwwgwwwywg'
         
-        expectResult = {}
-        expectResult['rotations'] = ''
-        expectResult['status'] = 'ok'
+        expectedRotations= ''
+        expectedCube = cube
         
-        actualResult = solve._solve(inputDict)
+        actualCube, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
+        self.assertEqual(expectedCube, actualCube)
         
     def test_bottomCross_030_flippedEdgeOnBottomF(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'grwoboywbbboyrgrrwggbygyrgrybrbogbogorwryoyyoobwwwwywg'
+        cube = 'grwoboywbbboyrgrrwggbygyrgrybrbogbogorwryoyyoobwwwwywg'
         
-        expectResult = {}
-        expectResult['rotations'] = 'FlULUUFF'
-        expectResult['status'] = 'ok'
+        expectedRotations = 'FlULUUFF'
         
-        actualResult = solve._solve(inputDict)
+        _, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
         
     def test_bottomCross_040_flippedEdgeOnBottom(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'worrbgwbrgggorrgwowggbgyygroboboyboryrooyybyybwwwwrywb'
+        cube = 'worrbgwbrgggorrgwowggbgyygroboboyboryrooyybyybwwwwrywb'
         
-        expectResult = {}
-        expectResult['rotations'] = 'RfUFUURR'
-        expectResult['status'] = 'ok'
+        expectedRotations = 'RfUFUURR'
         
-        actualResult = solve._solve(inputDict)
+        _, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
         
     def test_bottomCross_050_edgeInWrongPositionBottom(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'yoyroyorbrbwrbowborbyyroyrwgyrggbrggoobgyybwgwwowwwggb'
+        cube = 'yoyroyorbrbwrbowborbyyroyrwgyrggbrggoobgyybwgwwowwwggb'
         
-        expectResult = {}
-        expectResult['rotations'] = 'FFUUBB'
-        expectResult['status'] = 'ok'
+        expectedRotations = 'FFUUBB'
         
-        actualResult = solve._solve(inputDict)
+        _, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
         
     def test_bottomCross_060_edgeInSide(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'gywyrwyrogbwrgrbgrrggyoryoywbybborboooboyyogrbgwwwwbwg'
+        cube = 'gywyrwyrogbwrgrbgrrggyoryoywbybborboooboyyogrbgwwwwbwg'
         
-        expectResult = {}
-        expectResult['rotations'] = 'RUrFF'
-        expectResult['status'] = 'ok'
+        expectedRotations = 'RUrFF'
         
-        actualResult = solve._solve(inputDict)
+        _, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
         
     def test_bottomCross_070_edgeInTopUpwards(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'gbwyroyrwrbyggrrgrgywyoryoybrobborboogowyowybbggwwwbwg'
+        cube = 'gbwyroyrwrbyggrrgrgywyoryoybrobborboogowyowybbggwwwbwg'
         
-        expectResult = {}
-        expectResult['rotations'] = 'UUUFF'
-        expectResult['status'] = 'ok'
+        expectedRotations = 'UUUFF'
         
-        actualResult = solve._solve(inputDict)
+        _, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
         
     def test_bottomCross_080_edgeInTopSideways(self):
-        inputDict = {}
-        inputDict['op']   = 'solve'
-        inputDict['cube'] = 'bwwgrgoyybyrogrogrwrwyoryoyrbobbyrbgbggoyoyrowbgwwwbwg'
+        cube = 'bwwgrgoyybyrogrogrwrwyoryoyrbobbyrbgbggoyoyrowbgwwwbwg'
         
-        expectResult = {}
-        expectResult['rotations'] = 'FRurfUUFF'
-        expectResult['status'] = 'ok'
+        expectedRotations = 'FRurfUUFF'
         
-        actualResult = solve._solve(inputDict)
+        _, actualRotations = solveBottomCross._solveBottomCross(cube, '')
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
-        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertEqual(expectedRotations, actualRotations)
         
     def test_bottomCross_090_fullBottomCrossSolve(self):
         inputDict = {}
@@ -158,12 +123,12 @@ class BottomCrossTest(unittest.TestCase):
         inputDict['cube'] = 'ygwybrgbbooryrbrowwoywgworbrrbrogygogwgbybowgyywowyrgb'
         
         expectResult = {}
-        expectResult['rotations'] = 'ruRUUFFruRBBruRURRULL'
+        expectedRotations = 'ruRUUFFruRBBruRURRULL'
         expectResult['status'] = 'ok'
         
         actualResult = solve._solve(inputDict)
         
-        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertTrue(actualResult.get('rotations').startswith(expectedRotations))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
         
     def test_bottomCross_910_invalidCubeString(self):
