@@ -393,13 +393,27 @@ class Test(unittest.TestCase):
 #    confidence level: boundary value analysis
 #
 # happy path:
-#    test 010: edge located in front
-#    test 020: edge not located in front
+#    test 010: solved cube input
+#    test 020: solved bottom layer and middle layer input
 
     def test_solveMiddleLayer_010_solvedCubeInput(self):
         inputDict = {}
         inputDict['op']   = 'solve'
         inputDict['cube'] = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
+        
+        expectResult = {}
+        expectResult['rotations'] = ''
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        
+    def test_solveMiddleLayer_020_solvedBottomAndMiddle(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'roobbbbbbyrrrrrrrrygyggggggobyoooooobybyyygygwwwwwwwww'
         
         expectResult = {}
         expectResult['rotations'] = ''
