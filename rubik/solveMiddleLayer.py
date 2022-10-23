@@ -112,7 +112,7 @@ def _moveMiddlePieceToTop(cube, location):
     elif location == rotate.cubeEnum.R12.value:
         location = rotate.cubeEnum.L01.value
     elif location == rotate.cubeEnum.B12.value:
-        location = rotate.cubeEnum.L01.value
+        location = rotate.cubeEnum.F01.value
     else:
         location = rotate.cubeEnum.R01.value
         
