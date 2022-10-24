@@ -90,3 +90,15 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
+    def test_checkCrossState_020_topLine(self):
+        cube = 'yyrbbbbbbyoorrrrrryyoggggggbggooooooyrgyyyrbbwwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = 1
+        
+        actualResult = solveTopCross._checkCrossState(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+        
