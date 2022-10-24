@@ -34,7 +34,7 @@ def _checkCrossState( cube ):
                , cube[rotate.cubeEnum.U12.value], cube[rotate.cubeEnum.U21.value] ]
     
     # Cross solved
-    if topEdges.count(topEdges[0]) != len(topEdges):
+    if topEdges.count(topEdges[0]) == len(topEdges):
         return -1
     # Case 0: horizontal line, L in position
     if topEdges[1] == topEdges[2] or topEdges[0] == topEdges[1]:
