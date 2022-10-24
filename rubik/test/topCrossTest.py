@@ -185,3 +185,17 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+        
+    def test_orientTopEdges_030_LShapeLine(self):
+        cube = 'yygbbbbbborrrrrrrryggggggggyybooooooryboyyobywwwwwwwww'
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'rbybbbbbboryrrrrrrgogggggggrgyooooooyyoyyygybwwwwwwwww'
+        expectedRotations = 'UUUFRUrufFRUruf'
+        
+        actualCube, actualRotations = solveTopCross._orientTopEdges(cube, '')
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
