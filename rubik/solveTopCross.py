@@ -25,3 +25,13 @@ def _checkTopCross( cube ):
     if cube[rotate.cubeEnum.R01.value] != cube[rotate.cubeEnum.R11.value]:
         return False
     return True
+
+def _checkCrossState( cube ):
+    
+    topEdges = [ cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U10.value]
+               , cube[rotate.cubeEnum.U12.value], cube[rotate.cubeEnum.U21.value]]
+    
+    if topEdges.count(topEdges[0]) == 4:
+        return 0
+    return 1
+        

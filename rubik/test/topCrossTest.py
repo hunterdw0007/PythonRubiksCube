@@ -61,7 +61,7 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
-# Analysis - solveTopCross._checkTopState
+# Analysis - solveTopCross._checkCrossState
 #
 # inputs:
 #    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
@@ -78,7 +78,7 @@ class Test(unittest.TestCase):
 #    test 030: L on top
 #    test 040: dot on top
 
-    def test_checkTopState_010_topCrossSolved(self):
+    def test_checkCrossState_010_topCrossSolved(self):
         cube = 'grbbbbbbbrbyrrrrrrgobggggggygroooooooyoyyyyyywwwwwwwww'
         
         #checking that cube is valid
@@ -86,7 +86,7 @@ class Test(unittest.TestCase):
         
         expectResult = 0
         
-        actualResult = solveTopCross._checkTopState(cube)
+        actualResult = solveTopCross._checkCrossState(cube)
         
         self.assertEqual(expectResult, actualResult)
         
