@@ -74,7 +74,8 @@ class Test(unittest.TestCase):
 #
 # happy path:
 #    test 010: top cross completed
-#    test 020: line on top
+#    test 020: line on top - horizontal
+#    test 021: line on top - vertical
 #    test 030: L on top
 #    test 040: dot on top
 
@@ -90,8 +91,20 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
-    def test_checkCrossState_020_topLine(self):
+    def test_checkCrossState_020_topLineHorizontal(self):
         cube = 'yyrbbbbbbyoorrrrrryyoggggggbggooooooyrgyyyrbbwwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = 0
+        
+        actualResult = solveTopCross._checkCrossState(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+    
+    def test_checkCrossState_021_topLineVertical(self):
+        cube = 'yoobbbbbbyyorrrrrrbggggggggyyrooooooryybyrbygwwwwwwwww'
         
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
