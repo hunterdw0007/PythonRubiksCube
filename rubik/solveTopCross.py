@@ -27,12 +27,16 @@ def _checkTopCross( cube ):
     return True
 
 def _checkCrossState( cube ):
-    
+    # Returns the number of rotations needed to orient the top in order to perform the algorithm
+    # Special case for if the cross is already solved returns -1
     topEdges = [ cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U10.value]
                , cube[rotate.cubeEnum.U12.value], cube[rotate.cubeEnum.U21.value]]
     
-    # Case 1: Cross, horizontal line, L in position
-    if topEdges.count(topEdges[0]) == len(topEdges) or topEdges[1] == topEdges[2] or topEdges[0] == topEdges[1]:
+    # Cross solved
+    if topEdges.count(topEdges[0]) == len(topEdges):
+        return -1
+    # Case 0: horizontal line, L in position
+    if topEdges[1] == topEdges[2] or topEdges[0] == topEdges[1]:
         return 0
     # Case 2: line vertical, L in bottom left
     if topEdges[0] == topEdges[3] or topEdges[1] == topEdges[3]:
@@ -45,3 +49,7 @@ def _checkCrossState( cube ):
         return 3
     # Case 5: No edges
     return 0
+
+def _orientTopEdges( cube ):
+    return cube, ""
+    

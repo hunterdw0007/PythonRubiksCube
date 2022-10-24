@@ -85,7 +85,7 @@ class Test(unittest.TestCase):
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
-        expectResult = 0
+        expectResult = -1
         
         actualResult = solveTopCross._checkCrossState(cube)
         
@@ -167,7 +167,7 @@ class Test(unittest.TestCase):
         expectedCube = 'rbybbbbbboryrrrrrrgobggggggrgyooooooyyoyyygybwwwwwwwww'
         expectedRotations = ''
         
-        actualCube, actualLocation, actualRotations = solveTopCross._orientTopEdges(cube)
+        actualCube, actualRotations = solveTopCross._orientTopEdges(cube)
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
