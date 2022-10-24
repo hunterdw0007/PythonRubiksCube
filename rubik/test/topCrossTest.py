@@ -48,3 +48,16 @@ class Test(unittest.TestCase):
         actualResult = solveTopCross._checkTopCross(cube)
         
         self.assertEqual(expectResult, actualResult)
+        
+    def test_checkTopCross_030_scrambledCubeExceptCross(self):
+        cube = 'ybygbywbwoogooygyyrgorgbobywrgorrrgrbwwwwwrwbbyooygbrg'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = True
+        
+        actualResult = solveTopCross._checkTopCross(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+        
