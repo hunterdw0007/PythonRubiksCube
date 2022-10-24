@@ -22,16 +22,28 @@ class Test(unittest.TestCase):
 #
 # happy path:
 #    test 010: fully solved cube
-#    test 020: solved bottom not middle
-#    test 030: solved middle, scrambled elsewhere
+#    test 020: scrambled cube
+#    test 030: scrambled cube except cross
 
-    def test_checkTopCross_010_solvedTopCrossOfSolvedCube(self):
+    def test_checkTopCross_010_solvedCube(self):
         cube = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
         
         #checking that cube is valid
         self.assertTrue(verify._validateCube(cube))
         
         expectResult = True
+        
+        actualResult = solveTopCross._checkTopCross(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+        
+    def test_checkTopCross_020_scrambledCube(self):
+        cube = 'rgbbbbyybyborrrywrwgogggwrgywgoooowrgwbbyywyogorowrwyb'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = False
         
         actualResult = solveTopCross._checkTopCross(cube)
         
