@@ -31,7 +31,10 @@ def _checkCrossState( cube ):
     topEdges = [ cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U10.value]
                , cube[rotate.cubeEnum.U12.value], cube[rotate.cubeEnum.U21.value]]
     
-    if topEdges.count(topEdges[0]) == 4:
+    # Case 1: Cross created
+    if topEdges.count(topEdges[0]) == len(topEdges) or topEdges[1] == topEdges[2]:
         return 0
-    return 1
-        
+    
+    #Case 2: line created
+    if topEdges[0] == topEdges[3]:
+        return 1
