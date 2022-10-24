@@ -192,7 +192,7 @@ class Test(unittest.TestCase):
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
         
-        expectedCube = 'rbybbbbbboryrrrrrrgogggggggrgyooooooyyoyyygybwwwwwwwww'
+        expectedCube = 'rbybbbbbboryrrrrrrgobggggggrgyooooooyyoyyygybwwwwwwwww'
         expectedRotations = 'UUUFRUrufFRUruf'
         
         actualCube, actualRotations = solveTopCross._orientTopEdges(cube, '')
