@@ -128,7 +128,7 @@ class Test(unittest.TestCase):
         self.assertEqual(expectResult, actualResult)
         
     def test_checkCrossState_040_topDot(self):
-        cube = 'rygbbbbbboybrrrrrryyyggggggryboooooogrobyoygy'
+        cube = 'rygbbbbbboybrrrrrryyyggggggryboooooogrobyoygywwwwwwwww'
         
         #checking that cube is valid
         self.assertEqual(verify._validateCube(cube), True)
