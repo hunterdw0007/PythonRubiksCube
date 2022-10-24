@@ -78,7 +78,7 @@ class Test(unittest.TestCase):
 #    test 030: L on top
 #    test 040: dot on top
 
-def test_checkTopState_010_topCrossSolved(self):
+    def test_checkTopState_010_topCrossSolved(self):
         cube = 'grbbbbbbbrbyrrrrrrgobggggggygroooooooyoyyyyyywwwwwwwww'
         
         #checking that cube is valid
