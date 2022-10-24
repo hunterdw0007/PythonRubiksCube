@@ -50,6 +50,17 @@ def _checkCrossState( cube ):
     # Case 5: No edges
     return 0
 
-def _orientTopEdges( cube ):
-    return cube, ""
+def _orientTopEdges( cube, rotations ):
+    
+    rotationCount = _checkCrossState(cube)
+    
+    if rotationCount == -1:
+        return cube, rotations
+    
+    else:
+        rotations += 'U' * rotationCount + 'FRUruf'
+        cube = cube = rotate._rotate({'cube':cube,'dir':'U' * rotationCount + 'FRUruf'}).get('cube')
+    
+    return _orientTopEdges(cube, rotations)
+        
     

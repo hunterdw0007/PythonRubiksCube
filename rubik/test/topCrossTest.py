@@ -167,7 +167,7 @@ class Test(unittest.TestCase):
         expectedCube = 'rbybbbbbboryrrrrrrgobggggggrgyooooooyyoyyygybwwwwwwwww'
         expectedRotations = ''
         
-        actualCube, actualRotations = solveTopCross._orientTopEdges(cube)
+        actualCube, actualRotations = solveTopCross._orientTopEdges(cube, '')
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
@@ -181,7 +181,7 @@ class Test(unittest.TestCase):
         expectedCube = 'bbgbbbbbbyrrrrrrrryooggggggygooooooogybyyyyyrwwwwwwwww'
         expectedRotations = 'FRUruf'
         
-        actualCube, actualRotations = solveTopCross._orientTopEdges(cube)
+        actualCube, actualRotations = solveTopCross._orientTopEdges(cube, '')
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
