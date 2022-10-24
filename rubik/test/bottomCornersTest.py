@@ -8,7 +8,7 @@ import rubik.solve as solve
 import rubik.rotate as rotate
 import rubik.solveBottomCorners as solveBottomCorners
 
-class Test(unittest.TestCase):
+class BottomCornersTest(unittest.TestCase):
 
 # Analysis
 #
