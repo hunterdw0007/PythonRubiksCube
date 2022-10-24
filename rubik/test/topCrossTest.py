@@ -139,3 +139,35 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
+# Analysis - solveTopCross._orientTopEdges
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns:
+#        cube: string; len=54, [browyg], 9 occurences of each character, unique middle color
+#        rotations: string, len=0-3, [U]
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: cross solved
+#    test 020: horizontal line
+#    test 030: L shape
+#    test 040: dot on top
+
+    def test_orientTopEdges_010_CrossOrientedCorrectly(self):
+        cube = 'rbybbbbbboryrrrrrrgobggggggrgyooooooyyoyyygybwwwwwwwww'
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'rbybbbbbboryrrrrrrgobggggggrgyooooooyyoyyygybwwwwwwwww'
+        expectedRotations = ''
+        
+        actualCube, actualLocation, actualRotations = solveTopCross._orientTopEdges(cube)
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
