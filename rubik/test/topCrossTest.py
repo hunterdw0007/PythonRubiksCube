@@ -61,3 +61,32 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
+# Analysis - solveTopCross._checkTopState
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: int; [0-3]
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: top cross completed
+#    test 020: line on top
+#    test 030: L on top
+#    test 040: dot on top
+
+def test_checkTopState_010_topCrossSolved(self):
+        cube = 'grbbbbbbbrbyrrrrrrgobggggggygroooooooyoyyyyyywwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectResult = 0
+        
+        actualResult = solveTopCross._checkTopState(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+        
