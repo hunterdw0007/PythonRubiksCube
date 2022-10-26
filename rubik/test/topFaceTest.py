@@ -295,3 +295,17 @@ class Test(unittest.TestCase):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+        
+    def test_orientTopFace_020_noCorners(self):
+        cube = 'ygybbbbbbooyrrrrrrgbgggggggyrrooooooryoyyybybwwwwwwwww'
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'ooybbbbbbgbgrrrrrryrrggggggygyoooooobyryyybyowwwwwwwww'
+        expectedRotations = 'U'
+        
+        actualCube, actualRotations = solveTopFace._orientTopFace(cube, '')
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
