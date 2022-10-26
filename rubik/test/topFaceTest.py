@@ -4,6 +4,7 @@ Created on Oct 24, 2022
 @author: Hunter
 '''
 import unittest
+import hashlib
 import rubik.verify as verify
 import rubik.solveTopFace as solveTopFace
 import rubik.solve as solve
@@ -407,8 +408,10 @@ class Test(unittest.TestCase):
         expectResult = {}
         expectResult['rotations'] = ''
         expectResult['status'] = 'ok'
+        expectedHash = hashlib.sha256(inputDict.get('cube') + expectResult.get('rotations'))
         
         actualResult = solve._solve(inputDict)
         
         self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertTrue(expectedHash.hexdigest().find(actualResult.get('token')) > 0)
