@@ -337,3 +337,30 @@ def test_orientTopFace_040_twoCorners(self):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+
+# Analysis - solveTopFace._checkTopFace
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: boolean
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: top face solved
+#    test 020: top face not solved
+
+def test_checkTopFace_010_solvedCube(self):
+        cube = 'rrobbbbbbbbgrrrrrroorggggggggbooooooyyyyyyyyywwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = True
+        
+        actualResult = solveTopFace._checkTopFace(cube)
+        
+        self.assertEqual(expectResult, actualResult)
