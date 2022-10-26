@@ -364,3 +364,15 @@ class Test(unittest.TestCase):
         actualResult = solveTopFace._checkTopFace(cube)
         
         self.assertEqual(expectResult, actualResult)
+        
+    def test_checkTopFace_020_unsolvedCube(self):
+        cube = 'ggrbbbbbbgbbrrrrrrrrbggggggyoyoooooooyyyyyoyywwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = False
+        
+        actualResult = solveTopFace._checkTopFace(cube)
+        
+        self.assertEqual(expectResult, actualResult)
