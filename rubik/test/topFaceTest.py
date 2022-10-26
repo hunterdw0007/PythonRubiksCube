@@ -331,7 +331,7 @@ class Test(unittest.TestCase):
         self.assertEqual(verify._validateCube(cube), True)
         
         expectedCube = 'rrobbbbbbbbgrrrrrroorggggggggbooooooyyyyyyyyywwwwwwwww'
-        expectedRotations = 'RUrURUUrURUrURUUrUURUrURUUr'
+        expectedRotations = 'RUrURUUrURUrURUUrUUURUrURUUr'
         
         actualCube, actualRotations = solveTopFace._orientTopFace(cube, '')
         

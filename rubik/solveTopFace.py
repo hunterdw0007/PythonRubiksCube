@@ -6,6 +6,16 @@ Created on Oct 24, 2022
 
 import rubik.rotate as rotate
 
+def _checkTopFace( cube ):
+    
+    topPieces = [ cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U02.value]
+                , cube[rotate.cubeEnum.U10.value], cube[rotate.cubeEnum.U11.value], cube[rotate.cubeEnum.U12.value]
+                , cube[rotate.cubeEnum.U20.value], cube[rotate.cubeEnum.U21.value], cube[rotate.cubeEnum.U22.value] ]
+
+    if topPieces.count(topPieces[4]) != len(topPieces):
+        return False
+    return True
+
 def _checkTopCross( cube ):
     # Returns true if the top cross is solved, including edges being on the correct side
     topEdges = [ cube[rotate.cubeEnum.U11.value]
