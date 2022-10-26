@@ -253,3 +253,15 @@ class Test(unittest.TestCase):
         actualResult = solveTopFace._checkTopCorners(cube)
         
         self.assertEqual(expectResult, actualResult)
+        
+    def test_checkTopCorners_030_scrambledCube(self):
+        cube = 'bgobbbbbbyoyrrrrrrrybggggggryoooooooyrgbyyyygwwwwwwwww'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = False
+        
+        actualResult = solveTopFace._checkTopCorners(cube)
+        
+        self.assertEqual(expectResult, actualResult)
