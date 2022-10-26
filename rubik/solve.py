@@ -21,7 +21,7 @@ def _solve(parms):
         
 def _generateToken(inputCube, outputRotations):
     tokenHash = hashlib.sha256((inputCube + outputRotations).encode()).hexdigest()
-    start = random.randint(0, tokenHash.len()-8)
+    start = random.randint(0, len(tokenHash) - 8)
     return tokenHash[start : start + 8]
         
         
