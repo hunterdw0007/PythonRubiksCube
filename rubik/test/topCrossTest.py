@@ -265,3 +265,33 @@ class Test(unittest.TestCase):
         actualResult = solveTopFace._checkTopCorners(cube)
         
         self.assertEqual(expectResult, actualResult)
+        
+# Analysis - solveTopFace._orientTopFace
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: cube, rotations
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: top face solved
+#    test 020: top cross - no corners
+#    test 030: top fish aka one corner
+#    test 040: two corners
+    def test_orientTopFace_010_faceSolved(self):
+        cube = 'brgbbbbbbogrrrrrrrgobggggggrboooooooyyyyyyyyywwwwwwwww'
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'brgbbbbbbogrrrrrrrgobggggggrboooooooyyyyyyyyywwwwwwwww'
+        expectedRotations = ''
+        
+        actualCube, actualRotations = solveTopFace._orientTopFace(cube, '')
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
