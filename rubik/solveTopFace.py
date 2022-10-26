@@ -77,15 +77,12 @@ def _orientTopFace( cube, rotations):
             rotations += 'U'
             cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
         
-        rotations += 'RUrURUUr'
-        cube = rotate._rotate({'cube':cube,'dir':'RUrURUUr'}).get('cube')
-        
     elif topCorners.count(topCorners[0]) == 2:
         while cube[rotate.cubeEnum.U20.value] != cube[rotate.cubeEnum.U11.value]:
             rotations += 'U'
             cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
         
-        rotations += 'RUrURUUr'
-        cube = rotate._rotate({'cube':cube,'dir':'RUrURUUr'}).get('cube')
+    rotations += 'RUrURUUr'
+    cube = rotate._rotate({'cube':cube,'dir':'RUrURUUr'}).get('cube')
             
     return _orientTopFace(cube, rotations)
