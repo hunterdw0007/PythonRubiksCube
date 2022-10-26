@@ -408,10 +408,10 @@ class Test(unittest.TestCase):
         expectResult = {}
         expectResult['rotations'] = ''
         expectResult['status'] = 'ok'
-        expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode())
+        expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode()).hexdigest()
         
         actualResult = solve._solve(inputDict)
         
         self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
         self.assertEqual(expectResult.get('status'), actualResult.get('status'))
-        self.assertTrue(expectedHash.hexdigest().find(actualResult.get('token')) > 0)
+        self.assertTrue(expectedHash.find(actualResult.get('token')) > 0)
