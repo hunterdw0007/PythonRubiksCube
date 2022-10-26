@@ -6,6 +6,7 @@ Created on Oct 24, 2022
 import unittest
 import rubik.verify as verify
 import rubik.solveTopFace as solveTopFace
+import rubik.solve as solve
 
 class Test(unittest.TestCase):
 
@@ -376,3 +377,38 @@ class Test(unittest.TestCase):
         actualResult = solveTopFace._checkTopFace(cube)
         
         self.assertEqual(expectResult, actualResult)
+# Analysis - solve._solve
+#
+# inputs:
+#    parms: dict: mandatory: arrives validated
+#    parms['op']: string; 'solve', mandatory, arrives validated
+#    parms['cube']: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives unvalidated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: dict
+#    nominal:
+#        dict['rotations']: string, rotations to solve cube bottom
+#        dict['status']: string, 'ok'
+#    abnormal:
+#        dict['status']: string, 'error: xxx', xxx is message
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: solved cube input
+#    test 020: solved bottom, middle, top face
+
+    def test_solveTopFace_010_solvedCubeInput(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
+        
+        expectResult = {}
+        expectResult['rotations'] = ''
+        expectResult['status'] = 'ok'
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
