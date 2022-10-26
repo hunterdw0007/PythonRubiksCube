@@ -243,7 +243,7 @@ class Test(unittest.TestCase):
         self.assertEqual(expectResult, actualResult)
 
     def test_checkTopCorners_020_cornersOnly(self):
-        cube = 'oyobbbbbbbybrrrrrrryrgggggggygooooooyoybyryoywwwwwwwww'
+        cube = 'oyobbbbbbbybrrrrrrryrgggggggygooooooygybyryoywwwwwwwww'
         
         #checking that cube is valid
         self.assertTrue(verify._validateCube(cube))
