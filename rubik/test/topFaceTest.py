@@ -408,7 +408,7 @@ class Test(unittest.TestCase):
         expectResult = {}
         expectResult['rotations'] = ''
         expectResult['status'] = 'ok'
-        expectedHash = hashlib.sha256(inputDict.get('cube') + expectResult.get('rotations'))
+        expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode())
         
         actualResult = solve._solve(inputDict)
         

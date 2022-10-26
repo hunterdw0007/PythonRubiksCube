@@ -1,4 +1,5 @@
 import rubik.verify as verify
+import hashlib
 import rubik.solveBottomCross as solveBottomCross
 import rubik.solveBottomCorners as solveBottomCorners
 import rubik.solveMiddleLayer as solveMiddleLayer
@@ -13,7 +14,8 @@ def _solve(parms):
         cube, bottomCornersRotations = solveBottomCorners._solveBottomCorners(cube, '')
         cube, middleLayerRotations = solveMiddleLayer._solveMiddleLayer(cube, '')
         result['rotations'] = bottomCrossRotations + bottomCornersRotations + middleLayerRotations
-        result['status'] = 'ok'                   
+        result['status'] = 'ok'   
+        result['token'] = hashlib.sha256((parms.get('cube') + bottomCrossRotations + bottomCornersRotations + middleLayerRotations).encode()).hexdigest()              
     return result
         
         
