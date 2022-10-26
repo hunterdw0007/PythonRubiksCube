@@ -49,19 +49,43 @@ def _orientTopEdges( cube, rotations ):
         return cube, rotations
     else:
         rotations += 'U' * rotationCount + 'FRUruf'
-        cube = cube = rotate._rotate({'cube':cube,'dir':'U' * rotationCount + 'FRUruf'}).get('cube')
+        cube = rotate._rotate({'cube':cube,'dir':'U' * rotationCount + 'FRUruf'}).get('cube')
     
     return _orientTopEdges(cube, rotations)
         
 def _checkTopCorners( cube ):
     
     topCorners = [ cube[rotate.cubeEnum.U11.value]
-               , cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U02.value]
-               , cube[rotate.cubeEnum.U20.value], cube[rotate.cubeEnum.U22.value] ]
+                 , cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U02.value]
+                 , cube[rotate.cubeEnum.U20.value], cube[rotate.cubeEnum.U22.value] ]
     
     if topCorners.count(topCorners[0]) != len(topCorners):
         return False
     return True
 
 def _orientTopFace( cube, rotations):
-    return cube, rotations
+    
+    if _checkTopCorners(cube):
+        return cube, rotations
+    
+    topCorners = [ cube[rotate.cubeEnum.U11.value]
+                 , cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U02.value]
+                 , cube[rotate.cubeEnum.U20.value], cube[rotate.cubeEnum.U22.value] ]
+    
+    if topCorners.count(topCorners[0]) == 1:
+        while cube[rotate.cubeEnum.L02.value] != cube[rotate.cubeEnum.U11.value]:
+            rotations += 'U'
+            cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
+        
+        rotations += 'RUrURUUr'
+        cube = rotate._rotate({'cube':cube,'dir':'RUrURUUr'}).get('cube')
+        
+    elif topCorners.count(topCorners[0]) == 2:
+        while cube[rotate.cubeEnum.U20.value] != cube[rotate.cubeEnum.U11.value]:
+            rotations += 'U'
+            cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
+        
+        rotations += 'RUrURUUr'
+        cube = rotate._rotate({'cube':cube,'dir':'RUrURUUr'}).get('cube')
+            
+    return _orientTopFace(cube, rotations)
