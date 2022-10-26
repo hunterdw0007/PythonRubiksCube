@@ -63,5 +63,5 @@ def _checkTopCorners( cube ):
         return False
     return True
 
-def _orientTopFace( cube ):
-    return cube, ''
+def _orientTopFace( cube, rotations):
+    return cube, rotations
