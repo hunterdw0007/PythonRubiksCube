@@ -14,16 +14,6 @@ def _checkTopCross( cube ):
     
     if topEdges.count(topEdges[0]) != len(topEdges):
         return False
-    
-    # Side faces
-    if cube[rotate.cubeEnum.F01.value] != cube[rotate.cubeEnum.F11.value]:
-        return False
-    if cube[rotate.cubeEnum.R01.value] != cube[rotate.cubeEnum.R11.value]:
-        return False
-    if cube[rotate.cubeEnum.R01.value] != cube[rotate.cubeEnum.R11.value]:
-        return False
-    if cube[rotate.cubeEnum.R01.value] != cube[rotate.cubeEnum.R11.value]:
-        return False
     return True
 
 def _checkCrossState( cube ):
@@ -63,4 +53,12 @@ def _orientTopEdges( cube, rotations ):
     
     return _orientTopEdges(cube, rotations)
         
+def _checkTopCorners( cube ):
     
+    topCorners = [ cube[rotate.cubeEnum.U11.value]
+               , cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U02.value]
+               , cube[rotate.cubeEnum.U20.value], cube[rotate.cubeEnum.U22.value] ]
+    
+    if topCorners.count(topCorners[0]) != len(topCorners):
+        return False
+    return True
