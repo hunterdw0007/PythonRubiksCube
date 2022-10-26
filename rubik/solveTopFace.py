@@ -62,3 +62,6 @@ def _checkTopCorners( cube ):
     if topCorners.count(topCorners[0]) != len(topCorners):
         return False
     return True
+
+def _orientTopFace( cube ):
+    return cube, ''
