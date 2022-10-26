@@ -353,7 +353,7 @@ def test_orientTopFace_040_twoCorners(self):
 #    test 010: top face solved
 #    test 020: top face not solved
 
-def test_checkTopFace_010_solvedCube(self):
+    def test_checkTopFace_010_solvedCube(self):
         cube = 'rrobbbbbbbbgrrrrrroorggggggggbooooooyyyyyyyyywwwwwwwww'
         
         #checking that cube is valid
