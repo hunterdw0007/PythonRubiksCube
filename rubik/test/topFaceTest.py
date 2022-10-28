@@ -419,10 +419,10 @@ class Test(unittest.TestCase):
     def test_solveTopFace_020_solvedBottomMiddle(self):
         inputDict = {}
         inputDict['op']   = 'solve'
-        inputDict['cube'] = 'borrrrrrryryggggggrygoooooooyobbbbbbybggyyyybwwwwwwwww'
+        inputDict['cube'] = 'brorrrrrrygrgggggggyyoooooobyobbbbbbroybyyyygwwwwwwwww'
         
         expectResult = {}
-        expectResult['rotations'] = 'UUFRUrufFRUrufURUrURUUrUUURUrURUUrUURUrURUUr'
+        expectResult['rotations'] = 'UUFRUrufFRUrufRUrURUUrRUrURUUrUURUrURUUr'
         expectResult['status'] = 'ok'
         expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode()).hexdigest()
         
