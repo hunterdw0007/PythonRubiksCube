@@ -398,7 +398,7 @@ class Test(unittest.TestCase):
 #
 # happy path:
 #    test 010: solved cube input
-#    test 020: solved bottom, middle, top face
+#    test 020: solved bottom, middle
 
     def test_solveTopFace_010_solvedCubeInput(self):
         inputDict = {}
@@ -407,6 +407,22 @@ class Test(unittest.TestCase):
         
         expectResult = {}
         expectResult['rotations'] = ''
+        expectResult['status'] = 'ok'
+        expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode()).hexdigest()
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertTrue(expectedHash.find(actualResult.get('token')) > 0)
+        
+    def test_solveTopFace_020_solvedBottomMiddle(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'byybbbbbbryyrrrrrrgyoggggggbyyooooooyrobyorggwwwwwwwww'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'FRUrufUUFRUrufFRUrufUUURUrURUUrRUrURUUrUURUrURUUr'
         expectResult['status'] = 'ok'
         expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode()).hexdigest()
         
