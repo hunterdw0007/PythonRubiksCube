@@ -6,6 +6,17 @@ Created on Oct 24, 2022
 
 import rubik.rotate as rotate
 
+def _solveTopFace( cube, rotations ):
+    
+    if _checkTopFace( cube ):
+        return cube, rotations
+    
+    cube, rotations = _orientTopEdges( cube, rotations )
+    
+    cube, rotations = _orientTopFace(cube, rotations)
+    
+    return _solveTopFace(cube, rotations)
+
 def _checkTopFace( cube ):
     
     topPieces = [ cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U02.value]
@@ -93,6 +104,7 @@ def _orientTopFace( cube, rotations):
             cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
             
     elif topCorners.count(topCorners[0]) == 3:
+        #TODO: figure out if this boolean logic is wrong
         while cube[rotate.cubeEnum.U02.value] != cube[rotate.cubeEnum.U11.value] and cube[rotate.cubeEnum.U22.value] != cube[rotate.cubeEnum.U11.value]:
             rotations += 'U'
             cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
