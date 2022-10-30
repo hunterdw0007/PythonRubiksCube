@@ -1,5 +1,4 @@
 import rubik.rotate as rotate
-import math
 
 def _solveBottomCorners(cube, rotations):
     # Returns the rotations needed to take a given cube and produce a cube with a solved bottom corners
