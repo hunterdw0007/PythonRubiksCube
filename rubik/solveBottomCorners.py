@@ -1,19 +1,19 @@
 import rubik.rotate as rotate
 import math
 
-def _solveBottomCorners(cube, solution):
+def _solveBottomCorners(cube, rotations):
     # Returns the rotations needed to take a given cube and produce a cube with a solved bottom corners
     # Base Case: check if bottom corners are solved
     if _checkBottomCorners(cube):
-        return cube, solution
+        return cube, rotations
     
-    rotations = solution
     # Case 1: piece is located in top, set the location
     location = _locateBottomCornerInTop(cube)
     
     # Case 2: piece is located in bottom, move to top
     if location == -1:
-        cube, location, rotations = _moveWrongBottomCornerToTop(cube)
+        cube, location, mvRots = _moveWrongBottomCornerToTop(cube)
+        rotations += mvRots
     
     # Case 3: piece is already in the right spot
     if location == -1:
@@ -100,14 +100,14 @@ def _moveCornerToBottomFromTop(cube, location):
 # Also does the reverse but the location value will be incorrect
     if location == rotate.cubeEnum.F02.value:
         rotations = 'RUru'
-    if location == rotate.cubeEnum.R02.value:
+    elif location == rotate.cubeEnum.R02.value:
         rotations = 'BUbu'
-    if location == rotate.cubeEnum.B02.value:
+    elif location == rotate.cubeEnum.B02.value:
         rotations = 'LUlu'
-    if location == rotate.cubeEnum.L02.value:
+    elif location == rotate.cubeEnum.L02.value:
         rotations = 'FUfu'
         
-    cube = cube = rotate._rotate({'cube':cube,'dir':rotations})['cube'] 
+    cube = rotate._rotate({'cube':cube,'dir':rotations})['cube'] 
     location += 6
     
     return cube, location, rotations
@@ -116,11 +116,11 @@ def _orientCornerInBottom(cube, location):
 # Rotates a bottom corner once "clockwise" thus three applications of this algorithm will loop back to itself
     if location == rotate.cubeEnum.F22.value:
         rotations = 'RUruRUru'
-    if location == rotate.cubeEnum.R22.value:
+    elif location == rotate.cubeEnum.R22.value:
         rotations = 'BUbuBUbu'
-    if location == rotate.cubeEnum.B22.value:
+    elif location == rotate.cubeEnum.B22.value:
         rotations = 'LUluLUlu'
-    if location == rotate.cubeEnum.L22.value:
+    elif location == rotate.cubeEnum.L22.value:
         rotations = 'FUfuFUfu'
     
     cube = rotate._rotate({'cube':cube,'dir':rotations})['cube']
