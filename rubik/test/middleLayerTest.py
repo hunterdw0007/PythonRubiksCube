@@ -9,7 +9,7 @@ import rubik.rotate as rotate
 import rubik.verify as verify
 import rubik.solveMiddleLayer as solveMiddleLayer
 
-class Test(unittest.TestCase):
+class MiddleLayerTest(unittest.TestCase):
 
 # Analysis - solveMiddleLayer._checkMiddleLayer
 #
