@@ -49,3 +49,21 @@ class TopLayerTest(unittest.TestCase):
         actualResult = solveTopLayer._checkTopLayer(cube)
         
         self.assertEqual(expectResult, actualResult)
+        
+    def test_checktopLayer_030_solvedTopOnly(self):
+        cube = 'wwwbwwggogggggbbooyyyoyowyybbbgbwbborrrrrrrrryywyowoog'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = True
+        
+        actualResult = solveTopLayer._checkTopLayer(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+        
+        
+        
+        
+        
+        
