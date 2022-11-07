@@ -6,6 +6,7 @@ Created on Nov 6, 2022
 import unittest
 import rubik.verify as verify
 import rubik.solve as solve
+import rubik.solveTopLayer as solveTopLayer
 
 
 class TopLayerTest(unittest.TestCase):

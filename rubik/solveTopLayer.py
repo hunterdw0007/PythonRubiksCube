@@ -1,0 +1,29 @@
+'''
+Created on Nov 7, 2022
+
+@author: Hunter
+'''
+import rubik.rotate as rotate
+
+def _checkTopLayer(cube):
+    
+    topPieces = [ cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U02.value]
+                , cube[rotate.cubeEnum.U10.value], cube[rotate.cubeEnum.U11.value], cube[rotate.cubeEnum.U12.value]
+                , cube[rotate.cubeEnum.U20.value], cube[rotate.cubeEnum.U21.value], cube[rotate.cubeEnum.U22.value] ]
+    
+    edgePieces = [ cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.F01.value], cube[rotate.cubeEnum.F02.value]
+                 , cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.R01.value], cube[rotate.cubeEnum.R02.value]
+                 , cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.B01.value], cube[rotate.cubeEnum.B02.value]
+                 , cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.L01.value], cube[rotate.cubeEnum.L02.value]]
+
+    if topPieces.count(topPieces[4]) != len(topPieces):
+        return False
+    if edgePieces[0:4].count(cube[rotate.cubeEnum.F11.value] != 3):
+        return False
+    if edgePieces[3:7].count(cube[rotate.cubeEnum.R11.value] != 3):
+        return False
+    if edgePieces[6:9].count(cube[rotate.cubeEnum.F11.value] != 3):
+        return False
+    if edgePieces[8:12].count(cube[rotate.cubeEnum.F11.value] != 3):
+        return False
+    return True
