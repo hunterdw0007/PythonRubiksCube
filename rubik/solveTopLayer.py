@@ -6,7 +6,7 @@ Created on Nov 7, 2022
 import rubik.rotate as rotate
 
 def _checkTopLayer(cube):
-    
+    #Returns true if the top layer is solved regardless of the state of the rest of the cube
     topPieces = [ cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U02.value]
                 , cube[rotate.cubeEnum.U10.value], cube[rotate.cubeEnum.U11.value], cube[rotate.cubeEnum.U12.value]
                 , cube[rotate.cubeEnum.U20.value], cube[rotate.cubeEnum.U21.value], cube[rotate.cubeEnum.U22.value] ]
@@ -25,5 +25,22 @@ def _checkTopLayer(cube):
     if edgePieces[6:9].count(cube[rotate.cubeEnum.F11.value] != 3):
         return False
     if edgePieces[8:12].count(cube[rotate.cubeEnum.F11.value] != 3):
+        return False
+    return True
+
+def _checkTopCorners(cube):
+    #Returns true if all the top layer corners are solved based on the fact that all their "sides" match the side color
+    corners = [ cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.F11.value], cube[rotate.cubeEnum.F02.value]
+              , cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.R11.value], cube[rotate.cubeEnum.R02.value]
+              , cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.B02.value]
+              , cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.L02.value]]
+    
+    if corners[0:4].count(cube[rotate.cubeEnum.F11.value] != 3):
+        return False
+    if corners[3:7].count(cube[rotate.cubeEnum.R11.value] != 3):
+        return False
+    if corners[6:9].count(cube[rotate.cubeEnum.F11.value] != 3):
+        return False
+    if corners[8:12].count(cube[rotate.cubeEnum.F11.value] != 3):
         return False
     return True
