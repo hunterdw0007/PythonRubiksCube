@@ -62,8 +62,31 @@ class TopLayerTest(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
+# Analysis - solveTopLayer._checkTopCorners
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: boolean
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: fully solved cube
+#    test 020: scrambled cube
+#    test 030: scrambled cube except top corners
+    def test_checkTopCorners_010_solvedCube(self):
+        cube = 'wwwwwwwwwrrrrrrrrryyyyyyyyyooooooooobbbbbbbbbggggggggg'
         
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
         
+        expectResult = True
         
+        actualResult = solveTopLayer._checkTopCorners(cube)
+        
+        self.assertEqual(expectResult, actualResult)
         
         
