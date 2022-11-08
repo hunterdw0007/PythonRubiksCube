@@ -18,13 +18,13 @@ def _checkTopLayer(cube):
 
     if topPieces.count(topPieces[4]) != len(topPieces):
         return False
-    if edgePieces[0:4].count(cube[rotate.cubeEnum.F11.value] != 3):
+    if edgePieces[0:3].count(cube[rotate.cubeEnum.F11.value]) != 3:
         return False
-    if edgePieces[3:7].count(cube[rotate.cubeEnum.R11.value] != 3):
+    if edgePieces[3:6].count(cube[rotate.cubeEnum.R11.value]) != 3:
         return False
-    if edgePieces[6:9].count(cube[rotate.cubeEnum.F11.value] != 3):
+    if edgePieces[6:9].count(cube[rotate.cubeEnum.B11.value]) != 3:
         return False
-    if edgePieces[8:12].count(cube[rotate.cubeEnum.F11.value] != 3):
+    if edgePieces[9:12].count(cube[rotate.cubeEnum.L11.value]) != 3:
         return False
     return True
 
@@ -35,12 +35,12 @@ def _checkTopCorners(cube):
               , cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.B11.value], cube[rotate.cubeEnum.B02.value]
               , cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.L11.value], cube[rotate.cubeEnum.L02.value]]
     
-    if corners[0:4].count(cube[rotate.cubeEnum.F11.value] != 3):
+    if corners[0:3].count(cube[rotate.cubeEnum.F11.value]) != 3:
         return False
-    if corners[3:7].count(cube[rotate.cubeEnum.R11.value] != 3):
+    if corners[3:6].count(cube[rotate.cubeEnum.R11.value]) != 3:
         return False
-    if corners[6:9].count(cube[rotate.cubeEnum.F11.value] != 3):
+    if corners[6:9].count(cube[rotate.cubeEnum.B11.value]) != 3:
         return False
-    if corners[8:12].count(cube[rotate.cubeEnum.F11.value] != 3):
+    if corners[9:12].count(cube[rotate.cubeEnum.L11.value]) != 3:
         return False
     return True
