@@ -89,4 +89,14 @@ class TopLayerTest(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
         
+    def test_checkTopCorners_020_scrambledCube(self):
+        cube = 'rgbbbbyybyborrrywrwgogggwrgywgoooowrgwbbyywyogorowrwyb'
         
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = False
+        
+        actualResult = solveTopLayer._checkTopCorners(cube)
+        
+        self.assertEqual(expectResult, actualResult)
