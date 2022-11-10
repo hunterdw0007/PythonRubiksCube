@@ -131,7 +131,7 @@ class TopLayerTest(unittest.TestCase):
 #    test 040: headlights on front
 #    test 050: headlights on right
 #    test 060: no headlights
-def test_positionTopCorners_010_headlightsOnAllSides(self):
+    def test_positionTopCorners_010_headlightsOnAllSides(self):
         cube = 'brbbbbbbbobooooooogggggggggrorrrrrrrwwwwwwwwwyyyyyyyyy'
     
         #checking that cube is valid
