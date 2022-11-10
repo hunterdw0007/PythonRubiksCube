@@ -44,3 +44,14 @@ def _checkTopCorners(cube):
     if corners[9:12].count(cube[rotate.cubeEnum.L11.value]) != 3:
         return False
     return True
+
+def _positionTopCorners(cube, rotations):
+    #Returns a cube with solved corners in the correct positions
+    newCube = cube
+    while not _checkTopCorners(cube):
+        rotations += 'U'
+        newCube = rotate._rotate({'cube':newCube,'dir':'U'}).get('cube')
+        
+    cube = newCube if newCube != cube else cube
+    return cube, rotations
+        

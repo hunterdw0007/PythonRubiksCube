@@ -125,13 +125,10 @@ class TopLayerTest(unittest.TestCase):
 #    confidence level: boundary value analysis
 #
 # happy path:
-#    test 010: headlights on all sides
-#    test 020: headlights on back
-#    test 030: headlights on left
-#    test 040: headlights on front
-#    test 050: headlights on right
-#    test 060: no headlights
-    def test_positionTopCorners_010_headlightsOnAllSides(self):
+#    test 010: correctly solved corners
+#    test 020: corners rotated around
+#    test 030: corners unsolved
+    def test_positionTopCorners_010_correctlySolved(self):
         cube = 'brbbbbbbbobooooooogggggggggrorrrrrrrwwwwwwwwwyyyyyyyyy'
     
         #checking that cube is valid
