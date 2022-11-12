@@ -206,6 +206,19 @@ class TopLayerTest(unittest.TestCase):
         actualResult = solveTopLayer._locateTopCorners(cube)
         
         self.assertEqual(expectResult, actualResult)
+    
+    def test_locateTopCorners_030_leftHeadlights(self):
+        cube = 'rrbbbbbbbobroooooobgogggggggogrrrrrrwwwwwwwwwyyyyyyyyy'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = 1
+        
+        actualResult = solveTopLayer._locateTopCorners(cube)
+        
+        self.assertEqual(expectResult, actualResult)    
+    
 # Analysis - solveTopLayer._positionTopCorners
 #
 # inputs:
