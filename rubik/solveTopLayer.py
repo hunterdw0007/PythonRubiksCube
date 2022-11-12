@@ -5,6 +5,24 @@ Created on Nov 7, 2022
 '''
 import rubik.rotate as rotate
 
+def _solveTopLayer(cube, rotations):
+    
+    if _checkTopLayer(cube):
+        return cube, rotations
+    
+    if _checkTopEdges(cube):
+        rotations += 'U'
+        cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
+        return _solveTopLayer(cube, rotations)
+    
+    cube, cornerRotations = _positionTopCorners(cube, rotations)
+    rotations += cornerRotations
+    
+    cube, edgeRotations = _positionTopEdges(cube, rotations)
+    rotations += edgeRotations
+    
+    return _solveTopLayer(cube, rotations)
+
 def _checkTopLayer(cube):
     # Returns true if the top layer is solved regardless of the state of the rest of the cube
     topPieces = [ cube[rotate.cubeEnum.U00.value], cube[rotate.cubeEnum.U01.value], cube[rotate.cubeEnum.U02.value]

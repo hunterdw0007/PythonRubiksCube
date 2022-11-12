@@ -5,6 +5,7 @@ import rubik.solveBottomCross as solveBottomCross
 import rubik.solveBottomCorners as solveBottomCorners
 import rubik.solveMiddleLayer as solveMiddleLayer
 import rubik.solveTopFace as solveTopFace
+import rubik.solveTopLayer as solveTopLayer
 
 def _solve(parms):
     """Return rotates needed to solve input cube"""
@@ -16,7 +17,8 @@ def _solve(parms):
         cube, bottomCornersRotations = solveBottomCorners._solveBottomCorners(cube, '')
         cube, middleLayerRotations = solveMiddleLayer._solveMiddleLayer(cube, '')
         cube, topFaceRotations = solveTopFace._solveTopFace(cube, '')
-        result['rotations'] = bottomCrossRotations + bottomCornersRotations + middleLayerRotations + topFaceRotations
+        cube, topLayerRotations = solveTopLayer._solveTopLayer(cube, '')
+        result['rotations'] = bottomCrossRotations + bottomCornersRotations + middleLayerRotations + topFaceRotations + topLayerRotations
         result['status'] = 'ok'   
         result['token'] = _generateToken(parms.get('cube'), result.get('rotations'))
     return result
