@@ -85,4 +85,6 @@ def _locateSolvedBar(cube):
     # If there is no bar 0 is returned
     if cube[rotate.cubeEnum.L00.value] == cube[rotate.cubeEnum.L01.value] == cube[rotate.cubeEnum.L02.value]:
         return 1
+    if cube[rotate.cubeEnum.F00.value] == cube[rotate.cubeEnum.F01.value] == cube[rotate.cubeEnum.F02.value]:
+        return 2
     return 0
