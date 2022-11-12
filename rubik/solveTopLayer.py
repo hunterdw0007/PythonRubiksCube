@@ -57,6 +57,12 @@ def _checkTopEdges(cube):
         return False
     return True
 
+def _locateTopCorners(cube):
+    # Returns an integer representing the number of turns required to position the "headlights" at the back of the cube
+    # If there are no headlights 0 is returned
+    
+    return 0
+
 def _positionTopCorners(cube, rotations):
     # Returns a cube with solved corners in the correct positions
     newCube = cube
