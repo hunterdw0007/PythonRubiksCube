@@ -83,5 +83,6 @@ def _positionTopCorners(cube, rotations):
 def _locateSolvedBar(cube):
     # Returns an integer representing the number of turns required to position the bar at the back of the cube
     # If there is no bar 0 is returned
-    
+    if cube[rotate.cubeEnum.L00.value] == cube[rotate.cubeEnum.L01.value] == cube[rotate.cubeEnum.L02.value]:
+        return 1
     return 0
