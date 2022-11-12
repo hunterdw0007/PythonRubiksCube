@@ -95,3 +95,11 @@ def _positionTopEdges(cube, rotations):
     # Returns a cube with solved top layer although not necessarily rotated correctly
     if _checkTopEdges(cube):
         return cube, rotations
+    
+    rotationCount = _locateSolvedBar(cube)
+    
+    rotations += 'U' * rotationCount + 'RuRURURuruRR'
+    cube = rotate._rotate({'cube':cube,'dir':'U' * rotationCount + 'RuRURURuruRR'}).get('cube')
+        
+    return _positionTopEdges(cube, rotations)
+    
