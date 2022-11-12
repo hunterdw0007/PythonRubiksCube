@@ -40,6 +40,23 @@ def _checkTopCorners(cube):
         return False
     return True
 
+def _checkTopEdges(cube):
+    # Returns true if all the top layer edges are solved based on the fact that their sides match
+    edgePieces = [ cube[rotate.cubeEnum.F00.value], cube[rotate.cubeEnum.F01.value], cube[rotate.cubeEnum.F02.value]
+                 , cube[rotate.cubeEnum.R00.value], cube[rotate.cubeEnum.R01.value], cube[rotate.cubeEnum.R02.value]
+                 , cube[rotate.cubeEnum.B00.value], cube[rotate.cubeEnum.B01.value], cube[rotate.cubeEnum.B02.value]
+                 , cube[rotate.cubeEnum.L00.value], cube[rotate.cubeEnum.L01.value], cube[rotate.cubeEnum.L02.value]]
+     
+    if edgePieces[0:3].count(edgePieces[0]) != 3:
+        return False
+    if edgePieces[3:6].count(edgePieces[3]) != 3:
+        return False
+    if edgePieces[6:9].count(edgePieces[6]) != 3:
+        return False
+    if edgePieces[9:12].count(edgePieces[9]) != 3:
+        return False
+    return True
+
 def _positionTopCorners(cube, rotations):
     # Returns a cube with solved corners in the correct positions
     newCube = cube
