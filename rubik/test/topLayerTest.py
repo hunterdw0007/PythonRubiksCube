@@ -256,8 +256,10 @@ class TopLayerTest(unittest.TestCase):
 #
 # happy path:
 #    test 010: correctly solved corners
-#    test 020: corners rotated around
-#    test 030: corners unsolved
+#    test 020: front corners swapped
+#    test 030: back corners swapped
+#    test 040: no headlights
+
     def test_positionTopCorners_010_correctlySolved(self):
         cube = 'brbbbbbbbobooooooogggggggggrorrrrrrrwwwwwwwwwyyyyyyyyy'
     
@@ -266,6 +268,20 @@ class TopLayerTest(unittest.TestCase):
         
         expectedCube = 'brbbbbbbbobooooooogggggggggrorrrrrrrwwwwwwwwwyyyyyyyyy'
         expectedRotations = ''
+        
+        actualCube, actualRotations = solveTopLayer._positionTopCorners(cube, '')
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
+    
+    def test_positionTopCorners_020_frontCornersSwapped(self):
+        cube = 'obrbbbbbbbgooooooogogggggggrrbrrrrrrwwwwwwwwwyyyyyyyyy'
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'obobbbbbbgggoooooororggggggbrbrrrrrrwwwwwwwwwyyyyyyyyy'
+        expectedRotations = 'rFrBBRfrBBRR'
         
         actualCube, actualRotations = solveTopLayer._positionTopCorners(cube, '')
         
