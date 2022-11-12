@@ -78,4 +78,4 @@ def _positionTopCorners(cube, rotations):
     rotations += 'U' * rotationCount + 'rFrBBRfrBBRR'
     cube = rotate._rotate({'cube':cube,'dir':'U' * rotationCount + 'rFrBBRfrBBRR'}).get('cube')
         
-    return cube, rotations
+    return _positionTopCorners(cube, rotations)
