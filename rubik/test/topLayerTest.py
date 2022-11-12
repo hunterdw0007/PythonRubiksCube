@@ -147,7 +147,7 @@ class TopLayerTest(unittest.TestCase):
         #checking that cube is valid
         self.assertTrue(verify._validateCube(cube))
         
-        expectResult = True
+        expectResult = False
         
         actualResult = solveTopLayer._checkTopEdges(cube)
         
