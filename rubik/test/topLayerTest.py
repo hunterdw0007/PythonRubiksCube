@@ -172,7 +172,7 @@ class TopLayerTest(unittest.TestCase):
 #
 # outputs:
 #    side-effects: no state changes; no external effects
-#    returns: int [-1:3]
+#    returns: int [0:3]
 #
 #    confidence level: boundary value analysis
 #
@@ -315,3 +315,33 @@ class TopLayerTest(unittest.TestCase):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+        
+# Analysis - solveTopLayer._locateSolvedBar
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: int [0:3]
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: no bar
+#    test 020: bar on back
+#    test 030: bar on left
+#    test 040: bar on front
+#    test 050: bar on right
+
+    def test_locateSolvedBar_050_noBar(self):
+        cube = 'gogbbbbbbrbroooooobrbggggggogorrrrrrwwwwwwwwwyyyyyyyyy'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = 0
+        
+        actualResult = solveTopLayer._locateSolvedBar(cube)
+        
+        self.assertEqual(expectResult, actualResult)
