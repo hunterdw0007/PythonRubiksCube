@@ -6,7 +6,7 @@ Created on Nov 7, 2022
 import rubik.rotate as rotate
 
 def _solveTopLayer(cube, rotations):
-    
+    # Returns the cube and rotations required to solve the top layer of the cube
     if _checkTopLayer(cube):
         return cube, rotations
     

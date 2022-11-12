@@ -489,7 +489,6 @@ class TopLayerTest(unittest.TestCase):
 #    test 010: solved cube input
 #    test 020: scrambled edges
 #    test 030: scrambled edges 2
-#    test 040: solved, rotated
 
     def test_solveTopLayer_010_solvedCubeInput(self):
         inputDict = {}
