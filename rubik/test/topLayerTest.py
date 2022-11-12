@@ -358,7 +358,7 @@ class TopLayerTest(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
     
-    def test_locateSolvedBar_020_barOnLeft(self):
+    def test_locateSolvedBar_030_barOnLeft(self):
         cube = 'rorbbbbbbbrbooooooobogggggggggrrrrrrwwwwwwwwwyyyyyyyyy'
         
         #checking that cube is valid
@@ -370,13 +370,25 @@ class TopLayerTest(unittest.TestCase):
         
         self.assertEqual(expectResult, actualResult)
     
-    def test_locateSolvedBar_030_barOnFront(self):
+    def test_locateSolvedBar_040_barOnFront(self):
         cube = 'gggbbbbbbroroooooobrbggggggoborrrrrrwwwwwwwwwyyyyyyyyy'
         
         #checking that cube is valid
         self.assertTrue(verify._validateCube(cube))
         
         expectResult = 2
+        
+        actualResult = solveTopLayer._locateSolvedBar(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+        
+    def test_locateSolvedBar_050_barOnRight(self):
+        cube = 'obobbbbbbgggoooooororggggggbrbrrrrrrwwwwwwwwwyyyyyyyyy'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = 3
         
         actualResult = solveTopLayer._locateSolvedBar(cube)
         
