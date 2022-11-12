@@ -287,3 +287,17 @@ class TopLayerTest(unittest.TestCase):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+        
+    def test_positionTopCorners_030_backCornersSwapped(self):
+        cube = 'rgrbbbbbbboooooooogrbggggggobgrrrrrrwwwwwwwwwyyyyyyyyy'
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'grgbbbbbbrbroooooobgbggggggooorrrrrrwwwwwwwwwyyyyyyyyy'
+        expectedRotations = 'UUrFrBBRfrBBRR'
+        
+        actualCube, actualRotations = solveTopLayer._positionTopCorners(cube, '')
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
