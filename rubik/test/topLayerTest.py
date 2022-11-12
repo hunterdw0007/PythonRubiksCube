@@ -301,3 +301,17 @@ class TopLayerTest(unittest.TestCase):
         
         self.assertEqual(expectedCube, actualCube)
         self.assertEqual(expectedRotations, actualRotations)
+        
+    def test_positionTopCorners_040_noHeadlights(self):
+        cube = 'bbgbbbbbbrgooooooogobggggggorrrrrrrrwwwwwwwwwyyyyyyyyy'
+    
+        #checking that cube is valid
+        self.assertEqual(verify._validateCube(cube), True)
+        
+        expectedCube = 'gggbbbbbbroroooooobrbggggggoborrrrrrwwwwwwwwwyyyyyyyyy'
+        expectedRotations = 'rFrBBRfrBBRRUrFrBBRfrBBRR'
+        
+        actualCube, actualRotations = solveTopLayer._positionTopCorners(cube, '')
+        
+        self.assertEqual(expectedCube, actualCube)
+        self.assertEqual(expectedRotations, actualRotations)
