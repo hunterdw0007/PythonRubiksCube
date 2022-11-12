@@ -357,3 +357,15 @@ class TopLayerTest(unittest.TestCase):
         actualResult = solveTopLayer._locateSolvedBar(cube)
         
         self.assertEqual(expectResult, actualResult)
+    
+    def test_locateSolvedBar_020_barOnLeft(self):
+        cube = 'rorbbbbbbbrbooooooobogggggggggrrrrrrwwwwwwwwwyyyyyyyyy'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = 1
+        
+        actualResult = solveTopLayer._locateSolvedBar(cube)
+        
+        self.assertEqual(expectResult, actualResult)
