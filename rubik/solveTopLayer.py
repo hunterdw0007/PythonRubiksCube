@@ -90,3 +90,8 @@ def _locateSolvedBar(cube):
     if cube[rotate.cubeEnum.R00.value] == cube[rotate.cubeEnum.R01.value] == cube[rotate.cubeEnum.R02.value]:
         return 3
     return 0
+
+def _positionTopEdges(cube, rotations):
+    # Returns a cube with solved top layer although not necessarily rotated correctly
+    if _checkTopEdges(cube):
+        return cube, rotations
