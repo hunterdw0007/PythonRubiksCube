@@ -60,7 +60,12 @@ def _checkTopEdges(cube):
 def _locateTopCorners(cube):
     # Returns an integer representing the number of turns required to position the "headlights" at the back of the cube
     # If there are no headlights 0 is returned
-    
+    if cube[rotate.cubeEnum.L00.value] == cube[rotate.cubeEnum.L02.value]:
+        return 1
+    if cube[rotate.cubeEnum.F00.value] == cube[rotate.cubeEnum.F02.value]:
+        return 2
+    if cube[rotate.cubeEnum.R00.value] == cube[rotate.cubeEnum.R02.value]:
+        return 3
     return 0
 
 def _positionTopCorners(cube, rotations):
