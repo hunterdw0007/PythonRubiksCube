@@ -79,3 +79,9 @@ def _positionTopCorners(cube, rotations):
     cube = rotate._rotate({'cube':cube,'dir':'U' * rotationCount + 'rFrBBRfrBBRR'}).get('cube')
         
     return _positionTopCorners(cube, rotations)
+
+def _locateSolvedBar(cube):
+    # Returns an integer representing the number of turns required to position the bar at the back of the cube
+    # If there is no bar 0 is returned
+    
+    return 0
