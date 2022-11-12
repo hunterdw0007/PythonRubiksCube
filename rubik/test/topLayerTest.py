@@ -164,6 +164,37 @@ class TopLayerTest(unittest.TestCase):
         actualResult = solveTopLayer._checkTopEdges(cube)
         
         self.assertEqual(expectResult, actualResult)
+        
+# Analysis - solveTopLayer._locateTopCorners
+#
+# inputs:
+#    cube: string; len=54, [browyg], 9 occurences of each character, unique middle color; mandatory; arrives validated
+#
+# outputs:
+#    side-effects: no state changes; no external effects
+#    returns: int [-1:3]
+#
+#    confidence level: boundary value analysis
+#
+# happy path:
+#    test 010: no headlights
+#    test 020: headlights on back
+#    test 030: headlights on left
+#    test 040: headlights on front
+#    test 050: headlights on right
+
+    def test_locateTopCorners_010_solvedCube(self):
+        cube = 'rrobbbbbbgbbooooooogrggggggbogrrrrrrwwwwwwwwwyyyyyyyyy'
+        
+        #checking that cube is valid
+        self.assertTrue(verify._validateCube(cube))
+        
+        expectResult = 0
+        
+        actualResult = solveTopLayer._locateTopCorners(cube)
+        
+        self.assertEqual(expectResult, actualResult)
+        
 # Analysis - solveTopLayer._positionTopCorners
 #
 # inputs:
