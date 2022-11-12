@@ -72,4 +72,10 @@ def _positionTopCorners(cube, rotations):
     # Returns a cube with solved corners in the correct positions
     if _checkTopCorners(cube):
         return cube, rotations
+    
+    rotationCount = _locateTopCorners(cube)
+    
+    rotations += 'U' * rotationCount + 'rFrBBRfrBBRR'
+    cube = rotate._rotate({'cube':cube,'dir':'U' * rotationCount + 'rFrBBRfrBBRR'}).get('cube')
         
+    return cube, rotations
