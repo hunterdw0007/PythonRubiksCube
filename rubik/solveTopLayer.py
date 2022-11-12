@@ -15,11 +15,9 @@ def _solveTopLayer(cube, rotations):
         cube = rotate._rotate({'cube':cube,'dir':'U'}).get('cube')
         return _solveTopLayer(cube, rotations)
     
-    cube, cornerRotations = _positionTopCorners(cube, rotations)
-    rotations += cornerRotations
+    cube, rotations = _positionTopCorners(cube, rotations)
     
-    cube, edgeRotations = _positionTopEdges(cube, rotations)
-    rotations += edgeRotations
+    cube, rotations = _positionTopEdges(cube, rotations)
     
     return _solveTopLayer(cube, rotations)
 

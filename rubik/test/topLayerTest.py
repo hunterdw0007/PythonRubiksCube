@@ -513,7 +513,23 @@ class TopLayerTest(unittest.TestCase):
         inputDict['cube'] = 'brobbbbbbgbgoooooorgbggggggoorrrrrrrwwwwwwwwwyyyyyyyyy'
         
         expectResult = {}
-        expectResult['rotations'] = ''
+        expectResult['rotations'] = 'UUUrFrBBRfrBBRRUURuRURURuruRRU'
+        expectResult['status'] = 'ok'
+        expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode()).hexdigest()
+        
+        actualResult = solve._solve(inputDict)
+        
+        self.assertEqual(expectResult.get('rotations'), actualResult.get('rotations'))
+        self.assertEqual(expectResult.get('status'), actualResult.get('status'))
+        self.assertTrue(expectedHash.find(actualResult.get('token')) > 0)
+        
+    def test_solveTopLayer_030_scrambledTopLayer(self):
+        inputDict = {}
+        inputDict['op']   = 'solve'
+        inputDict['cube'] = 'bggbbbbbbrrbooooooobogggggggorrrrrrrwwwwwwwwwyyyyyyyyy'
+        
+        expectResult = {}
+        expectResult['rotations'] = 'rFrBBRfrBBRRRuRURURuruRRURuRURURuruRRUUU'
         expectResult['status'] = 'ok'
         expectedHash = hashlib.sha256((inputDict.get('cube') + expectResult.get('rotations')).encode()).hexdigest()
         
