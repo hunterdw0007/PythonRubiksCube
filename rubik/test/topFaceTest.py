@@ -9,7 +9,7 @@ import rubik.verify as verify
 import rubik.solveTopFace as solveTopFace
 import rubik.solve as solve
 
-class Test(unittest.TestCase):
+class TopFaceTest(unittest.TestCase):
 
 # Analysis - solveTopFace._checkTopCross
 #
